@@ -53,7 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!google.visualization || !google.visualization.arrayToDataTable) {
             console.error("Google Charts library not fully loaded yet.");
             errorMessageDiv.textContent = "Chart library not ready. Please wait...";
-            // Remove spinner if it's still there
             const spinner = chartDiv.querySelector('.loading-spinner');
             if (spinner) spinner.remove();
             return;
@@ -61,59 +60,80 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const dataTable = google.visualization.arrayToDataTable(apiData);
 
-        // Define consistent colors based on your button colors
+        // Your defined brand colors
         const topicColors = {
-            "Data Engineering": "#c18dbe", // Pink (from your style.css)
+            "Data Engineering": "#c18dbe", // Pink
             "AI": "#56BABF",               // Blue
             "Analytics": "#F28F64",        // Orange
             "Economic Evaluation": "#559370" // Green
         };
 
-        // Build the colors array in the order they appear in apiData (after header)
-        let orderedColors = [];
-        if (apiData && apiData.length > 1) {
+        // --- KEY CHANGE FOR COLORS ---
+
+        let colorsArray = [];
+        if (apiData && apiData.length > 1) { // apiData[0] is headers
             for (let i = 1; i < apiData.length; i++) {
-                const topicName = apiData[i][0];
-                orderedColors.push(topicColors[topicName] || '#cccccc'); // Default to gray if not found
+                const topicName = apiData[i][0]; // Get the topic name from the current row
+                colorsArray.push(topicColors[topicName] || '#cccccc'); // Use defined color or a default
             }
         }
 
         chartOptions = {
             title: 'Topic Popularity by Selections',
             titleTextStyle: { color: '#005EB8', fontSize: 18, bold: false },
-            // Use 'bars: 'horizontal'' for horizontal bar chart, or remove for vertical column chart
-            // bars: 'horizontal', // For BarChart (classic)
-            // hAxis: { title: 'Number of Selections', minValue: 0, textStyle: { color: '#555' }, titleTextStyle: { color: '#333' } },
-            // vAxis: { title: 'Topic', textStyle: { color: '#555' }, titleTextStyle: { color: '#333' } },
-            // For ColumnChart (vertical bars)
-            vAxis: { title: 'Number of Selections', minValue: 0, format: '0', gridlines: { color: '#e0e0e0' }, textStyle: { color: '#555' }, titleTextStyle: { color: '#333' } },
-            hAxis: { title: 'Topic', textStyle: { color: '#555' }, titleTextStyle: { color: '#333' } },
-            legend: { position: 'none' }, // 'none', 'top', 'bottom', 'right', 'in'
-            chartArea: { width: '80%', height: '75%' }, // Adjust to give space for labels
+            vAxis: {
+                title: 'Number of Selections',
+                minValue: 0,
+                format: '0', // Ensures whole numbers on the axis
+                gridlines: { color: '#e0e0e0' },
+                textStyle: { color: '#555' },
+                titleTextStyle: { color: '#333' }
+            },
+            hAxis: {
+                title: 'Topic',
+                textStyle: { color: '#555' },
+                titleTextStyle: { color: '#333' }
+            },
+            legend: { position: 'none' },
+            chartArea: { width: '80%', height: '75%' },
             animation: {
                 duration: 1000,
                 easing: 'out',
-                startup: true // Animate on first draw
+                startup: true
             },
-            colors: orderedColors.length > 0 ? orderedColors : ['#005EB8', '#007A33', '#DA291C', '#FFB81C'], // Fallback NHS-ish colors
-            bar: { groupWidth: "60%" } // For ColumnChart, makes bars a bit thicker
+            // --- APPLY COLORS ARRAY ---
+            colors: colorsArray.length > 0 ? colorsArray : ['#c18dbe'], // Use the generated array, fallback if empty
+            bar: { groupWidth: "60%" }
+
         };
 
-        // Remove spinner before drawing
+
+        const dataWithStyles = [
+            ['Topic', 'Count', { role: 'style' }] // Add the style role to the header
+        ];
+        if (apiData && apiData.length > 1) {
+            for (let i = 1; i < apiData.length; i++) {
+                const topicName = apiData[i][0];
+                const count = apiData[i][1];
+                const color = topicColors[topicName] || '#cccccc'; // Default color
+                dataWithStyles.push([topicName, count, color]);
+            }
+        }
+        const styledDataTable = google.visualization.arrayToDataTable(dataWithStyles);
+
+
         const spinner = chartDiv.querySelector('.loading-spinner');
         if (spinner) spinner.remove();
 
-        // Create a new chart instance or update existing
-        // Using ColumnChart for vertical bars
         if (!chart) {
             chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-            // For horizontal bars:
-            // chart = new google.visualization.BarChart(document.getElementById('chart_div'));
         }
-        chart.draw(dataTable, chartOptions);
+        // Use the styledDataTable
+        chart.draw(styledDataTable, chartOptions);
+        // If the styledDataTable approach works, you can remove the 'colors' array generation
+        // and the `colors: colorsArray` line in chartOptions to simplify.
+
     }
 
-    // Initial call and set up polling
-    // fetchDataAndDrawChart(); // Called by setOnLoadCallback
     setInterval(fetchDataAndDrawChart, POLLING_INTERVAL);
 });
