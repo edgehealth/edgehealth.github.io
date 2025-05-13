@@ -1,0 +1,52 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f0e0fb5c; /* Light background */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #1D1B38;
+}
+h1 {
+    color: #1D1B38; /* Edge Dark Blue */
+    margin-bottom: 20px;
+    text-align: center;
+}
+#chart_container {
+    width: 95%;
+    max-width: 900px; /* Max width of the chart container */
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+#chart_div {
+    width: 100%;
+    height: 500px;   /* Adjust height as needed */
+}
+#last_updated {
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: #555;
+    text-align: center;
+}
+#error_message {
+    margin-top: 15px;
+    color: #d9534f; /* Bootstrap danger red */
+    font-weight: bold;
+    text-align: center;
+}
+.loading-spinner { /* Basic spinner */
+    border: 5px solid #f3f3f3; /* Light grey */
+    border-top: 5px solid #f0e0fb; /* Edge Ligt Pink */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

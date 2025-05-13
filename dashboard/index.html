@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NHS Confed - Live Dashboard</title>
+
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+    <h1>Live Topic Interest</h1>
+    <div id="chart_container">
+        <div id="chart_div">
+            <div class="loading-spinner"></div> <!-- Show spinner while loading -->
+        </div>
+    </div>
+    <div id="last_updated">Fetching initial data...</div>
+    <div id="error_message"></div>
+
+    <script src="dashboard_script.js"></script>
+</body>
+</html>
