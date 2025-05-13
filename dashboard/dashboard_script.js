@@ -118,10 +118,10 @@ document.addEventListener('DOMContentLoaded', () => {
             bar: { groupWidth: "60%" }, // For ColumnChart, makes bars a bit thicker
             // --- ANNOTATION STYLING ---
             annotations: {
-                alwaysOutside: false, // false to try and fit inside, true to force outside
+                alwaysOutside: true, // false to try and fit inside, true to force outside
                 textStyle: {
                     fontSize: 20,
-                    color: '#fff', // Color of the annotation text
+                    color: '#000', // Color of the annotation text
                     auraColor: 'none' // Set to 'none' if you don't want an outline, or a color like '#fff' for a white outline
                 },
             }
