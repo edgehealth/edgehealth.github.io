@@ -68,17 +68,30 @@ document.addEventListener('DOMContentLoaded', () => {
             "Economic Evaluations": "#559370" // Green
         };
 
-        // --- KEY CHANGE FOR COLORS ---
 
-        let colorsArray = [];
+               // --- KEY CHANGE FOR ANNOTATIONS AND COLORS ---
+        // We need to add an annotation column and a style column for colors.
+        // The data structure will be: [Topic, Count, {role: 'style'}, {role: 'annotation'}]
+
+        const dataWithStylesAndAnnotations = [
+            // Add the style role and annotation role to the header
+            ['Topic', 'Count', { role: 'style' }, { role: 'annotation' }]
+        ];
+
         if (apiData && apiData.length > 1) { // apiData[0] is headers
             for (let i = 1; i < apiData.length; i++) {
-                const topicName = apiData[i][0]; // Get the topic name from the current row
-                colorsArray.push(topicColors[topicName] || '#cccccc'); // Use defined color or a default
+                const topicName = apiData[i][0];
+                const count = apiData[i][1]; // This is the value we want to annotate
+                const color = topicColors[topicName] || '#cccccc'; // Default color
+
+                // Add the topic, its count, its color, and the count again as an annotation string
+                dataWithStylesAndAnnotations.push([topicName, count, color, String(count)]);
             }
         }
 
-        chartOptions = {
+        const styledDataTable = google.visualization.arrayToDataTable(dataWithStylesAndAnnotations);
+
+        const chartOptions = {
             title: 'Topic Popularity by Selections',
             titleTextStyle: { color: '#1D1B38', fontSize: 18, bold: false },
             vAxis: {
@@ -95,32 +108,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 titleTextStyle: { color: '#333' }
             },
             legend: { position: 'none' },
-            chartArea: { width: '80%', height: '75%' },
+            chartArea: { width: '80%', height: '75%' }, // Adjust to give space for labels and annotations
             animation: {
                 duration: 1000,
                 easing: 'out',
                 startup: true
             },
-            // --- APPLY COLORS ARRAY ---
-            colors: colorsArray.length > 0 ? colorsArray : ['#c18dbe'], // Use the generated array, fallback if empty
-            bar: { groupWidth: "60%" }
+            // The 'colors' option is not needed here because we are using the style role column
+            bar: { groupWidth: "60%" }, // For ColumnChart, makes bars a bit thicker
+            // --- ANNOTATION STYLING ---
+            annotations: {
+                alwaysOutside: false, // false to try and fit inside, true to force outside
+                textStyle: {
+                    fontSize: 12,
+                    color: '#000', // Color of the annotation text
+                    auraColor: 'none' // Set to 'none' if you don't want an outline, or a color like '#fff' for a white outline
+                },
+            }
 
         };
-
-
-        const dataWithStyles = [
-            ['Topic', 'Count', { role: 'style' }] // Add the style role to the header
-        ];
-        if (apiData && apiData.length > 1) {
-            for (let i = 1; i < apiData.length; i++) {
-                const topicName = apiData[i][0];
-                const count = apiData[i][1];
-                const color = topicColors[topicName] || '#cccccc'; // Default color
-                dataWithStyles.push([topicName, count, color]);
-            }
-        }
-        const styledDataTable = google.visualization.arrayToDataTable(dataWithStyles);
-
 
         const spinner = chartDiv.querySelector('.loading-spinner');
         if (spinner) spinner.remove();
@@ -128,11 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!chart) {
             chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
         }
-        // Use the styledDataTable
         chart.draw(styledDataTable, chartOptions);
-        // If the styledDataTable approach works, you can remove the 'colors' array generation
-        // and the `colors: colorsArray` line in chartOptions to simplify.
-
     }
 
     setInterval(fetchDataAndDrawChart, POLLING_INTERVAL);
