@@ -120,8 +120,8 @@ document.addEventListener('DOMContentLoaded', () => {
             annotations: {
                 alwaysOutside: false, // false to try and fit inside, true to force outside
                 textStyle: {
-                    fontSize: 12,
-                    color: '#000', // Color of the annotation text
+                    fontSize: 20,
+                    color: '#fff', // Color of the annotation text
                     auraColor: 'none' // Set to 'none' if you don't want an outline, or a color like '#fff' for a white outline
                 },
             }
