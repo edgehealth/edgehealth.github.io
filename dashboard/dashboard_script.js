@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "Data Engineering": "#c18dbe", // Pink
             "AI": "#56BABF",               // Blue
             "Analytics": "#F28F64",        // Orange
-            "Economic Evaluation": "#559370" // Green
+            "Economic Evaluations": "#559370" // Green
         };
 
         // --- KEY CHANGE FOR COLORS ---
