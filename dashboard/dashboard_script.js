@@ -77,19 +77,35 @@ document.addEventListener('DOMContentLoaded', () => {
             // Add the style role and annotation role to the header
             ['Topic', 'Count', { role: 'style' }, { role: 'annotation' }]
         ];
+        
+        let maxCount = 0; // <<<< Initialize maxCount
 
-        if (apiData && apiData.length > 1) { // apiData[0] is headers
+        if (apiData && apiData.length > 1) {
             for (let i = 1; i < apiData.length; i++) {
                 const topicName = apiData[i][0];
-                const count = apiData[i][1]; // This is the value we want to annotate
-                const color = topicColors[topicName] || '#cccccc'; // Default color
-
-                // Add the topic, its count, its color, and the count again as an annotation string
+                const count = apiData[i][1];
+                const color = topicColors[topicName] || '#cccccc';
+    
+                if (count > maxCount) { // <<<< Find the maximum count
+                    maxCount = count;
+                }
+    
                 dataWithStylesAndAnnotations.push([topicName, count, color, String(count)]);
             }
         }
 
         const styledDataTable = google.visualization.arrayToDataTable(dataWithStylesAndAnnotations);
+        
+        let vAxisMax;
+        if (maxCount === 0) {
+            vAxisMax = 5; // Or 1, or 10 - a sensible minimum if no data yet
+        } else {
+            // Add a percentage buffer (e.g., 20%) or a fixed buffer
+            // Adjust this buffer as needed for your annotation font size
+            const buffer = Math.ceil(maxCount * 0.20); // 20% buffer
+            // const fixedBuffer = 2; // Or a fixed buffer, e.g., add 2 units
+            vAxisMax = maxCount + Math.max(buffer, 1); // Ensure at least 1 unit buffer
+        }
 
         const chartOptions = {
             title: 'Topic Popularity by Selections',
@@ -100,7 +116,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 format: '0', // Ensures whole numbers on the axis
                 gridlines: { color: '#e0e0e0' },
                 textStyle: { color: '#555' },
-                titleTextStyle: { color: '#333' }
+                titleTextStyle: { color: '#333' },
+                viewWindow: {
+                    min: 0,
+                    max: vAxisMax  // <<<< Use the calculated maximum
+                }
             },
             hAxis: {
                 title: 'Topic',
