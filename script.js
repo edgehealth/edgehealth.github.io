@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const buttons = document.querySelectorAll('.topic-button');
     const feedbackMessageElement = document.getElementById('feedback-message');
 
-    if (SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbzH_KYGZafbS-UswAwuki7aMcNghg8_mxxINj-Wpa9fEQzk-zLkOVom9SkSxSDOC8Y/exec') {
+    if (SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE') {
         feedbackMessageElement.textContent = 'ERROR: Apps Script URL not configured in script.js!';
         feedbackMessageElement.className = 'feedback error';
         console.error("FATAL: SCRIPT_URL is not set. Please paste your Google Apps Script Web App URL into script.js");
