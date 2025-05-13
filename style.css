@@ -1,11 +1,11 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    background-color: #f0f4f8;
+    background-color: #f0e0fb5c;
     text-align: center;
     padding: 20px;
     box-sizing: border-box;
@@ -21,8 +21,9 @@ body {
 }
 
 h1 {
-    color: #333;
+    color: #1D1B38;
     margin-bottom: 10px;
+    font-family: 'Libre Baskerville', serif;
 }
 
 p {
@@ -35,10 +36,7 @@ p {
     display: grid;
     /* --- CHANGED HERE --- */
     grid-template-columns: repeat(2, 1fr); /* This creates a 2-column grid */
-    /* grid-template-rows: repeat(2, 1fr); */ /* Optional: if you want to force equal height rows */
     gap: 25px; /* Increased gap slightly for a 2x2 layout */
-    /* max-width: 600px; /* Optional: if you want to constrain the grid width itself, even if container is wider */
-    /* margin: 0 auto; /* To center the grid if it has a max-width smaller than container */
 }
 
 .topic-button {
@@ -47,7 +45,9 @@ p {
     font-weight: bold;
     color: white;
     border: none;
-    border-radius: 10px;
+   /* border-radius: 10px; */
+    border-bottom-left-radius: 50px;
+    border-top-right-radius: 50px;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     display: flex;
@@ -55,7 +55,6 @@ p {
     justify-content: center;
     align-items: center;
     min-height: 180px; /* Adjusted min-height for a more squarish 2x2 feel */
-    /* aspect-ratio: 1 / 1; /* Uncomment if you want perfect squares, but text might overflow */
 }
 
 .topic-button:hover {
@@ -75,11 +74,11 @@ p {
     opacity: 0.9;
 }
 
-/* Specific button colors - feel free to change these! */
-#btn-data-engineering { background-color: #007bff; /* Blue */ }
-#btn-ai { background-color: #dc3545; /* Red */ }
-#btn-analytics { background-color: #28a745; /* Green */ }
-#btn-econ-eval { background-color: #ffc107; color: #333; /* Yellow - text color changed for readability */ }
+/* Specific button colors */
+#btn-data-engineering { background-color: #c18dbe; /* Edge Pink */ }
+#btn-ai { background-color: #56BABF; /* Edge Aquamarine */ }
+#btn-analytics { background-color: #F28F64; /* Edge Orange */ }
+#btn-econ-eval { background-color: #559370; /* color: #333;  Edge Green - could change text colour if needed for readability */ }
 
 .feedback {
     margin-top: 30px;
@@ -89,11 +88,11 @@ p {
 }
 
 .feedback.success {
-    color: #28a745; /* Green */
+    color: #c18dbe; /* Edge pink */
 }
 
 .feedback.error {
-    color: #dc3545; /* Red */
+    color: #F28F64; /* Edge orange */
 }
 
 /* For smaller screens */
@@ -103,10 +102,6 @@ p {
     }
     .button-grid {
         gap: 15px; /* Slightly smaller gap on smaller screens */
-        /* If the 2x2 becomes too cramped on very small screens,
-           you could revert to a single column here:
-           grid-template-columns: 1fr;
-        */
     }
     .topic-button {
         font-size: 1.2em; /* Adjust font size for smaller buttons */
@@ -122,7 +117,7 @@ p {
     }
 }
 
-/* Even smaller screens - you might want single column here */
+/* Even smaller screens - single column  */
 @media (max-width: 400px) {
     .button-grid {
         grid-template-columns: 1fr; /* Stack buttons into a single column */
