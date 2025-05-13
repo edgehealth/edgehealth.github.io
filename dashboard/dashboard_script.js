@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         chartOptions = {
             title: 'Topic Popularity by Selections',
-            titleTextStyle: { color: '#005EB8', fontSize: 18, bold: false },
+            titleTextStyle: { color: '#1D1B38', fontSize: 18, bold: false },
             vAxis: {
                 title: 'Number of Selections',
                 minValue: 0,

@@ -1,5 +1,5 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', sans-serif;
     margin: 0;
     padding: 20px;
     background-color: #f0e0fb5c; /* Light background */
@@ -12,6 +12,7 @@ h1 {
     color: #1D1B38; /* Edge Dark Blue */
     margin-bottom: 20px;
     text-align: center;
+    font-family: 'Libre Baskerville', serif;
 }
 #chart_container {
     width: 95%;
