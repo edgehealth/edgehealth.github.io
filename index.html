@@ -1,7 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NHS Confed Interactive</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+    <div class="container">
+        <h1>Which topic interests you most?</h1>
+        <p>Tap a button, get a sweet!</p>
+
+        <div class="button-grid">
+            <button id="btn-data-engineering" class="topic-button" data-topic="Data Engineering">
+                Data Engineering
+                <span class="sweet-info">(Blue Sweet)</span>
+            </button>
+            <button id="btn-ai" class="topic-button" data-topic="AI">
+                AI
+                <span class="sweet-info">(Red Sweet)</span>
+            </button>
+            <button id="btn-analytics" class="topic-button" data-topic="Analytics">
+                Analytics
+                <span class="sweet-info">(Green Sweet)</span>
+            </button>
+            <button id="btn-econ-eval" class="topic-button" data-topic="Economic Evaluation">
+                Economic Evaluations
+                <span class="sweet-info">(Yellow Sweet)</span>
+            </button>
+        </div>
+        <div id="feedback-message" class="feedback"></div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>

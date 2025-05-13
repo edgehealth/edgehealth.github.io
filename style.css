@@ -1,0 +1,106 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f0f4f8;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 100%;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+p {
+    color: #555;
+    margin-bottom: 30px;
+    font-size: 1.1em;
+}
+
+.button-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive columns */
+    gap: 20px; /* Space between buttons */
+}
+
+.topic-button {
+    padding: 30px 20px; /* Generous padding */
+    font-size: 1.5em;   /* Larger font */
+    font-weight: bold;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 150px; /* Ensure buttons have a good height */
+}
+
+.topic-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.topic-button:active {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+.sweet-info {
+    font-size: 0.7em;
+    font-weight: normal;
+    margin-top: 8px;
+    opacity: 0.9;
+}
+
+/* Specific button colors - feel free to change these! */
+#btn-data-engineering { background-color: #007bff; /* Blue */ }
+#btn-ai { background-color: #dc3545; /* Red */ }
+#btn-analytics { background-color: #28a745; /* Green */ }
+#btn-econ-eval { background-color: #ffc107; color: #333; /* Yellow - text color changed for readability */ }
+
+.feedback {
+    margin-top: 30px;
+    font-size: 1.2em;
+    min-height: 1.5em; /* Reserve space for message */
+    font-weight: bold;
+}
+
+.feedback.success {
+    color: #28a745; /* Green */
+}
+
+.feedback.error {
+    color: #dc3545; /* Red */
+}
+
+/* For smaller screens, stack buttons if they don't fit side-by-side */
+@media (max-width: 600px) {
+    .button-grid {
+        grid-template-columns: 1fr; /* Single column */
+    }
+    .topic-button {
+        font-size: 1.3em;
+        padding: 25px 15px;
+    }
+    h1 {
+        font-size: 1.8em;
+    }
+}
