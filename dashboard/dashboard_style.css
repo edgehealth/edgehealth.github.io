@@ -1,10 +1,13 @@
 body {
     font-family: 'Segoe UI', sans-serif;
     margin: 0;
-    padding: 2vw; /* Use viewport width for responsive padding */
+    padding: 2rem 4rem; /* More side padding for centering */
     background-color: #f0e0fb5c;
     color: #1D1B38;
-    font-size: 1.2rem; /* Base font size that scales */
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 h1 {
@@ -12,15 +15,16 @@ h1 {
     margin-bottom: 2rem;
     text-align: center;
     font-family: 'Libre Baskerville', serif;
-    font-size: clamp(2rem, 4vw, 5rem); /* Responsive font size */
+    font-size: clamp(2rem, 4vw, 5rem);
 }
 
 /* Counter Bar Styles */
 .counter-bar {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 2vw; /* Responsive gap */
-    width: 90%; /* Much wider than before */
+    gap: 2rem;
+    max-width: 1400px; /* Wider than before, but still constrained */
+    width: 100%;
     margin: 0 auto 3rem auto;
     padding: 0;
 }
@@ -32,7 +36,7 @@ h1 {
     box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    min-height: 8rem; /* Minimum height that scales */
+    min-height: 8rem;
 }
 
 .counter-item:hover {
@@ -41,7 +45,7 @@ h1 {
 }
 
 .counter-label {
-    font-size: clamp(1rem, 1.5vw, 2rem); /* Responsive label size */
+    font-size: clamp(1rem, 1.5vw, 2rem);
     font-weight: 600;
     margin-bottom: 1rem;
     color: #555;
@@ -49,7 +53,7 @@ h1 {
 }
 
 .counter-value {
-    font-size: clamp(2rem, 4vw, 8rem); /* Much larger, responsive counter */
+    font-size: clamp(2rem, 4vw, 6rem); /* Slightly smaller max than ultra-wide version */
     font-weight: bold;
     color: #1D1B38;
     line-height: 1;
@@ -76,8 +80,9 @@ h1 {
 .image-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 3vw; /* Responsive gap */
-    width: 90%; /* Much wider */
+    gap: 2.5rem;
+    max-width: 1400px; /* Same width as counter bar */
+    width: 100%;
     margin: 0 auto;
     padding: 0;
 }
@@ -93,7 +98,7 @@ h1 {
 
 .quadrant-image {
     width: 100%;
-    height: clamp(20rem, 25vw, 40rem); /* Responsive height */
+    height: clamp(18rem, 20vw, 30rem); /* Responsive but constrained height */
     object-fit: cover;
     transition: all 0.5s ease;
 }
@@ -101,7 +106,7 @@ h1 {
 .quadrant-label {
     padding: 2rem;
     text-align: center;
-    font-size: clamp(1.2rem, 2vw, 2.5rem); /* Responsive label */
+    font-size: clamp(1.2rem, 2vw, 2rem);
     font-weight: 600;
     color: #1D1B38;
     background-color: #ffffff;
@@ -123,7 +128,7 @@ h1 {
     opacity: 0;
     transition: opacity 0.5s ease;
     cursor: pointer;
-    padding: 2vw;
+    padding: 2rem;
     box-sizing: border-box;
 }
 
@@ -159,7 +164,7 @@ h1 {
 .lightbox-label {
     padding: 3rem;
     text-align: center;
-    font-size: clamp(2rem, 4vw, 6rem); /* Much larger lightbox text */
+    font-size: clamp(2rem, 4vw, 5rem);
     font-weight: 600;
     color: #1D1B38;
     background-color: #ffffff;
@@ -170,9 +175,11 @@ h1 {
 /* Status messages */
 #last_updated {
     margin-top: 2rem;
-    font-size: clamp(0.9rem, 1.2vw, 1.5rem);
+    font-size: clamp(0.9rem, 1.2vw, 1.3rem);
     color: #555;
     text-align: center;
+    max-width: 1400px;
+    width: 100%;
 }
 
 #error_message {
@@ -180,7 +187,9 @@ h1 {
     color: #d9534f;
     font-weight: bold;
     text-align: center;
-    font-size: clamp(1rem, 1.3vw, 1.8rem);
+    font-size: clamp(1rem, 1.3vw, 1.5rem);
+    max-width: 1400px;
+    width: 100%;
 }
 
 .loading-spinner {
@@ -199,20 +208,15 @@ h1 {
 }
 
 /* Large Screen Optimizations */
-@media (min-width: 1200px) {
+@media (min-width: 1600px) {
     body {
         font-size: 1.4rem;
-        padding: 1.5vw;
+        padding: 3rem 6rem; /* More side padding on large screens */
     }
     
-    .counter-bar {
-        width: 95%; /* Even wider on large screens */
-        gap: 2.5vw;
-    }
-    
+    .counter-bar,
     .image-grid {
-        width: 95%;
-        gap: 3.5vw;
+        max-width: 1600px; /* Even wider on very large screens */
     }
     
     .counter-item {
@@ -224,21 +228,16 @@ h1 {
     }
 }
 
-/* Extra Large Screens (like your 50" display) */
-@media (min-width: 1920px) {
+/* Ultra Large Screens (your 50" display) */
+@media (min-width: 2000px) {
     body {
         font-size: 1.6rem;
-        padding: 1vw;
+        padding: 4rem 8rem; /* Substantial side padding */
     }
     
-    .counter-bar {
-        width: 98%; /* Nearly full width */
-        gap: 2vw;
-    }
-    
+    .counter-bar,
     .image-grid {
-        width: 98%;
-        gap: 3vw;
+        max-width: 1800px; /* Max comfortable width */
     }
     
     .counter-item {
@@ -255,39 +254,26 @@ h1 {
     }
 }
 
-/* Ultra Large Screens */
-@media (min-width: 3000px) {
-    body {
-        font-size: 2rem;
-    }
-    
-    .counter-bar,
-    .image-grid {
-        width: 99%;
-    }
-    
-    .counter-item {
-        padding: 5rem;
-        min-height: 12rem;
-    }
-}
-
 /* Tablet and smaller screens */
 @media (max-width: 768px) {
+    body {
+        padding: 1rem 2rem;
+    }
+    
     .counter-bar {
         grid-template-columns: repeat(2, 1fr);
-        gap: 3vw;
-        width: 95%;
+        gap: 1.5rem;
+        max-width: 600px;
     }
     
     .image-grid {
         grid-template-columns: 1fr;
-        gap: 4vw;
-        width: 95%;
+        gap: 2rem;
+        max-width: 500px;
     }
     
     .lightbox-overlay {
-        padding: 2vw;
+        padding: 1rem;
     }
     
     .lightbox-content {
@@ -297,14 +283,22 @@ h1 {
 }
 
 @media (max-width: 480px) {
+    body {
+        padding: 1rem;
+    }
+    
     .counter-bar {
         grid-template-columns: 1fr;
-        gap: 4vw;
-        width: 98%;
+        gap: 1rem;
+        max-width: 400px;
+    }
+    
+    .image-grid {
+        max-width: 400px;
     }
     
     .lightbox-overlay {
-        padding: 1vw;
+        padding: 0.5rem;
     }
     
     .lightbox-content {
