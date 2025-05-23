@@ -2,7 +2,7 @@ body {
     font-family: 'Segoe UI', sans-serif;
     margin: 0;
     padding: 2rem 4rem;
-    background-color: #f0e0fb5c;
+    background-color: #fff;
     color: #1D1B38;
     font-size: 1.2rem;
     display: flex;
@@ -27,9 +27,13 @@ h1 {
     width: 100%;
     margin: 0 auto 2rem auto; 
     padding: 2em;
+    place-items: center; 
 }
 
 .counter-card {
+     width: 100%; 
+    max-width: 250px; 
+    aspect-ratio: 1 / 1; 
     padding: 1.5rem 1.5rem; 
     border: none;
     border-bottom-left-radius: 50px;
@@ -43,6 +47,8 @@ h1 {
     min-height: 6rem; 
     position: relative;
     overflow: hidden;
+    justify-self: center;
+    align-self: center; 
 }
 
 .counter-card::before {
@@ -349,8 +355,9 @@ h1 {
     }
     
     .counter-card {
-        padding: 2rem 1.5rem;
-        min-height: 8rem;
+        max-width: 200px; 
+        aspect-ratio: 1.2 / 1; 
+        padding: 1.2rem;
     }
     
     .image-grid {
@@ -364,7 +371,7 @@ h1 {
     .counter-bar {
         grid-template-columns: 1fr;
         gap: 0.8rem;
-        max-width: 400px;
+        max-width: 300px; 
     }
     
     .counter-card {
