@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const lastUpdatedDiv = document.getElementById('last_updated');
     const errorMessageDiv = document.getElementById('error_message');
     const loadingDiv = document.getElementById('loading');
-    const POLLING_INTERVAL = 3000; // Fetch data every 3 seconds for more responsive updates
+    const POLLING_INTERVAL = 500; // Fetch data every 3 seconds for more responsive updates
 
     // Track previous counts to detect new votes
     let previousCounts = {

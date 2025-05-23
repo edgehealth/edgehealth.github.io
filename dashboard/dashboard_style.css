@@ -1,52 +1,55 @@
 body {
     font-family: 'Segoe UI', sans-serif;
     margin: 0;
-    padding: 20px;
+    padding: 2vw; /* Use viewport width for responsive padding */
     background-color: #f0e0fb5c;
     color: #1D1B38;
+    font-size: 1.2rem; /* Base font size that scales */
 }
 
 h1 {
     color: #1D1B38;
-    margin-bottom: 30px;
+    margin-bottom: 2rem;
     text-align: center;
     font-family: 'Libre Baskerville', serif;
-    font-size: 2.5em;
+    font-size: clamp(2rem, 4vw, 5rem); /* Responsive font size */
 }
 
 /* Counter Bar Styles */
 .counter-bar {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    max-width: 1200px;
-    margin: 0 auto 40px auto;
-    padding: 0 20px;
+    gap: 2vw; /* Responsive gap */
+    width: 90%; /* Much wider than before */
+    margin: 0 auto 3rem auto;
+    padding: 0;
 }
 
 .counter-item {
     background-color: #ffffff;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-height: 8rem; /* Minimum height that scales */
 }
 
 .counter-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    transform: translateY(-0.3rem);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
 }
 
 .counter-label {
-    font-size: 1.1em;
+    font-size: clamp(1rem, 1.5vw, 2rem); /* Responsive label size */
     font-weight: 600;
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
     color: #555;
+    line-height: 1.2;
 }
 
 .counter-value {
-    font-size: 3em;
+    font-size: clamp(2rem, 4vw, 8rem); /* Much larger, responsive counter */
     font-weight: bold;
     color: #1D1B38;
     line-height: 1;
@@ -73,16 +76,16 @@ h1 {
 .image-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-    max-width: 1200px;
+    gap: 3vw; /* Responsive gap */
+    width: 90%; /* Much wider */
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0;
 }
 
 .image-quadrant {
     background-color: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    border-radius: 1.5rem;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: all 0.5s ease;
     position: relative;
@@ -90,33 +93,19 @@ h1 {
 
 .quadrant-image {
     width: 100%;
-    height: 300px;
+    height: clamp(20rem, 25vw, 40rem); /* Responsive height */
     object-fit: cover;
     transition: all 0.5s ease;
 }
 
 .quadrant-label {
-    padding: 20px;
+    padding: 2rem;
     text-align: center;
-    font-size: 1.3em;
+    font-size: clamp(1.2rem, 2vw, 2.5rem); /* Responsive label */
     font-weight: 600;
     color: #1D1B38;
     background-color: #ffffff;
-}
-
-
-/* Status messages */
-#last_updated {
-    margin-top: 30px;
-    font-size: 0.9em;
-    color: #555;
-    text-align: center;
-}
-
-#error_message {
-    margin-top: 15px;
-    color: #d9534f;
-    font-weight: bold;
+    line-height: 1.2;
 }
 
 /* Updated Lightbox Styles - Full Screen Images */
@@ -134,7 +123,7 @@ h1 {
     opacity: 0;
     transition: opacity 0.5s ease;
     cursor: pointer;
-    padding: 20px;
+    padding: 2vw;
     box-sizing: border-box;
 }
 
@@ -144,8 +133,8 @@ h1 {
 
 .lightbox-content {
     background-color: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    border-radius: 2rem;
+    box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.5);
     overflow: hidden;
     transform: scale(0.8);
     transition: transform 0.5s ease;
@@ -168,45 +157,159 @@ h1 {
 }
 
 .lightbox-label {
-    padding: 30px;
+    padding: 3rem;
     text-align: center;
-    font-size: 2.5em;
+    font-size: clamp(2rem, 4vw, 6rem); /* Much larger lightbox text */
     font-weight: 600;
     color: #1D1B38;
     background-color: #ffffff;
     flex-shrink: 0;
+    line-height: 1.2;
 }
 
-/* Responsive lightbox */
+/* Status messages */
+#last_updated {
+    margin-top: 2rem;
+    font-size: clamp(0.9rem, 1.2vw, 1.5rem);
+    color: #555;
+    text-align: center;
+}
+
+#error_message {
+    margin-top: 1rem;
+    color: #d9534f;
+    font-weight: bold;
+    text-align: center;
+    font-size: clamp(1rem, 1.3vw, 1.8rem);
+}
+
+.loading-spinner {
+    border: 0.4rem solid #f3f3f3;
+    border-top: 0.4rem solid #c18dbe;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    animation: spin 1s linear infinite;
+    margin: 2rem auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Large Screen Optimizations */
+@media (min-width: 1200px) {
+    body {
+        font-size: 1.4rem;
+        padding: 1.5vw;
+    }
+    
+    .counter-bar {
+        width: 95%; /* Even wider on large screens */
+        gap: 2.5vw;
+    }
+    
+    .image-grid {
+        width: 95%;
+        gap: 3.5vw;
+    }
+    
+    .counter-item {
+        padding: 3rem;
+    }
+    
+    .quadrant-label {
+        padding: 3rem;
+    }
+}
+
+/* Extra Large Screens (like your 50" display) */
+@media (min-width: 1920px) {
+    body {
+        font-size: 1.6rem;
+        padding: 1vw;
+    }
+    
+    .counter-bar {
+        width: 98%; /* Nearly full width */
+        gap: 2vw;
+    }
+    
+    .image-grid {
+        width: 98%;
+        gap: 3vw;
+    }
+    
+    .counter-item {
+        padding: 4rem;
+        min-height: 10rem;
+    }
+    
+    .quadrant-label {
+        padding: 4rem;
+    }
+    
+    .lightbox-label {
+        padding: 4rem;
+    }
+}
+
+/* Ultra Large Screens */
+@media (min-width: 3000px) {
+    body {
+        font-size: 2rem;
+    }
+    
+    .counter-bar,
+    .image-grid {
+        width: 99%;
+    }
+    
+    .counter-item {
+        padding: 5rem;
+        min-height: 12rem;
+    }
+}
+
+/* Tablet and smaller screens */
 @media (max-width: 768px) {
+    .counter-bar {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3vw;
+        width: 95%;
+    }
+    
+    .image-grid {
+        grid-template-columns: 1fr;
+        gap: 4vw;
+        width: 95%;
+    }
+    
     .lightbox-overlay {
-        padding: 10px;
+        padding: 2vw;
+    }
+    
+    .lightbox-content {
+        width: 96vw;
+        height: 96vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .counter-bar {
+        grid-template-columns: 1fr;
+        gap: 4vw;
+        width: 98%;
+    }
+    
+    .lightbox-overlay {
+        padding: 1vw;
     }
     
     .lightbox-content {
         width: 98vw;
         height: 98vh;
-    }
-    
-    .lightbox-label {
-        padding: 20px;
-        font-size: 2em;
-    }
-}
-
-@media (max-width: 480px) {
-    .lightbox-overlay {
-        padding: 5px;
-    }
-    
-    .lightbox-content {
-        width: 100vw;
-        height: 100vh;
-        border-radius: 0;
-    }
-    
-    .lightbox-label {
-        padding: 15px;
-        font-size: 1.5em;
+        border-radius: 1rem;
     }
 }
