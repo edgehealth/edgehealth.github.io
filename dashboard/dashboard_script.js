@@ -1,4 +1,3 @@
-// dashboard_script.js
 
 document.addEventListener('DOMContentLoaded', () => {
     // !!! IMPORTANT: PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE !!!
@@ -11,13 +10,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Track previous counts to detect new votes
     let previousCounts = {
-        "Data Engineering": 0,
-        "AI": 0,
-        "Analytics": 0,
-        "Economic Evaluations": 0
+        "Data Engineering": null,  // Start with null instead of 0
+        "AI": null,
+        "Analytics": null,
+        "Economic Evaluations": null
     };
 
-    let isFirstLoad = true; // Flag to track if this is the initial data load
+    let isInitialized = false; // Flag to track if we've set initial baseline
 
     // Mapping for easier reference
     const topicMapping = {
@@ -76,8 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (valueElement) {
                         valueElement.textContent = count;
                         
-                        // Only add pulse animation if not first load and count increased
-                        if (!isFirstLoad && count > previousCounts[topicName]) {
+                        // Only add pulse animation if initialized and count increased
+                        if (isInitialized && previousCounts[topicName] !== null && count > previousCounts[topicName]) {
                             counterElement.classList.add('pulse');
                             setTimeout(() => {
                                 counterElement.classList.remove('pulse');
@@ -87,8 +86,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 // Check if this topic got a new vote and trigger image enlargement
-                // ONLY if this is not the first load
-                if (!isFirstLoad && count > previousCounts[topicName]) {
+                // ONLY if we're initialized and there's a real increase
+                if (isInitialized && previousCounts[topicName] !== null && count > previousCounts[topicName]) {
                     console.log(`New vote detected for ${topicName}! Count: ${previousCounts[topicName]} → ${count}`);
                     enlargeImageLightbox(topicKey);
                 }
@@ -98,10 +97,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // Mark that we've completed the first load
-        if (isFirstLoad) {
-            isFirstLoad = false;
-            console.log("Initial data load completed. Now watching for new votes...");
+        // Mark that we've completed initialization
+        if (!isInitialized) {
+            isInitialized = true;
+            console.log("Dashboard initialized with current counts. Now watching for new votes...");
         }
     }
 
