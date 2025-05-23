@@ -1,7 +1,7 @@
 body {
     font-family: 'Segoe UI', sans-serif;
     margin: 0;
-    padding: 2rem 4rem; /* More side padding for centering */
+    padding: 2rem 4rem;
     background-color: #f0e0fb5c;
     color: #1D1B38;
     font-size: 1.2rem;
@@ -18,102 +18,174 @@ h1 {
     font-size: clamp(2rem, 4vw, 5rem);
 }
 
-/* Counter Bar Styles */
+/* Modern Bootstrap-style Counter Cards */
 .counter-bar {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
-    max-width: 1400px; /* Wider than before, but still constrained */
+    max-width: 1400px;
     width: 100%;
     margin: 0 auto 3rem auto;
     padding: 0;
 }
 
-.counter-item {
-    background-color: #ffffff;
+.counter-card {
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+    border: 1px solid #e9ecef;
+    border-radius: 1.5rem;
     padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    min-height: 8rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    position: relative;
+    overflow: hidden;
 }
 
-.counter-item:hover {
-    transform: translateY(-0.3rem);
-    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+.counter-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--card-color), var(--card-color-light));
 }
 
-.counter-label {
-    font-size: clamp(1rem, 1.5vw, 2rem);
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: #555;
-    line-height: 1.2;
+.counter-card:hover {
+    transform: translateY(-0.25rem);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.12);
+}
+
+.counter-icon {
+    flex-shrink: 0;
+}
+
+.icon-circle {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    font-weight: bold;
+}
+
+.icon-circle.data-engineering { 
+    background: linear-gradient(135deg, #c18dbe, #d4a5d0);
+}
+.icon-circle.ai { 
+    background: linear-gradient(135deg, #56BABF, #7bc8cd);
+}
+.icon-circle.analytics { 
+    background: linear-gradient(135deg, #F28F64, #f5a584);
+}
+.icon-circle.econ-eval { 
+    background: linear-gradient(135deg, #559370, #73a687);
+}
+
+.counter-content {
+    flex: 1;
+    text-align: left;
 }
 
 .counter-value {
-    font-size: clamp(2rem, 4vw, 6rem); /* Slightly smaller max than ultra-wide version */
-    font-weight: bold;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 700;
     color: #1D1B38;
     line-height: 1;
+    margin-bottom: 0.5rem;
 }
 
-/* Counter color coding */
-#counter-data-engineering .counter-value { color: #c18dbe; }
-#counter-ai .counter-value { color: #56BABF; }
-#counter-analytics .counter-value { color: #F28F64; }
-#counter-econ-eval .counter-value { color: #559370; }
+.counter-label {
+    font-size: clamp(0.9rem, 1.2vw, 1.3rem);
+    font-weight: 600;
+    color: #6c757d;
+    line-height: 1.2;
+}
+
+/* Set CSS variables for card colors */
+#counter-data-engineering { --card-color: #c18dbe; --card-color-light: #d4a5d0; }
+#counter-ai { --card-color: #56BABF; --card-color-light: #7bc8cd; }
+#counter-analytics { --card-color: #F28F64; --card-color-light: #f5a584; }
+#counter-econ-eval { --card-color: #559370; --card-color-light: #73a687; }
 
 /* Pulse animation for new votes */
-.counter-item.pulse {
-    animation: pulse 1s ease-in-out;
+.counter-card.pulse {
+    animation: cardPulse 1s ease-in-out;
 }
 
-@keyframes pulse {
+@keyframes cardPulse {
     0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
+    50% { transform: scale(1.05); box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.15); }
     100% { transform: scale(1); }
 }
 
-/* Image Grid Styles */
+/* Image Grid with Overlay Text */
 .image-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 2.5rem;
-    max-width: 1400px; /* Same width as counter bar */
+    max-width: 1400px;
     width: 100%;
     margin: 0 auto;
     padding: 0;
 }
 
 .image-quadrant {
-    background-color: #ffffff;
-    border-radius: 1.5rem;
-    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: all 0.5s ease;
     position: relative;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.image-quadrant:hover {
+    transform: translateY(-0.5rem);
+    box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.15);
+}
+
+.image-quadrant.clickable:hover .image-overlay {
+    background: rgba(0, 0, 0, 0.7);
 }
 
 .quadrant-image {
     width: 100%;
-    height: clamp(18rem, 20vw, 30rem); /* Responsive but constrained height */
+    height: clamp(18rem, 20vw, 30rem);
     object-fit: cover;
-    transition: all 0.5s ease;
+    transition: all 0.3s ease;
 }
 
-.quadrant-label {
+.image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    color: white;
     padding: 2rem;
-    text-align: center;
-    font-size: clamp(1.2rem, 2vw, 2rem);
-    font-weight: 600;
-    color: #1D1B38;
-    background-color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.overlay-content h3 {
+    font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
     line-height: 1.2;
 }
 
-/* Updated Lightbox Styles - Full Screen Images */
+.overlay-content p {
+    font-size: clamp(1rem, 1.5vw, 1.3rem);
+    margin: 0;
+    opacity: 0.9;
+    line-height: 1.4;
+}
+
+/* Lightbox Styles */
 .lightbox-overlay {
     position: fixed;
     top: 0;
@@ -137,17 +209,15 @@ h1 {
 }
 
 .lightbox-content {
-    background-color: #ffffff;
+    position: relative;
     border-radius: 2rem;
-    box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.5);
     overflow: hidden;
     transform: scale(0.8);
     transition: transform 0.5s ease;
     cursor: default;
     width: 95vw;
     height: 95vh;
-    display: flex;
-    flex-direction: column;
+    box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.5);
 }
 
 .lightbox-overlay.active .lightbox-content {
@@ -156,32 +226,36 @@ h1 {
 
 .lightbox-image {
     width: 100%;
-    flex: 1;
+    height: 100%;
     object-fit: cover;
     display: block;
 }
 
-.lightbox-label {
-    padding: 3rem;
-    text-align: center;
-    font-size: clamp(2rem, 4vw, 5rem);
-    font-weight: 600;
-    color: #1D1B38;
-    background-color: #ffffff;
-    flex-shrink: 0;
+.lightbox-text-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+    color: white;
+    padding: 4rem;
+}
+
+.lightbox-text-overlay h3 {
+    font-size: clamp(3rem, 5vw, 6rem);
+    font-weight: 700;
+    margin: 0 0 1rem 0;
     line-height: 1.2;
 }
 
-/* Status messages */
-#last_updated {
-    margin-top: 2rem;
-    font-size: clamp(0.9rem, 1.2vw, 1.3rem);
-    color: #555;
-    text-align: center;
-    max-width: 1400px;
-    width: 100%;
+.lightbox-text-overlay p {
+    font-size: clamp(1.5rem, 3vw, 3rem);
+    margin: 0;
+    opacity: 0.9;
+    line-height: 1.4;
 }
 
+/* Status messages */
 #error_message {
     margin-top: 1rem;
     color: #d9534f;
@@ -207,54 +281,7 @@ h1 {
     100% { transform: rotate(360deg); }
 }
 
-/* Large Screen Optimizations */
-@media (min-width: 1600px) {
-    body {
-        font-size: 1.4rem;
-        padding: 3rem 6rem; /* More side padding on large screens */
-    }
-    
-    .counter-bar,
-    .image-grid {
-        max-width: 1600px; /* Even wider on very large screens */
-    }
-    
-    .counter-item {
-        padding: 3rem;
-    }
-    
-    .quadrant-label {
-        padding: 3rem;
-    }
-}
-
-/* Ultra Large Screens (your 50" display) */
-@media (min-width: 2000px) {
-    body {
-        font-size: 1.6rem;
-        padding: 4rem 8rem; /* Substantial side padding */
-    }
-    
-    .counter-bar,
-    .image-grid {
-        max-width: 1800px; /* Max comfortable width */
-    }
-    
-    .counter-item {
-        padding: 4rem;
-        min-height: 10rem;
-    }
-    
-    .quadrant-label {
-        padding: 4rem;
-    }
-    
-    .lightbox-label {
-        padding: 4rem;
-    }
-}
-
-/* Tablet and smaller screens */
+/* Responsive Design */
 @media (max-width: 768px) {
     body {
         padding: 1rem 2rem;
@@ -266,44 +293,28 @@ h1 {
         max-width: 600px;
     }
     
+    .counter-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+        padding: 1.5rem;
+    }
+    
+    .counter-content {
+        text-align: center;
+    }
+    
     .image-grid {
         grid-template-columns: 1fr;
         gap: 2rem;
         max-width: 500px;
     }
-    
-    .lightbox-overlay {
-        padding: 1rem;
-    }
-    
-    .lightbox-content {
-        width: 96vw;
-        height: 96vh;
-    }
 }
 
 @media (max-width: 480px) {
-    body {
-        padding: 1rem;
-    }
-    
     .counter-bar {
         grid-template-columns: 1fr;
         gap: 1rem;
         max-width: 400px;
-    }
-    
-    .image-grid {
-        max-width: 400px;
-    }
-    
-    .lightbox-overlay {
-        padding: 0.5rem;
-    }
-    
-    .lightbox-content {
-        width: 98vw;
-        height: 98vh;
-        border-radius: 1rem;
     }
 }

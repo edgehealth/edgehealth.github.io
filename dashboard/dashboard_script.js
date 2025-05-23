@@ -1,24 +1,21 @@
+// dashboard_script.js
 
 document.addEventListener('DOMContentLoaded', () => {
-    // !!! IMPORTANT: PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE !!!
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzH_KYGZafbS-UswAwuki7aMcNghg8_mxxINj-Wpa9fEQzk-zLkOVom9SkSxSDOC8Y/exec';
 
-    const lastUpdatedDiv = document.getElementById('last_updated');
     const errorMessageDiv = document.getElementById('error_message');
     const loadingDiv = document.getElementById('loading');
-    const POLLING_INTERVAL = 500; // Fetch data every 3 seconds for more responsive updates
+    const POLLING_INTERVAL = 750;
 
-    // Track previous counts to detect new votes
     let previousCounts = {
-        "Data Engineering": null,  // Start with null instead of 0
+        "Data Engineering": null,
         "AI": null,
         "Analytics": null,
         "Economic Evaluations": null
     };
 
-    let isInitialized = false; // Flag to track if we've set initial baseline
+    let isInitialized = false;
 
-    // Mapping for easier reference
     const topicMapping = {
         "Data Engineering": "data-engineering",
         "AI": "ai", 
@@ -26,9 +23,19 @@ document.addEventListener('DOMContentLoaded', () => {
         "Economic Evaluations": "econ-eval"
     };
 
+    // Add click listeners to image quadrants
+    document.querySelectorAll('.image-quadrant.clickable').forEach(quadrant => {
+        quadrant.addEventListener('click', () => {
+            const topicKey = quadrant.dataset.topic;
+            if (topicKey) {
+                console.log(`Image quadrant clicked: ${topicKey}`);
+                enlargeImageLightbox(topicKey);
+            }
+        });
+    });
+
     function fetchDataAndUpdateCounters() {
-        errorMessageDiv.textContent = ''; // Clear previous errors
-        loadingDiv.style.display = 'block';
+        errorMessageDiv.textContent = '';
         
         const fetchUrl = `${SCRIPT_URL}?action=getTopicData&cachebust=${new Date().getTime()}`;
 
@@ -43,15 +50,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (data.error) {
                     throw new Error(`Error from Apps Script: ${data.error}`);
                 }
-                console.log("Data fetched for counters:", data);
                 updateCounters(data);
-                lastUpdatedDiv.textContent = `Last updated: ${new Date().toLocaleTimeString()}`;
-                loadingDiv.style.display = 'none';
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
                 errorMessageDiv.textContent = `Error: ${error.message}. Retrying in ${POLLING_INTERVAL/1000}s...`;
-                loadingDiv.style.display = 'none';
             });
     }
 
@@ -61,7 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Skip header row (index 0), process data rows
         for (let i = 1; i < apiData.length; i++) {
             const topicName = apiData[i][0];
             const count = apiData[i][1];
@@ -75,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (valueElement) {
                         valueElement.textContent = count;
                         
-                        // Only add pulse animation if initialized and count increased
+                        // Add pulse animation if initialized and count increased
                         if (isInitialized && previousCounts[topicName] !== null && count > previousCounts[topicName]) {
                             counterElement.classList.add('pulse');
                             setTimeout(() => {
@@ -86,18 +88,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 // Check if this topic got a new vote and trigger image enlargement
-                // ONLY if we're initialized and there's a real increase
                 if (isInitialized && previousCounts[topicName] !== null && count > previousCounts[topicName]) {
                     console.log(`New vote detected for ${topicName}! Count: ${previousCounts[topicName]} → ${count}`);
                     enlargeImageLightbox(topicKey);
                 }
 
-                // Update previous count
                 previousCounts[topicName] = count;
             }
         }
 
-        // Mark that we've completed initialization
         if (!isInitialized) {
             isInitialized = true;
             console.log("Dashboard initialized with current counts. Now watching for new votes...");
@@ -114,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Get the source image
         const sourceQuadrant = document.getElementById(`quadrant-${topicKey}`);
         const sourceImage = sourceQuadrant.querySelector('.quadrant-image');
-        const sourceLabel = sourceQuadrant.querySelector('.quadrant-label');
+        const overlayContent = sourceQuadrant.querySelector('.overlay-content');
         
         if (!sourceImage) return;
 
@@ -126,16 +125,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const lightboxContent = document.createElement('div');
         lightboxContent.className = 'lightbox-content';
         
-        // Clone the image and label
+        // Clone the image and overlay content
         const enlargedImage = sourceImage.cloneNode(true);
         enlargedImage.className = 'lightbox-image';
         
-        const enlargedLabel = sourceLabel.cloneNode(true);
-        enlargedLabel.className = 'lightbox-label';
+        const enlargedOverlay = document.createElement('div');
+        enlargedOverlay.className = 'lightbox-text-overlay';
+        enlargedOverlay.innerHTML = overlayContent.innerHTML;
         
         // Add content to lightbox
         lightboxContent.appendChild(enlargedImage);
-        lightboxContent.appendChild(enlargedLabel);
+        lightboxContent.appendChild(enlargedOverlay);
         lightboxOverlay.appendChild(lightboxContent);
         
         // Add lightbox to page
@@ -153,8 +153,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (lightboxOverlay.parentNode) {
                     lightboxOverlay.remove();
                 }
-            }, 500); // Wait for fade out animation
-        }, 30000); // 30 seconds
+            }, 500);
+        }, 30000);
 
         // Allow clicking to close early
         lightboxOverlay.addEventListener('click', (e) => {

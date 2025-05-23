@@ -12,47 +12,86 @@
 <body>
     <h1>Live Topic Interest</h1>
     
-    <!-- Counter Bar -->
+    <!-- Modern Bootstrap-style Counter Cards -->
     <div class="counter-bar">
-        <div class="counter-item" id="counter-data-engineering">
-            <div class="counter-label">Data Engineering</div>
-            <div class="counter-value">0</div>
+        <div class="counter-card" id="counter-data-engineering">
+            <div class="counter-icon">
+                <div class="icon-circle data-engineering">🔧</div>
+            </div>
+            <div class="counter-content">
+                <div class="counter-value">0</div>
+                <div class="counter-label">Data Engineering</div>
+            </div>
         </div>
-        <div class="counter-item" id="counter-ai">
-            <div class="counter-label">AI</div>
-            <div class="counter-value">0</div>
+        <div class="counter-card" id="counter-ai">
+            <div class="counter-icon">
+                <div class="icon-circle ai">🤖</div>
+            </div>
+            <div class="counter-content">
+                <div class="counter-value">0</div>
+                <div class="counter-label">AI</div>
+            </div>
         </div>
-        <div class="counter-item" id="counter-analytics">
-            <div class="counter-label">Analytics</div>
-            <div class="counter-value">0</div>
+        <div class="counter-card" id="counter-analytics">
+            <div class="counter-icon">
+                <div class="icon-circle analytics">📊</div>
+            </div>
+            <div class="counter-content">
+                <div class="counter-value">0</div>
+                <div class="counter-label">Analytics</div>
+            </div>
         </div>
-        <div class="counter-item" id="counter-econ-eval">
-            <div class="counter-label">Economic Evaluations</div>
-            <div class="counter-value">0</div>
+        <div class="counter-card" id="counter-econ-eval">
+            <div class="counter-icon">
+                <div class="icon-circle econ-eval">💰</div>
+            </div>
+            <div class="counter-content">
+                <div class="counter-value">0</div>
+                <div class="counter-label">Economic Evaluations</div>
+            </div>
         </div>
     </div>
 
-    <!-- Image Quadrants -->
+    <!-- Image Quadrants with Overlay Text -->
     <div class="image-grid">
-        <div class="image-quadrant" id="quadrant-data-engineering">
-            <img src="https://i0.wp.com/kloudsaga.com/wp-content/uploads/2024/02/data-engineering-solution.webp" alt="Data Engineering" class="quadrant-image">
-            <div class="quadrant-label">Data Engineering</div>
+        <div class="image-quadrant clickable" id="quadrant-data-engineering" data-topic="data-engineering">
+            <img src="https://via.placeholder.com/600x400/c18dbe/ffffff?text=Data+Engineering" alt="Data Engineering" class="quadrant-image">
+            <div class="image-overlay">
+                <div class="overlay-content">
+                    <h3>Data Engineering</h3>
+                    <p>Building robust data pipelines and infrastructure</p>
+                </div>
+            </div>
         </div>
-        <div class="image-quadrant" id="quadrant-ai">
-            <img src="https://cdn.ceps.eu/wp-content/uploads/2024/07/vecteezy_ai-generated-ai-circuit-board-technology-background_37348385-scaled.jpg" alt="AI" class="quadrant-image">
-            <div class="quadrant-label">AI</div>
+        <div class="image-quadrant clickable" id="quadrant-ai" data-topic="ai">
+            <img src="https://via.placeholder.com/600x400/56BABF/ffffff?text=AI" alt="AI" class="quadrant-image">
+            <div class="image-overlay">
+                <div class="overlay-content">
+                    <h3>Artificial Intelligence</h3>
+                    <p>Intelligent solutions for healthcare challenges</p>
+                </div>
+            </div>
         </div>
-        <div class="image-quadrant" id="quadrant-analytics">
-            <img src="https://planonsoftware.com/upload_mm/4/7/1/4719_fullimage_20210309-image-dataanalytics-magnifieroverview-high-3000x1987.jpg" alt="Analytics" class="quadrant-image">
-            <div class="quadrant-label">Analytics</div>
+        <div class="image-quadrant clickable" id="quadrant-analytics" data-topic="analytics">
+            <img src="https://via.placeholder.com/600x400/F28F64/ffffff?text=Analytics" alt="Analytics" class="quadrant-image">
+            <div class="image-overlay">
+                <div class="overlay-content">
+                    <h3>Analytics</h3>
+                    <p>Data-driven insights and visualizations</p>
+                </div>
+            </div>
         </div>
-        <div class="image-quadrant" id="quadrant-econ-eval">
-            <img src="https://cepr.org/sites/default/files/styles/16_9_small/public/2022-09/AdobeStock_256411314.jpeg?itok=d2gsnokX" alt="Economic Evaluations" class="quadrant-image">
-            <div class="quadrant-label">Economic Evaluations</div>
+        <div class="image-quadrant clickable" id="quadrant-econ-eval" data-topic="econ-eval">
+            <img src="https://via.placeholder.com/600x400/559370/ffffff?text=Economic+Evaluations" alt="Economic Evaluations" class="quadrant-image">
+            <div class="image-overlay">
+                <div class="overlay-content">
+                    <h3>Economic Evaluations</h3>
+                    <p>Cost-effectiveness and health economics</p>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div id="last_updated">Fetching initial data...</div>
     <div id="error_message"></div>
     <div id="loading" class="loading-spinner" style="display: none;"></div>
 
