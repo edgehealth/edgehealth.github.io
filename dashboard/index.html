@@ -5,19 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="dashboard_style.css">
     <title>NHS Confed - Live Dashboard</title>
-
-    <!--Load the AJAX API-->
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <meta http-equiv='cache-control' content='no-cache'> 
+    <meta http-equiv='expires' content='0'> 
+    <meta http-equiv='pragma' content='no-cache'>
 </head>
 <body>
     <h1>Live Topic Interest</h1>
-    <div id="chart_container">
-        <div id="chart_div">
-            <div class="loading-spinner"></div> <!-- Show spinner while loading -->
+    
+    <!-- Counter Bar -->
+    <div class="counter-bar">
+        <div class="counter-item" id="counter-data-engineering">
+            <div class="counter-label">Data Engineering</div>
+            <div class="counter-value">0</div>
+        </div>
+        <div class="counter-item" id="counter-ai">
+            <div class="counter-label">AI</div>
+            <div class="counter-value">0</div>
+        </div>
+        <div class="counter-item" id="counter-analytics">
+            <div class="counter-label">Analytics</div>
+            <div class="counter-value">0</div>
+        </div>
+        <div class="counter-item" id="counter-econ-eval">
+            <div class="counter-label">Economic Evaluations</div>
+            <div class="counter-value">0</div>
         </div>
     </div>
+
+    <!-- Image Quadrants -->
+    <div class="image-grid">
+        <div class="image-quadrant" id="quadrant-data-engineering">
+            <img src="https://via.placeholder.com/300x300/c18dbe/ffffff?text=Data+Engineering" alt="Data Engineering" class="quadrant-image">
+            <div class="quadrant-label">Data Engineering</div>
+        </div>
+        <div class="image-quadrant" id="quadrant-ai">
+            <img src="https://via.placeholder.com/300x300/56BABF/ffffff?text=AI" alt="AI" class="quadrant-image">
+            <div class="quadrant-label">AI</div>
+        </div>
+        <div class="image-quadrant" id="quadrant-analytics">
+            <img src="https://via.placeholder.com/300x300/F28F64/ffffff?text=Analytics" alt="Analytics" class="quadrant-image">
+            <div class="quadrant-label">Analytics</div>
+        </div>
+        <div class="image-quadrant" id="quadrant-econ-eval">
+            <img src="https://via.placeholder.com/300x300/559370/ffffff?text=Economic+Evaluations" alt="Economic Evaluations" class="quadrant-image">
+            <div class="quadrant-label">Economic Evaluations</div>
+        </div>
+    </div>
+
     <div id="last_updated">Fetching initial data...</div>
     <div id="error_message"></div>
+    <div id="loading" class="loading-spinner" style="display: none;"></div>
 
     <script src="dashboard_script.js"></script>
 </body>
