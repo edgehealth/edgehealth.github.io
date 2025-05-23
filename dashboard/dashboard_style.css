@@ -18,7 +18,7 @@ h1 {
     font-size: clamp(2rem, 4vw, 5rem);
 }
 
-/* Modern Bootstrap-style Counter Cards */
+/* Colorful Petal-shaped Counter Cards */
 .counter-bar {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -30,15 +30,18 @@ h1 {
 }
 
 .counter-card {
-    background: linear-gradient(145deg, #ffffff, #f8f9fa);
-    border: 1px solid #e9ecef;
-    border-radius: 1.5rem;
-    padding: 2rem;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08);
+    padding: 2.5rem 2rem;
+    border: none;
+    /* Petal shape - matching your front page buttons */
+    border-bottom-left-radius: 50px;
+    border-top-right-radius: 50px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     transition: all 0.3s ease;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    gap: 1.5rem;
+    min-height: 10rem;
     position: relative;
     overflow: hidden;
 }
@@ -49,79 +52,91 @@ h1 {
     top: 0;
     left: 0;
     right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--card-color), var(--card-color-light));
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.05));
+    pointer-events: none;
 }
 
 .counter-card:hover {
-    transform: translateY(-0.25rem);
-    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.12);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
 }
 
-.counter-icon {
-    flex-shrink: 0;
-}
-
-.icon-circle {
-    width: 4rem;
-    height: 4rem;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    color: white;
-    font-weight: bold;
-}
-
-.icon-circle.data-engineering { 
+/* Brand Colors for Each Counter */
+#counter-data-engineering {
     background: linear-gradient(135deg, #c18dbe, #d4a5d0);
-}
-.icon-circle.ai { 
-    background: linear-gradient(135deg, #56BABF, #7bc8cd);
-}
-.icon-circle.analytics { 
-    background: linear-gradient(135deg, #F28F64, #f5a584);
-}
-.icon-circle.econ-eval { 
-    background: linear-gradient(135deg, #559370, #73a687);
+    color: white;
 }
 
-.counter-content {
-    flex: 1;
-    text-align: left;
+#counter-ai {
+    background: linear-gradient(135deg, #56BABF, #7bc8cd);
+    color: white;
+}
+
+#counter-analytics {
+    background: linear-gradient(135deg, #F28F64, #f5a584);
+    color: white;
+}
+
+#counter-econ-eval {
+    background: linear-gradient(135deg, #559370, #73a687);
+    color: white;
 }
 
 .counter-value {
-    font-size: clamp(2.5rem, 4vw, 4rem);
-    font-weight: 700;
-    color: #1D1B38;
+    font-size: clamp(3rem, 5vw, 6rem);
+    font-weight: 900;
+    color: white;
     line-height: 1;
     margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 1;
 }
 
 .counter-label {
-    font-size: clamp(0.9rem, 1.2vw, 1.3rem);
-    font-weight: 600;
-    color: #6c757d;
+    font-size: clamp(1rem, 1.4vw, 1.6rem);
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
     line-height: 1.2;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 1;
 }
 
-/* Set CSS variables for card colors */
-#counter-data-engineering { --card-color: #c18dbe; --card-color-light: #d4a5d0; }
-#counter-ai { --card-color: #56BABF; --card-color-light: #7bc8cd; }
-#counter-analytics { --card-color: #F28F64; --card-color-light: #f5a584; }
-#counter-econ-eval { --card-color: #559370; --card-color-light: #73a687; }
+/* Remove icon-related styles */
+.counter-icon,
+.icon-circle {
+    display: none;
+}
 
-/* Pulse animation for new votes */
+.counter-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Enhanced Pulse animation for new votes */
 .counter-card.pulse {
-    animation: cardPulse 1s ease-in-out;
+    animation: petalPulse 1.2s ease-in-out;
 }
 
-@keyframes cardPulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.15); }
-    100% { transform: scale(1); }
+@keyframes petalPulse {
+    0% { 
+        transform: scale(1) translateY(0); 
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+    50% { 
+        transform: scale(1.08) translateY(-12px); 
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    }
+    100% { 
+        transform: scale(1) translateY(0); 
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
 }
 
 /* Image Grid with Overlay Text */
@@ -281,6 +296,42 @@ h1 {
     100% { transform: rotate(360deg); }
 }
 
+/* Large Screen Optimizations */
+@media (min-width: 1600px) {
+    body {
+        font-size: 1.4rem;
+        padding: 3rem 6rem;
+    }
+    
+    .counter-bar,
+    .image-grid {
+        max-width: 1600px;
+    }
+    
+    .counter-card {
+        padding: 3rem 2.5rem;
+        min-height: 12rem;
+    }
+}
+
+/* Ultra Large Screens */
+@media (min-width: 2000px) {
+    body {
+        font-size: 1.6rem;
+        padding: 4rem 8rem;
+    }
+    
+    .counter-bar,
+    .image-grid {
+        max-width: 1800px;
+    }
+    
+    .counter-card {
+        padding: 4rem 3rem;
+        min-height: 14rem;
+    }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     body {
@@ -294,14 +345,8 @@ h1 {
     }
     
     .counter-card {
-        flex-direction: column;
-        text-align: center;
-        gap: 1rem;
-        padding: 1.5rem;
-    }
-    
-    .counter-content {
-        text-align: center;
+        padding: 2rem 1.5rem;
+        min-height: 8rem;
     }
     
     .image-grid {
@@ -316,5 +361,10 @@ h1 {
         grid-template-columns: 1fr;
         gap: 1rem;
         max-width: 400px;
+    }
+    
+    .counter-card {
+        padding: 1.5rem;
+        min-height: 7rem;
     }
 }
