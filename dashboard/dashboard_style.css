@@ -18,30 +18,30 @@ h1 {
     font-size: clamp(2rem, 4vw, 5rem);
 }
 
-/* Colorful Petal-shaped Counter Cards */
+/* Compact Petal-shaped Counter Cards */
 .counter-bar {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
+    gap: 1.5rem; /* Reduced gap */
     max-width: 1400px;
     width: 100%;
-    margin: 0 auto 3rem auto;
+    margin: 0 auto 2rem auto; /* Reduced bottom margin */
     padding: 0;
 }
 
 .counter-card {
-    padding: 2.5rem 2rem;
+    padding: 1.5rem 1.5rem; /* Reduced padding */
     border: none;
     /* Petal shape - matching your front page buttons */
     border-bottom-left-radius: 50px;
     border-top-right-radius: 50px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12); /* Slightly smaller shadow */
     transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 10rem;
+    min-height: 6rem; /* Much smaller height */
     position: relative;
     overflow: hidden;
 }
@@ -58,9 +58,10 @@ h1 {
 }
 
 .counter-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    transform: translateY(-6px); 
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
 }
+
 
 /* Brand Colors for Each Counter */
 #counter-data-engineering {
@@ -84,31 +85,25 @@ h1 {
 }
 
 .counter-value {
-    font-size: clamp(3rem, 5vw, 6rem);
+    font-size: clamp(2rem, 3.5vw, 4rem); /* Smaller font sizes */
     font-weight: 900;
     color: white;
     line-height: 1;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem; /* Reduced margin */
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     position: relative;
     z-index: 1;
 }
 
 .counter-label {
-    font-size: clamp(1rem, 1.4vw, 1.6rem);
+    font-size: clamp(0.8rem, 1.1vw, 1.2rem); /* Smaller label */
     font-weight: 700;
     color: rgba(255, 255, 255, 0.95);
-    line-height: 1.2;
+    line-height: 1.1;
     text-align: center;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
     position: relative;
     z-index: 1;
-}
-
-/* Remove icon-related styles */
-.counter-icon,
-.icon-circle {
-    display: none;
 }
 
 .counter-content {
@@ -309,8 +304,8 @@ h1 {
     }
     
     .counter-card {
-        padding: 3rem 2.5rem;
-        min-height: 12rem;
+        padding: 2rem 2rem;
+        min-height: 7rem; /* Still compact on large screens */
     }
 }
 
@@ -327,10 +322,11 @@ h1 {
     }
     
     .counter-card {
-        padding: 4rem 3rem;
-        min-height: 14rem;
+        padding: 2.5rem 2.5rem;
+        min-height: 8rem; /* Still reasonable size */
     }
 }
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -359,12 +355,12 @@ h1 {
 @media (max-width: 480px) {
     .counter-bar {
         grid-template-columns: 1fr;
-        gap: 1rem;
+        gap: 0.8rem;
         max-width: 400px;
     }
     
     .counter-card {
-        padding: 1.5rem;
-        min-height: 7rem;
+        padding: 1rem;
+        min-height: 4.5rem;
     }
 }
