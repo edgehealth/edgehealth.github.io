@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
         "Economic Evaluations": 0
     };
 
+    let isFirstLoad = true; // Flag to track if this is the initial data load
+
     // Mapping for easier reference
     const topicMapping = {
         "Data Engineering": "data-engineering",
@@ -74,8 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (valueElement) {
                         valueElement.textContent = count;
                         
-                        // Add pulse animation to counter if count increased
-                        if (count > previousCounts[topicName]) {
+                        // Only add pulse animation if not first load and count increased
+                        if (!isFirstLoad && count > previousCounts[topicName]) {
                             counterElement.classList.add('pulse');
                             setTimeout(() => {
                                 counterElement.classList.remove('pulse');
@@ -85,28 +87,87 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 // Check if this topic got a new vote and trigger image enlargement
-                if (count > previousCounts[topicName]) {
+                // ONLY if this is not the first load
+                if (!isFirstLoad && count > previousCounts[topicName]) {
                     console.log(`New vote detected for ${topicName}! Count: ${previousCounts[topicName]} → ${count}`);
-                    enlargeImage(topicKey);
+                    enlargeImageLightbox(topicKey);
                 }
 
                 // Update previous count
                 previousCounts[topicName] = count;
             }
         }
+
+        // Mark that we've completed the first load
+        if (isFirstLoad) {
+            isFirstLoad = false;
+            console.log("Initial data load completed. Now watching for new votes...");
+        }
     }
 
-    function enlargeImage(topicKey) {
-        const quadrant = document.getElementById(`quadrant-${topicKey}`);
-        if (quadrant) {
-            // Add enlarged class
-            quadrant.classList.add('enlarged');
-            
-            // Remove the class after 30 seconds
-            setTimeout(() => {
-                quadrant.classList.remove('enlarged');
-            }, 30000); // 30 seconds
+    function enlargeImageLightbox(topicKey) {
+        // Remove any existing lightbox
+        const existingLightbox = document.querySelector('.lightbox-overlay');
+        if (existingLightbox) {
+            existingLightbox.remove();
         }
+
+        // Get the source image
+        const sourceQuadrant = document.getElementById(`quadrant-${topicKey}`);
+        const sourceImage = sourceQuadrant.querySelector('.quadrant-image');
+        const sourceLabel = sourceQuadrant.querySelector('.quadrant-label');
+        
+        if (!sourceImage) return;
+
+        // Create lightbox overlay
+        const lightboxOverlay = document.createElement('div');
+        lightboxOverlay.className = 'lightbox-overlay';
+        
+        // Create lightbox content
+        const lightboxContent = document.createElement('div');
+        lightboxContent.className = 'lightbox-content';
+        
+        // Clone the image and label
+        const enlargedImage = sourceImage.cloneNode(true);
+        enlargedImage.className = 'lightbox-image';
+        
+        const enlargedLabel = sourceLabel.cloneNode(true);
+        enlargedLabel.className = 'lightbox-label';
+        
+        // Add content to lightbox
+        lightboxContent.appendChild(enlargedImage);
+        lightboxContent.appendChild(enlargedLabel);
+        lightboxOverlay.appendChild(lightboxContent);
+        
+        // Add lightbox to page
+        document.body.appendChild(lightboxOverlay);
+        
+        // Animate in
+        setTimeout(() => {
+            lightboxOverlay.classList.add('active');
+        }, 10);
+        
+        // Remove after 30 seconds
+        setTimeout(() => {
+            lightboxOverlay.classList.remove('active');
+            setTimeout(() => {
+                if (lightboxOverlay.parentNode) {
+                    lightboxOverlay.remove();
+                }
+            }, 500); // Wait for fade out animation
+        }, 30000); // 30 seconds
+
+        // Allow clicking to close early
+        lightboxOverlay.addEventListener('click', (e) => {
+            if (e.target === lightboxOverlay) {
+                lightboxOverlay.classList.remove('active');
+                setTimeout(() => {
+                    if (lightboxOverlay.parentNode) {
+                        lightboxOverlay.remove();
+                    }
+                }, 500);
+            }
+        });
     }
 
     // Initial fetch

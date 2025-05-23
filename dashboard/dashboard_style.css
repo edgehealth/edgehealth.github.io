@@ -1,130 +1,96 @@
-body {
-    font-family: 'Segoe UI', sans-serif;
-    margin: 0;
-    padding: 20px;
-    background-color: #f0e0fb5c;
-    color: #1D1B38;
-}
+/* Add these new styles to your existing dashboard_style.css */
 
-h1 {
-    color: #1D1B38;
-    margin-bottom: 30px;
-    text-align: center;
-    font-family: 'Libre Baskerville', serif;
-    font-size: 2.5em;
-}
-
-/* Counter Bar Styles */
-.counter-bar {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    max-width: 1200px;
-    margin: 0 auto 40px auto;
-    padding: 0 20px;
-}
-
-.counter-item {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.counter-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
-}
-
-.counter-label {
-    font-size: 1.1em;
-    font-weight: 600;
-    margin-bottom: 10px;
-    color: #555;
-}
-
-.counter-value {
-    font-size: 3em;
-    font-weight: bold;
-    color: #1D1B38;
-    line-height: 1;
-}
-
-/* Counter color coding */
-#counter-data-engineering .counter-value { color: #c18dbe; }
-#counter-ai .counter-value { color: #56BABF; }
-#counter-analytics .counter-value { color: #F28F64; }
-#counter-econ-eval .counter-value { color: #559370; }
-
-/* Pulse animation for new votes */
-.counter-item.pulse {
-    animation: pulse 1s ease-in-out;
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-
-/* Image Grid Styles */
-.image-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.image-quadrant {
-    background-color: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: all 0.5s ease;
-    position: relative;
-}
-
-.quadrant-image {
+/* Lightbox Styles */
+.lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 300px;
-    object-fit: cover;
-    transition: all 0.5s ease;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    cursor: pointer;
 }
 
-.quadrant-label {
-    padding: 20px;
+.lightbox-overlay.active {
+    opacity: 1;
+}
+
+.lightbox-content {
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    transform: scale(0.8);
+    transition: transform 0.5s ease;
+    cursor: default;
+    max-width: 90vw;
+    max-height: 90vh;
+}
+
+.lightbox-overlay.active .lightbox-content {
+    transform: scale(1);
+}
+
+.lightbox-image {
+    width: 600px;
+    height: 600px;
+    object-fit: cover;
+    display: block;
+}
+
+.lightbox-label {
+    padding: 30px;
     text-align: center;
-    font-size: 1.3em;
+    font-size: 2em;
     font-weight: 600;
     color: #1D1B38;
     background-color: #ffffff;
 }
 
-/* Enlarged state for 30-second animation */
+/* Remove the old enlarged styles since we're using lightbox now */
 .image-quadrant.enlarged {
-    transform: scale(1.1);
+    /* Remove these styles or comment them out */
+    /* transform: scale(1.1);
     z-index: 10;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2); */
 }
 
 .image-quadrant.enlarged .quadrant-image {
-    height: 400px;
+    /* Remove this too */
+    /* height: 400px; */
 }
 
-/* Status messages */
-#last_updated {
-    margin-top: 30px;
-    font-size: 0.9em;
-    color: #555;
-    text-align: center;
+/* Responsive lightbox */
+@media (max-width: 768px) {
+    .lightbox-image {
+        width: 80vw;
+        height: 80vw;
+        max-width: 500px;
+        max-height: 500px;
+    }
+    
+    .lightbox-label {
+        padding: 20px;
+        font-size: 1.5em;
+    }
 }
 
-#error_message {
-    margin-top: 15px;
-    color: #d9534f;
-    font-weight: bold;
+@media (max-width: 480px) {
+    .lightbox-image {
+        width: 90vw;
+        height: 90vw;
+        max-width: 400px;
+        max-height: 400px;
+    }
+    
+    .lightbox-label {
+        padding: 15px;
+        font-size: 1.2em;
+    }
 }
