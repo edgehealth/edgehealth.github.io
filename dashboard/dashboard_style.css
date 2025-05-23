@@ -12,10 +12,10 @@ body {
 
 h1 {
     color: #1D1B38;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     text-align: center;
     font-family: 'Libre Baskerville', serif;
-    font-size: clamp(2rem, 4vw, 5rem);
+    font-size: clamp(1rem, 4vw, 5rem);
 }
 
 /* Compact Petal-shaped Counter Cards */
@@ -25,23 +25,22 @@ h1 {
     gap: 1.5rem; /* Reduced gap */
     max-width: 1400px;
     width: 100%;
-    margin: 0 auto 2rem auto; /* Reduced bottom margin */
-    padding: 0;
+    margin: 0 auto 2rem auto; 
+    padding: 2em;
 }
 
 .counter-card {
-    padding: 1.5rem 1.5rem; /* Reduced padding */
+    padding: 1.5rem 1.5rem; 
     border: none;
-    /* Petal shape - matching your front page buttons */
     border-bottom-left-radius: 50px;
     border-top-right-radius: 50px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12); /* Slightly smaller shadow */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12); 
     transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 6rem; /* Much smaller height */
+    min-height: 6rem; 
     position: relative;
     overflow: hidden;
 }
@@ -85,7 +84,7 @@ h1 {
 }
 
 .counter-value {
-    font-size: clamp(2rem, 3.5vw, 4rem); /* Smaller font sizes */
+    font-size: clamp(2rem, 3.5vw, 4rem); 
     font-weight: 900;
     color: white;
     line-height: 1;
@@ -96,7 +95,7 @@ h1 {
 }
 
 .counter-label {
-    font-size: clamp(0.8rem, 1.1vw, 1.2rem); /* Smaller label */
+    font-size: clamp(0.8rem, 1.1vw, 1.2rem); 
     font-weight: 700;
     color: rgba(255, 255, 255, 0.95);
     line-height: 1.1;
@@ -114,7 +113,6 @@ h1 {
     width: 100%;
 }
 
-/* Enhanced Pulse animation for new votes */
 .counter-card.pulse {
     animation: petalPulse 1.2s ease-in-out;
 }
@@ -208,7 +206,7 @@ h1 {
     align-items: center;
     z-index: 1000;
     opacity: 0;
-    transition: opacity 0.5s ease;
+    transition: all 0.4s ease-out; 
     cursor: pointer;
     padding: 2rem;
     box-sizing: border-box;
@@ -216,14 +214,15 @@ h1 {
 
 .lightbox-overlay.active {
     opacity: 1;
+    background-color: rgba(0, 0, 0, 0.9);
 }
 
 .lightbox-content {
     position: relative;
     border-radius: 2rem;
     overflow: hidden;
-    transform: scale(0.8);
-    transition: transform 0.5s ease;
+    transform: scale(0.6) translateY(50px); 
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
     cursor: default;
     width: 95vw;
     height: 95vh;
@@ -231,7 +230,8 @@ h1 {
 }
 
 .lightbox-overlay.active .lightbox-content {
-    transform: scale(1);
+    transform: scale(1) translateY(0);
+    opacity: 1;
 }
 
 .lightbox-image {
@@ -249,6 +249,14 @@ h1 {
     background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
     color: white;
     padding: 4rem;
+    transform: translateY(20px); 
+    opacity: 0;
+    transition: all 0.6s ease-out 0.3s;
+}
+
+.lightbox-overlay.active .lightbox-text-overlay {
+    transform: translateY(0);
+    opacity: 1;
 }
 
 .lightbox-text-overlay h3 {
@@ -305,7 +313,7 @@ h1 {
     
     .counter-card {
         padding: 2rem 2rem;
-        min-height: 7rem; /* Still compact on large screens */
+        min-height: 7rem; 
     }
 }
 
@@ -323,7 +331,7 @@ h1 {
     
     .counter-card {
         padding: 2.5rem 2.5rem;
-        min-height: 8rem; /* Still reasonable size */
+        min-height: 8rem; 
     }
 }
 

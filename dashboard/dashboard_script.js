@@ -104,70 +104,70 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function enlargeImageLightbox(topicKey) {
-        // Remove any existing lightbox
-        const existingLightbox = document.querySelector('.lightbox-overlay');
-        if (existingLightbox) {
-            existingLightbox.remove();
-        }
+    // Remove any existing lightbox
+    const existingLightbox = document.querySelector('.lightbox-overlay');
+    if (existingLightbox) {
+        existingLightbox.remove();
+    }
 
-        // Get the source image
-        const sourceQuadrant = document.getElementById(`quadrant-${topicKey}`);
-        const sourceImage = sourceQuadrant.querySelector('.quadrant-image');
-        const overlayContent = sourceQuadrant.querySelector('.overlay-content');
-        
-        if (!sourceImage) return;
+    // Get the source image
+    const sourceQuadrant = document.getElementById(`quadrant-${topicKey}`);
+    const sourceImage = sourceQuadrant.querySelector('.quadrant-image');
+    const overlayContent = sourceQuadrant.querySelector('.overlay-content');
+    
+    if (!sourceImage) return;
 
-        // Create lightbox overlay
-        const lightboxOverlay = document.createElement('div');
-        lightboxOverlay.className = 'lightbox-overlay';
-        
-        // Create lightbox content
-        const lightboxContent = document.createElement('div');
-        lightboxContent.className = 'lightbox-content';
-        
-        // Clone the image and overlay content
-        const enlargedImage = sourceImage.cloneNode(true);
-        enlargedImage.className = 'lightbox-image';
-        
-        const enlargedOverlay = document.createElement('div');
-        enlargedOverlay.className = 'lightbox-text-overlay';
-        enlargedOverlay.innerHTML = overlayContent.innerHTML;
-        
-        // Add content to lightbox
-        lightboxContent.appendChild(enlargedImage);
-        lightboxContent.appendChild(enlargedOverlay);
-        lightboxOverlay.appendChild(lightboxContent);
-        
-        // Add lightbox to page
-        document.body.appendChild(lightboxOverlay);
-        
-        // Animate in
+    // Create lightbox overlay
+    const lightboxOverlay = document.createElement('div');
+    lightboxOverlay.className = 'lightbox-overlay';
+    
+    // Create lightbox content
+    const lightboxContent = document.createElement('div');
+    lightboxContent.className = 'lightbox-content';
+    
+    // Clone the image and overlay content
+    const enlargedImage = sourceImage.cloneNode(true);
+    enlargedImage.className = 'lightbox-image';
+    
+    const enlargedOverlay = document.createElement('div');
+    enlargedOverlay.className = 'lightbox-text-overlay';
+    enlargedOverlay.innerHTML = overlayContent.innerHTML;
+    
+    // Add content to lightbox
+    lightboxContent.appendChild(enlargedImage);
+    lightboxContent.appendChild(enlargedOverlay);
+    lightboxOverlay.appendChild(lightboxContent);
+    
+    // Add lightbox to page
+    document.body.appendChild(lightboxOverlay);
+    
+    // Animate in with a longer delay for smoother effect
+    setTimeout(() => {
+        lightboxOverlay.classList.add('active');
+    }, 50); // Slightly longer delay for smoother initiation
+    
+    // Remove after 30 seconds with smooth exit
+    setTimeout(() => {
+        lightboxOverlay.classList.remove('active');
         setTimeout(() => {
-            lightboxOverlay.classList.add('active');
-        }, 10);
-        
-        // Remove after 30 seconds
-        setTimeout(() => {
+            if (lightboxOverlay.parentNode) {
+                lightboxOverlay.remove();
+            }
+        }, 800); // Wait for full exit animation
+    }, 30000); // 30 seconds
+
+    // Allow clicking to close early
+    lightboxOverlay.addEventListener('click', (e) => {
+        if (e.target === lightboxOverlay) {
             lightboxOverlay.classList.remove('active');
             setTimeout(() => {
                 if (lightboxOverlay.parentNode) {
                     lightboxOverlay.remove();
                 }
-            }, 500);
-        }, 30000);
-
-        // Allow clicking to close early
-        lightboxOverlay.addEventListener('click', (e) => {
-            if (e.target === lightboxOverlay) {
-                lightboxOverlay.classList.remove('active');
-                setTimeout(() => {
-                    if (lightboxOverlay.parentNode) {
-                        lightboxOverlay.remove();
-                    }
-                }, 500);
-            }
-        });
-    }
+            }, 800); // Wait for exit animation
+        }
+    });
+}
 
     // Initial fetch
     fetchDataAndUpdateCounters();
