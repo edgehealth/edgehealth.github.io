@@ -6,11 +6,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const feedbackMessageElement = document.getElementById('feedback-message');
 
     buttons.forEach(button => {
-        button.addEventListener('click', () => {
-            const topic = button.dataset.topic;
-            logTopicChoice(topic);
-        });
+    button.addEventListener('click', () => {
+        const topic = button.dataset.topic;
+        
+        // Add pressed animation
+        button.classList.add('pressed');
+        setTimeout(() => {
+            button.classList.remove('pressed');
+        }, 600);
+        
+        logTopicChoice(topic);
     });
+});
 
     function logTopicChoice(topic) {
         feedbackMessageElement.textContent = 'Sending...';
@@ -35,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             console.log('Success:', data);
             if (data.status === "success") {
-                feedbackMessageElement.textContent = `Thanks for choosing ${data.topic}! Pick up your sweet!`;
+                feedbackMessageElement.textContent = `Thanks for choosing ${data.topic}! Pick up your chocolate!`;
                 feedbackMessageElement.className = 'feedback success';
             } else {
                 feedbackMessageElement.textContent = `Error: ${data.message}`;
