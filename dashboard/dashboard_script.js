@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Get the source image
     const sourceQuadrant = document.getElementById(`quadrant-${topicKey}`);
     const sourceImage = sourceQuadrant.querySelector('.quadrant-image');
-    const overlayContent = sourceQuadrant.querySelector('.overlay-content');
+   // const overlayContent = sourceQuadrant.querySelector('.overlay-content');
     
     if (!sourceImage) return;
 
@@ -129,13 +129,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const enlargedImage = sourceImage.cloneNode(true);
     enlargedImage.className = 'lightbox-image';
     
-    const enlargedOverlay = document.createElement('div');
-    enlargedOverlay.className = 'lightbox-text-overlay';
-    enlargedOverlay.innerHTML = overlayContent.innerHTML;
+    //const enlargedOverlay = document.createElement('div');
+    //enlargedOverlay.className = 'lightbox-text-overlay';
+    //enlargedOverlay.innerHTML = overlayContent.innerHTML;
     
     // Add content to lightbox
     lightboxContent.appendChild(enlargedImage);
-    lightboxContent.appendChild(enlargedOverlay);
+    //lightboxContent.appendChild(enlargedOverlay);
     lightboxOverlay.appendChild(lightboxContent);
     
     // Add lightbox to page

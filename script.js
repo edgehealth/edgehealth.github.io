@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             console.log('Success:', data);
             if (data.status === "success") {
-                feedbackMessageElement.textContent = `Thanks for choosing ${data.topic}! Pick up your chocolate!`;
+                feedbackMessageElement.textContent = `Thanks for choosing ${data.topic}! Pick up your treat!`;
                 feedbackMessageElement.className = 'feedback success';
             } else {
                 feedbackMessageElement.textContent = `Error: ${data.message}`;
