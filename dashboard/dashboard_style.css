@@ -70,22 +70,22 @@ h1 {
 
 /* Brand Colors for Each Counter */
 #counter-data-engineering {
-    background: linear-gradient(135deg, #c18dbe, #d4a5d0);
+    background: linear-gradient(135deg, #B58CBD, #B58CBD);
     color: white;
 }
 
 #counter-ai {
-    background: linear-gradient(135deg, #56BABF, #7bc8cd);
+    background: linear-gradient(135deg, #241E3E, #241E3E);
     color: white;
 }
 
 #counter-analytics {
-    background: linear-gradient(135deg, #F28F64, #f5a584);
+    background: linear-gradient(135deg, #80B9BC, #80B9BC);
     color: white;
 }
 
 #counter-econ-eval {
-    background: linear-gradient(135deg, #559370, #73a687);
+    background: linear-gradient(135deg, #EADDED, #EADDED);
     color: white;
 }
 
