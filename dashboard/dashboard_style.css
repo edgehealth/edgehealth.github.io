@@ -279,7 +279,6 @@ h1 {
     line-height: 1.4;
 }
 
-/* Status messages */
 #error_message {
     margin-top: 1rem;
     color: #d9534f;
