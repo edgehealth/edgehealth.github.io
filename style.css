@@ -12,117 +12,211 @@ body {
 }
 
 .container {
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    max-width: 800px; /* Max width of the content area */
+    background: linear-gradient(145deg, #ffffff, #f8f9fa); /* Subtle gradient background */
+    padding: 40px; /* Slightly more padding */
+    border-radius: 20px; /* More rounded corners */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12); /* Enhanced shadow */
+    max-width: 900px; /* Slightly wider */
     width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+    pointer-events: none;
 }
 
 h1 {
     color: #1D1B38;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     font-family: 'Libre Baskerville', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem); /* Responsive font size */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle text shadow */
+    position: relative;
+    z-index: 1;
 }
 
 p {
     color: #555;
-    margin-bottom: 30px;
-    font-size: 1.1em;
+    margin-bottom: 40px;
+    font-size: clamp(1rem, 2vw, 1.3em); /* Responsive subtitle */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    position: relative;
+    z-index: 1;
 }
 
 .button-grid {
     display: grid;
-    /* --- CHANGED HERE --- */
-    grid-template-columns: repeat(2, 1fr); /* This creates a 2-column grid */
-    gap: 25px; /* Increased gap slightly for a 2x2 layout */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px; /* Slightly larger gap */
+    position: relative;
+    z-index: 1;
 }
 
 .topic-button {
-    padding: 30px 20px;
-    font-size: 1.5em;
+    padding: 35px 25px; /* Slightly more padding */
+    font-size: clamp(1.2em, 2.5vw, 1.8em); /* Responsive font size */
     font-weight: bold;
     color: white;
     border: none;
-   /* border-radius: 10px; */
+    /* Petal shape - same as dashboard */
     border-bottom-left-radius: 50px;
     border-top-right-radius: 50px;
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: all 0.3s ease; /* Smoother transition */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 180px; /* Adjusted min-height for a more squarish 2x2 feel */
+    min-height: 200px;
+    position: relative;
+    overflow: hidden;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* White text shadow for readability */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+}
+
+/* Subtle overlay effect on buttons */
+.topic-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.05));
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Ensure text is above the overlay */
+.topic-button > * {
+    position: relative;
+    z-index: 2;
 }
 
 .topic-button:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(-8px); /* More dramatic hover effect */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25); /* Enhanced hover shadow */
 }
 
 .topic-button:active {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.1s ease; /* Quick active response */
 }
 
 .sweet-info {
-    font-size: 0.7em;
+    font-size: 0.75em;
     font-weight: normal;
-    margin-top: 8px;
-    opacity: 0.9;
+    margin-top: 10px;
+    opacity: 0.95;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-/* Specific button colors */
-#btn-data-engineering { background-color: #c18dbe; /* Edge Pink */ }
-#btn-ai { background-color: #56BABF; /* Edge Aquamarine */ }
-#btn-analytics { background-color: #F28F64; /* Edge Orange */ }
-#btn-econ-eval { background-color: #559370; /* color: #333;  Edge Green - could change text colour if needed for readability */ }
+/* Enhanced button colors with gradients */
+#btn-data-engineering { 
+    background: linear-gradient(135deg, #B58CBD, #B58CBD);
+}
+
+#btn-ai { 
+    background: linear-gradient(135deg, #241E3E, #241E3E);
+}
+
+#btn-analytics { 
+    background: linear-gradient(135deg, #80B9BC, #80B9BC);
+}
+
+#btn-econ-eval { 
+    background: linear-gradient(135deg, #EADDED, #EADDED);
+}
+
+/* Add pulse animation for button press feedback */
+.topic-button.pressed {
+    animation: buttonPress 0.6s ease-out;
+}
+
+@keyframes buttonPress {
+    0% { 
+        transform: scale(1) translateY(0); 
+    }
+    50% { 
+        transform: scale(1.05) translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+    100% { 
+        transform: scale(1) translateY(0);
+    }
+}
 
 .feedback {
-    margin-top: 30px;
-    font-size: 1.2em;
-    min-height: 1.5em; /* Reserve space for message */
+    margin-top: 40px;
+    font-size: clamp(1rem, 2vw, 1.4em); /* Responsive feedback text */
+    min-height: 1.5em;
     font-weight: bold;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
 }
 
 .feedback.success {
-    color: #c18dbe; /* Edge pink */
+    color: #c18dbe;
+    text-shadow: 0 1px 2px rgba(193, 141, 190, 0.3);
 }
 
 .feedback.error {
-    color: #F28F64; /* Edge orange */
+    color: #F28F64;
+    text-shadow: 0 1px 2px rgba(242, 143, 100, 0.3);
 }
 
-/* For smaller screens */
+/* Enhanced responsive design */
 @media (max-width: 600px) {
     .container {
-        padding: 20px;
+        padding: 30px 25px;
+        max-width: 95%;
     }
     .button-grid {
-        gap: 15px; /* Slightly smaller gap on smaller screens */
+        gap: 20px;
     }
     .topic-button {
-        font-size: 1.2em; /* Adjust font size for smaller buttons */
-        padding: 20px 10px;
-        min-height: 140px; /* Adjust min-height for smaller buttons */
+        padding: 25px 15px;
+        min-height: 160px;
     }
-    h1 {
-        font-size: 1.6em;
-    }
-    p {
-        font-size: 1em;
-        margin-bottom: 20px;
+    .topic-button:hover {
+        transform: translateY(-6px); /* Less dramatic on mobile */
     }
 }
 
-/* Even smaller screens - single column  */
 @media (max-width: 400px) {
+    .container {
+        padding: 25px 20px;
+    }
     .button-grid {
-        grid-template-columns: 1fr; /* Stack buttons into a single column */
+        grid-template-columns: 1fr;
+        gap: 15px;
     }
     .topic-button {
-        min-height: 100px; /* Adjust for single column layout */
+        min-height: 120px;
+        padding: 20px 15px;
+    }
+}
+
+/* Large screen optimizations */
+@media (min-width: 1200px) {
+    .container {
+        padding: 50px;
+    }
+    .button-grid {
+        gap: 40px;
+    }
+    .topic-button {
+        padding: 45px 30px;
+        min-height: 220px;
     }
 }

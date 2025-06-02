@@ -1,73 +1,40 @@
 body {
     font-family: 'Segoe UI', sans-serif;
     margin: 0;
-<<<<<<< Updated upstream
-    padding: 20px;
-    background-color: #f0e0fb5c; /* Light background */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: #1D1B38;
-}
-h1 {
-    color: #1D1B38; /* Edge Dark Blue */
-    margin-bottom: 20px;
-    text-align: center;
-    font-family: 'Libre Baskerville', serif;
-}
-#chart_container {
-    width: 95%;
-    max-width: 900px; /* Max width of the chart container */
-    background-color: #ffffff;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-}
-#chart_div {
-    width: 100%;
-    height: 500px;   /* Adjust height as needed */
-}
-#last_updated {
-    margin-top: 20px;
-    font-size: 0.9em;
-    color: #555;
-=======
-    padding: 1vh 2vw; /* Use viewport units instead of fixed padding */
+    padding: 2rem 4rem;
     background-color: #f0e0fb5c;
     color: #1D1B38;
     font-size: 1.2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh; 
-   /* overflow: hidden; */
-    box-sizing: border-box;
 }
 
 h1 {
     color: #1D1B38;
-    margin-bottom: 1vh; /* Use viewport units */
+    margin-bottom: 1rem;
     text-align: center;
     font-family: 'Libre Baskerville', serif;
-    font-size: clamp(2rem, 5vw, 8rem); /* Larger scaling for big screens */
-    flex-shrink: 0; /* Prevent shrinking */
+    font-size: clamp(1rem, 4vw, 5rem);
 }
+
+/* Compact Petal-shaped Counter Cards */
 .counter-bar {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 2vw; /* Viewport-based gap */
-    width: 95vw; /* Use most of screen width */
-    margin: 0 auto 2vh auto; 
-    padding: 2vh 0;
-    place-items: center;
-    height: 25vh; /* Fixed height portion of screen */
-    flex-shrink: 0;
+    gap: 1.5rem; /* Reduced gap */
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto 2rem auto; 
+    padding: 2em 0;
+    place-items: center; 
 }
 
 .counter-card {
-    width: 90%; /* Fill most of grid cell */
+    width: 50%; 
+    max-width: 250px; 
     aspect-ratio: 1.2 / 1; 
-    padding: 1.5vh 1.5vw; /* Viewport-based padding */
+    padding: 1.5rem 1.5rem; 
     border: none;
     border-bottom-left-radius: 50px;
     border-top-right-radius: 50px;
@@ -77,7 +44,7 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 8vh; /* Viewport-based min height */
+    min-height: 6rem; 
     position: relative;
     overflow: hidden;
     justify-self: center;
@@ -99,6 +66,7 @@ h1 {
     transform: translateY(-6px); 
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
 }
+
 
 /* Brand Colors for Each Counter */
 #counter-data-engineering {
@@ -122,31 +90,26 @@ h1 {
 }
 
 .counter-value {
-    font-size: clamp(2rem, 4vw, 6rem); /* Larger scaling */
+    font-size: clamp(2rem, 3.5vw, 4rem); 
     font-weight: 900;
     color: white;
     line-height: 1;
-    margin-bottom: 0.5vh; /* Viewport unit */
+    margin-bottom: 0.3rem; /* Reduced margin */
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     position: relative;
     z-index: 1;
 }
 
 .counter-label {
-    font-size: clamp(0.8rem, 1.5vw, 2rem); /* Larger scaling */
+    font-size: clamp(0.8rem, 1.1vw, 1.2rem); 
     font-weight: 700;
     color: rgba(255, 255, 255, 0.95);
     line-height: 1.1;
->>>>>>> Stashed changes
     text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 1;
 }
-<<<<<<< Updated upstream
-#error_message {
-    margin-top: 15px;
-    color: #d9534f; /* Bootstrap danger red */
-    font-weight: bold;
-    text-align: center;
-=======
 
 .counter-content {
     display: flex;
@@ -179,12 +142,11 @@ h1 {
 .image-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 2vw; /* Viewport-based gap */
-    width: 95vw; /* Use most of screen width */
-    flex: 1; /* Take remaining space */
+    gap: 2.5rem;
+    max-width: 1400px;
+    width: 100%;
     margin: 0 auto;
-    padding: 0 0 2vh 0; /* Bottom padding only */
-    min-height: 0; /* Allow shrinking if needed */
+    padding: 0;
 }
 
 .image-quadrant {
@@ -194,7 +156,6 @@ h1 {
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     cursor: pointer;
-    height: 100%; /* Fill grid cell */
 }
 
 .image-quadrant:hover {
@@ -208,7 +169,7 @@ h1 {
 
 .quadrant-image {
     width: 100%;
-    height: 100%; /* Fill container */
+    height: clamp(18rem, 20vw, 30rem);
     object-fit: cover;
     transition: all 0.3s ease;
 }
@@ -220,19 +181,19 @@ h1 {
     right: 0;
     background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
     color: white;
-    padding: 2vh 2vw; /* Viewport-based padding */
+    padding: 2rem;
     transition: all 0.3s ease;
 }
 
 .overlay-content h3 {
-    font-size: clamp(1.5rem, 3vw, 4rem); /* Larger scaling */
+    font-size: clamp(1.5rem, 2.5vw, 2.2rem);
     font-weight: 700;
-    margin: 0 0 0.5vh 0; /* Viewport unit */
+    margin: 0 0 0.5rem 0;
     line-height: 1.2;
 }
 
 .overlay-content p {
-    font-size: clamp(1rem, 2vw, 2.5rem); /* Larger scaling */
+    font-size: clamp(1rem, 1.5vw, 1.3rem);
     margin: 0;
     opacity: 0.9;
     line-height: 1.4;
@@ -320,70 +281,101 @@ h1 {
 
 /* Status messages */
 #error_message {
-    margin-top: 1vh;
+    margin-top: 1rem;
     color: #d9534f;
     font-weight: bold;
     text-align: center;
-    font-size: clamp(1rem, 2vw, 2rem);
+    font-size: clamp(1rem, 1.3vw, 1.5rem);
+    max-width: 1400px;
     width: 100%;
->>>>>>> Stashed changes
 }
-.loading-spinner { /* Basic spinner */
-    border: 5px solid #f3f3f3; /* Light grey */
-    border-top: 5px solid #f0e0fb; /* Edge Ligt Pink */
+
+.loading-spinner {
+    border: 0.4rem solid #f3f3f3;
+    border-top: 0.4rem solid #c18dbe;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 3rem;
+    height: 3rem;
     animation: spin 1s linear infinite;
-<<<<<<< Updated upstream
-    margin: 20px auto;
-=======
-    margin: 2vh auto;
->>>>>>> Stashed changes
+    margin: 2rem auto;
 }
+
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
-<<<<<<< Updated upstream
-=======
 }
 
-/* Remove the large screen media queries as we're now using viewport units */
-/* The responsive design for mobile can remain the same */
+/* Large Screen Optimizations */
+@media (min-width: 1600px) {
+    body {
+        font-size: 1.4rem;
+        padding: 3rem 6rem;
+    }
+    
+    .counter-bar,
+    .image-grid {
+        max-width: 1600px;
+    }
+    
+    .counter-card {
+        padding: 2rem 2rem;
+        min-height: 7rem; 
+    }
+}
 
-/* Responsive Design for small screens only */
+/* Ultra Large Screens */
+@media (min-width: 2000px) {
+    body {
+        font-size: 1.6rem;
+        padding: 4rem 8rem;
+    }
+    
+    .counter-bar,
+    .image-grid {
+        max-width: 1800px;
+    }
+    
+    .counter-card {
+        padding: 2.5rem 2.5rem;
+        min-height: 8rem; 
+    }
+}
+
+
+/* Responsive Design */
 @media (max-width: 768px) {
     body {
-        padding: 1vh 2vw;
+        padding: 1rem 2rem;
     }
     
     .counter-bar {
         grid-template-columns: repeat(2, 1fr);
-        gap: 2vw;
-        height: 30vh;
+        gap: 1.5rem;
+        max-width: 600px;
     }
     
     .counter-card {
+        max-width: 200px; 
         aspect-ratio: 1.2 / 1; 
-        padding: 1.2vh 1.2vw;
+        padding: 1.2rem;
     }
     
     .image-grid {
         grid-template-columns: 1fr;
-        gap: 2vh;
+        gap: 2rem;
+        max-width: 500px;
     }
 }
 
 @media (max-width: 480px) {
     .counter-bar {
         grid-template-columns: 1fr;
-        gap: 1vh;
-        height: 40vh;
+        gap: 0.8rem;
+        max-width: 300px; 
     }
     
     .counter-card {
-        padding: 1vh 1vw;
-        min-height: 6vh;
+        padding: 1rem;
+        min-height: 4.5rem;
     }
->>>>>>> Stashed changes
 }
