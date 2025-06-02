@@ -1,6 +1,7 @@
 body {
     font-family: 'Segoe UI', sans-serif;
     margin: 0;
+<<<<<<< Updated upstream
     padding: 20px;
     background-color: #f0e0fb5c; /* Light background */
     display: flex;
@@ -30,13 +31,302 @@ h1 {
     margin-top: 20px;
     font-size: 0.9em;
     color: #555;
+=======
+    padding: 1vh 2vw; /* Use viewport units instead of fixed padding */
+    background-color: #f0e0fb5c;
+    color: #1D1B38;
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh; 
+   /* overflow: hidden; */
+    box-sizing: border-box;
+}
+
+h1 {
+    color: #1D1B38;
+    margin-bottom: 1vh; /* Use viewport units */
+    text-align: center;
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(2rem, 5vw, 8rem); /* Larger scaling for big screens */
+    flex-shrink: 0; /* Prevent shrinking */
+}
+.counter-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2vw; /* Viewport-based gap */
+    width: 95vw; /* Use most of screen width */
+    margin: 0 auto 2vh auto; 
+    padding: 2vh 0;
+    place-items: center;
+    height: 25vh; /* Fixed height portion of screen */
+    flex-shrink: 0;
+}
+
+.counter-card {
+    width: 90%; /* Fill most of grid cell */
+    aspect-ratio: 1.2 / 1; 
+    padding: 1.5vh 1.5vw; /* Viewport-based padding */
+    border: none;
+    border-bottom-left-radius: 50px;
+    border-top-right-radius: 50px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12); 
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 8vh; /* Viewport-based min height */
+    position: relative;
+    overflow: hidden;
+    justify-self: center;
+    align-self: center; 
+}
+
+.counter-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.05));
+    pointer-events: none;
+}
+
+.counter-card:hover {
+    transform: translateY(-6px); 
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+}
+
+/* Brand Colors for Each Counter */
+#counter-data-engineering {
+    background: linear-gradient(135deg, #B58CBD, #B58CBD);
+    color: white;
+}
+
+#counter-ai {
+    background: linear-gradient(135deg, #241E3E, #241E3E);
+    color: white;
+}
+
+#counter-analytics {
+    background: linear-gradient(135deg, #80B9BC, #80B9BC);
+    color: white;
+}
+
+#counter-econ-eval {
+    background: linear-gradient(135deg, #EADDED, #EADDED);
+    color: white;
+}
+
+.counter-value {
+    font-size: clamp(2rem, 4vw, 6rem); /* Larger scaling */
+    font-weight: 900;
+    color: white;
+    line-height: 1;
+    margin-bottom: 0.5vh; /* Viewport unit */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 1;
+}
+
+.counter-label {
+    font-size: clamp(0.8rem, 1.5vw, 2rem); /* Larger scaling */
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
+    line-height: 1.1;
+>>>>>>> Stashed changes
     text-align: center;
 }
+<<<<<<< Updated upstream
 #error_message {
     margin-top: 15px;
     color: #d9534f; /* Bootstrap danger red */
     font-weight: bold;
     text-align: center;
+=======
+
+.counter-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.counter-card.pulse {
+    animation: petalPulse 1.2s ease-in-out;
+}
+
+@keyframes petalPulse {
+    0% { 
+        transform: scale(1) translateY(0); 
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+    50% { 
+        transform: scale(1.08) translateY(-12px); 
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    }
+    100% { 
+        transform: scale(1) translateY(0); 
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+}
+
+/* Image Grid with Overlay Text */
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2vw; /* Viewport-based gap */
+    width: 95vw; /* Use most of screen width */
+    flex: 1; /* Take remaining space */
+    margin: 0 auto;
+    padding: 0 0 2vh 0; /* Bottom padding only */
+    min-height: 0; /* Allow shrinking if needed */
+}
+
+.image-quadrant {
+    position: relative;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    height: 100%; /* Fill grid cell */
+}
+
+.image-quadrant:hover {
+    transform: translateY(-0.5rem);
+    box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.15);
+}
+
+.image-quadrant.clickable:hover .image-overlay {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.quadrant-image {
+    width: 100%;
+    height: 100%; /* Fill container */
+    object-fit: cover;
+    transition: all 0.3s ease;
+}
+
+.image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    color: white;
+    padding: 2vh 2vw; /* Viewport-based padding */
+    transition: all 0.3s ease;
+}
+
+.overlay-content h3 {
+    font-size: clamp(1.5rem, 3vw, 4rem); /* Larger scaling */
+    font-weight: 700;
+    margin: 0 0 0.5vh 0; /* Viewport unit */
+    line-height: 1.2;
+}
+
+.overlay-content p {
+    font-size: clamp(1rem, 2vw, 2.5rem); /* Larger scaling */
+    margin: 0;
+    opacity: 0.9;
+    line-height: 1.4;
+}
+
+/* Lightbox Styles */
+.lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: all 0.4s ease-out; 
+    cursor: pointer;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.lightbox-overlay.active {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.lightbox-content {
+    position: relative;
+    border-radius: 2rem;
+    overflow: hidden;
+    transform: scale(0.6) translateY(50px); 
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+    cursor: default;
+    width: 95vw;
+    height: 95vh;
+    box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-overlay.active .lightbox-content {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+}
+
+.lightbox-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.lightbox-text-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+    color: white;
+    padding: 4rem;
+    transform: translateY(20px); 
+    opacity: 0;
+    transition: all 0.6s ease-out 0.3s;
+}
+
+.lightbox-overlay.active .lightbox-text-overlay {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.lightbox-text-overlay h3 {
+    font-size: clamp(3rem, 5vw, 6rem);
+    font-weight: 700;
+    margin: 0 0 1rem 0;
+    line-height: 1.2;
+}
+
+.lightbox-text-overlay p {
+    font-size: clamp(1.5rem, 3vw, 3rem);
+    margin: 0;
+    opacity: 0.9;
+    line-height: 1.4;
+}
+
+/* Status messages */
+#error_message {
+    margin-top: 1vh;
+    color: #d9534f;
+    font-weight: bold;
+    text-align: center;
+    font-size: clamp(1rem, 2vw, 2rem);
+    width: 100%;
+>>>>>>> Stashed changes
 }
 .loading-spinner { /* Basic spinner */
     border: 5px solid #f3f3f3; /* Light grey */
@@ -45,9 +335,55 @@ h1 {
     width: 40px;
     height: 40px;
     animation: spin 1s linear infinite;
+<<<<<<< Updated upstream
     margin: 20px auto;
+=======
+    margin: 2vh auto;
+>>>>>>> Stashed changes
 }
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+<<<<<<< Updated upstream
+=======
+}
+
+/* Remove the large screen media queries as we're now using viewport units */
+/* The responsive design for mobile can remain the same */
+
+/* Responsive Design for small screens only */
+@media (max-width: 768px) {
+    body {
+        padding: 1vh 2vw;
+    }
+    
+    .counter-bar {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2vw;
+        height: 30vh;
+    }
+    
+    .counter-card {
+        aspect-ratio: 1.2 / 1; 
+        padding: 1.2vh 1.2vw;
+    }
+    
+    .image-grid {
+        grid-template-columns: 1fr;
+        gap: 2vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .counter-bar {
+        grid-template-columns: 1fr;
+        gap: 1vh;
+        height: 40vh;
+    }
+    
+    .counter-card {
+        padding: 1vh 1vw;
+        min-height: 6vh;
+    }
+>>>>>>> Stashed changes
 }
