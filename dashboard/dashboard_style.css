@@ -1,40 +1,50 @@
 body {
     font-family: 'Segoe UI', sans-serif;
     margin: 0;
-    padding: 2rem 4rem;
+    padding: 0;
     background-color: #f0e0fb5c;
     color: #1D1B38;
-    font-size: 1.2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* Main Dashboard Container - Controls everything */
+.dashboard-container {
+    display: grid;
+    grid-template-rows: auto 1fr 2fr; /* Title auto, counters 1 part, images 2 parts */
+    height: 100vh;
+    width: 100vw;
+    padding: 1vh 1vw;
+    box-sizing: border-box;
+    gap: 1vh;
 }
 
 h1 {
     color: #1D1B38;
-    margin-bottom: 1rem;
+    margin: 0;
     text-align: center;
     font-family: 'Libre Baskerville', serif;
-    font-size: clamp(1rem, 4vw, 5rem);
+    font-size: clamp(1.5rem, 4vh, 5rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-row: 1;
 }
 
-/* Compact Petal-shaped Counter Cards */
+/* Counter Bar - Takes 1 part of remaining space */
 .counter-bar {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem; /* Reduced gap */
-    max-width: 1400px;
-    width: 100%;
-    margin: 0 auto 2rem auto; 
-    padding: 2em 0;
-    place-items: center; 
+    gap: 1vw;
+    place-items: stretch; /* Make items fill their cells */
+    grid-row: 2;
+    min-height: 0; /* Allow shrinking */
 }
 
 .counter-card {
-    width: 50%; 
-    max-width: 250px; 
-    aspect-ratio: 1.2 / 1; 
-    padding: 1.5rem 1.5rem; 
+    padding: 1vh 0.5vw;
     border: none;
     border-bottom-left-radius: 50px;
     border-top-right-radius: 50px;
@@ -44,11 +54,9 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 6rem; 
     position: relative;
     overflow: hidden;
-    justify-self: center;
-    align-self: center; 
+    box-sizing: border-box;
 }
 
 .counter-card::before {
@@ -66,7 +74,6 @@ h1 {
     transform: translateY(-6px); 
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
 }
-
 
 /* Brand Colors for Each Counter */
 #counter-data-engineering {
@@ -90,18 +97,18 @@ h1 {
 }
 
 .counter-value {
-    font-size: clamp(2rem, 3.5vw, 4rem); 
+    font-size: clamp(1.2rem, 3vh, 4rem);
     font-weight: 900;
     color: white;
     line-height: 1;
-    margin-bottom: 0.3rem; /* Reduced margin */
+    margin-bottom: 0.5vh;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     position: relative;
     z-index: 1;
 }
 
 .counter-label {
-    font-size: clamp(0.8rem, 1.1vw, 1.2rem); 
+    font-size: clamp(0.6rem, 1.5vh, 1.5rem);
     font-weight: 700;
     color: rgba(255, 255, 255, 0.95);
     line-height: 1.1;
@@ -109,6 +116,7 @@ h1 {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
     position: relative;
     z-index: 1;
+    padding: 0 0.5vw;
 }
 
 .counter-content {
@@ -117,6 +125,7 @@ h1 {
     align-items: center;
     justify-content: center;
     width: 100%;
+    height: 100%;
 }
 
 .counter-card.pulse {
@@ -138,15 +147,14 @@ h1 {
     }
 }
 
-/* Image Grid with Overlay Text */
+/* Image Grid - Takes 2 parts of remaining space */
 .image-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 2.5rem;
-    max-width: 1400px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 0;
+    grid-template-rows: repeat(2, 1fr);
+    gap: 1vw;
+    grid-row: 3;
+    min-height: 0; /* Allow shrinking */
 }
 
 .image-quadrant {
@@ -156,6 +164,8 @@ h1 {
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     cursor: pointer;
+    box-sizing: border-box;
+    min-height: 0; /* Allow shrinking */
 }
 
 .image-quadrant:hover {
@@ -169,7 +179,7 @@ h1 {
 
 .quadrant-image {
     width: 100%;
-    height: clamp(18rem, 20vw, 30rem);
+    height: 100%;
     object-fit: cover;
     transition: all 0.3s ease;
 }
@@ -181,25 +191,25 @@ h1 {
     right: 0;
     background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
     color: white;
-    padding: 2rem;
+    padding: 1vh 1vw;
     transition: all 0.3s ease;
 }
 
 .overlay-content h3 {
-    font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+    font-size: clamp(0.8rem, 2.5vh, 2.5rem);
     font-weight: 700;
-    margin: 0 0 0.5rem 0;
+    margin: 0 0 0.5vh 0;
     line-height: 1.2;
 }
 
 .overlay-content p {
-    font-size: clamp(1rem, 1.5vw, 1.3rem);
+    font-size: clamp(0.6rem, 1.8vh, 1.8rem);
     margin: 0;
     opacity: 0.9;
     line-height: 1.4;
 }
 
-/* Lightbox Styles */
+/* Rest of your lightbox styles remain the same... */
 .lightbox-overlay {
     position: fixed;
     top: 0;
@@ -279,102 +289,56 @@ h1 {
     line-height: 1.4;
 }
 
+/* Status messages */
 #error_message {
-    margin-top: 1rem;
+    position: fixed;
+    top: 2vh;
+    left: 50%;
+    transform: translateX(-50%);
     color: #d9534f;
     font-weight: bold;
     text-align: center;
-    font-size: clamp(1rem, 1.3vw, 1.5rem);
-    max-width: 1400px;
-    width: 100%;
+    font-size: clamp(0.8rem, 2vh, 2rem);
+    z-index: 100;
 }
 
 .loading-spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     border: 0.4rem solid #f3f3f3;
     border-top: 0.4rem solid #c18dbe;
     border-radius: 50%;
     width: 3rem;
     height: 3rem;
     animation: spin 1s linear infinite;
-    margin: 2rem auto;
+    z-index: 100;
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
-
-/* Large Screen Optimizations */
-@media (min-width: 1600px) {
-    body {
-        font-size: 1.4rem;
-        padding: 3rem 6rem;
-    }
-    
-    .counter-bar,
-    .image-grid {
-        max-width: 1600px;
-    }
-    
-    .counter-card {
-        padding: 2rem 2rem;
-        min-height: 7rem; 
-    }
-}
-
-/* Ultra Large Screens */
-@media (min-width: 2000px) {
-    body {
-        font-size: 1.6rem;
-        padding: 4rem 8rem;
-    }
-    
-    .counter-bar,
-    .image-grid {
-        max-width: 1800px;
-    }
-    
-    .counter-card {
-        padding: 2.5rem 2.5rem;
-        min-height: 8rem; 
-    }
-}
-
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    body {
-        padding: 1rem 2rem;
+    .dashboard-container {
+        grid-template-rows: auto 1fr 3fr; /* Give more space to images on mobile */
     }
     
     .counter-bar {
         grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-        max-width: 600px;
-    }
-    
-    .counter-card {
-        max-width: 200px; 
-        aspect-ratio: 1.2 / 1; 
-        padding: 1.2rem;
     }
     
     .image-grid {
         grid-template-columns: 1fr;
-        gap: 2rem;
-        max-width: 500px;
+        grid-template-rows: repeat(4, 1fr);
     }
 }
 
 @media (max-width: 480px) {
     .counter-bar {
         grid-template-columns: 1fr;
-        gap: 0.8rem;
-        max-width: 300px; 
-    }
-    
-    .counter-card {
-        padding: 1rem;
-        min-height: 4.5rem;
     }
 }
