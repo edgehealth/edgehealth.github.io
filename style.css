@@ -16,7 +16,8 @@ body {
     padding: 40px; /* Slightly more padding */
     border-radius: 20px; /* More rounded corners */
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12); /* Enhanced shadow */
-    max-width: 900px; /* Slightly wider */
+    max-width: 60vw; /* Slightly wider */
+    max-height: 85vh;
     width: 100%;
     position: relative;
     overflow: hidden;
