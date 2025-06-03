@@ -40,16 +40,15 @@ h1 {
     gap: 2vw;
     place-items: center;
     grid-row: 2;
-    padding: 0 12vw; /* More padding to center smaller counters */
-    /* max-height: 0.5vh; */
+    padding: 0 17vw; 
 }
 
 .counter-card {
-    width: 8vw; /* Much smaller counters */
+    width: 8.5vw; 
     height: 8vw;
-    max-width: 130px; /* Smaller max size */
+    max-width: 130px; 
     max-height: 130px;
-    min-width: 80px; /* Smaller minimum */
+    min-width: 80px; 
     min-height: 80px;
     padding: 0.8vh 0.8vw;
     border: none;
@@ -154,15 +153,14 @@ h1 {
     }
 }
 
-/* Image Grid - Much more space */
+
 .image-grid {
     display: grid;
     grid-template-columns: repeat(2, 0.4fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 2vw; /* Much larger gap between images */
+    grid-template-rows: repeat(2, 0.29fr);
+    gap: 2vw; 
     grid-row: 3;
-    padding: 2vh 6vw; /* More padding around the grid */
-    /* min-height: 0; */
+    padding: 0.5vw 0 0.5vh;
     justify-content: center;
     align-items: center;
 }
@@ -336,7 +334,7 @@ h1 {
 @media (max-width: 768px) {
     .dashboard-container {
         grid-template-rows: auto 0.8fr 3fr;
-        padding: 2vh 2vw;
+        padding: 1vh 2vw;
         gap: 2vh;
     }
     
