@@ -13,12 +13,16 @@ body {
 /* Main Dashboard Container - Controls everything */
 .dashboard-container {
     display: grid;
-    grid-template-rows: auto 0.5fr 3fr; /* Give more space to images, less to counters */
-    height: 100vh;
+    grid-template-rows: auto 0.8fr 2fr; /* Give more space to images, less to counters */
+    height: 110vh;
     width: 100vw;
     padding: 2vh 4vw;
     box-sizing: border-box;
     gap: 3vh;
+    align-content: center;
+    justify-content: space-evenly;
+    /* align-items: center; */
+    /* justify-items: stretch; */
 }
 
 h1 {
@@ -37,10 +41,10 @@ h1 {
 .counter-bar {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 2vw;
+    gap: 9vw;
     place-items: center;
     grid-row: 2;
-    padding: 0 17vw; 
+    padding: 0 17vw;
 }
 
 .counter-card {
@@ -157,13 +161,14 @@ h1 {
 .image-grid {
     display: grid;
     grid-template-columns: repeat(2, 0.4fr);
-    grid-template-rows: repeat(2, 0.29fr);
-    gap: 2vw; 
+    /* grid-template-rows: repeat(2, 0.29fr); */
+    gap: 3vw;
     grid-row: 3;
     padding: 0.5vw 0 0.5vh;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
     align-content: space-evenly;
+    /* justify-items: center; */
 }
 
 .image-quadrant {
