@@ -41,21 +41,21 @@ h1 {
 .counter-bar {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 9vw;
+    gap: 6vw;
     place-items: center;
     grid-row: 2;
     padding: 0 15vw;
     max-height: 20vh;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
 }
 
 .counter-card {
     width: 8.5vw; 
     height: 8vw;
-    max-width: 130px; 
-    max-height: 130px;
     min-width: 80px; 
     min-height: 80px;
-    padding: 0.8vh 0.8vw;
     border: none;
     border-bottom-left-radius: 40px; /* Smaller radius to match size */
     border-top-right-radius: 40px;
@@ -161,9 +161,9 @@ h1 {
 
 .image-grid {
     display: grid;
-    grid-template-columns: repeat(2, 60vh);
+    grid-template-columns: repeat(2, 58vh);
     /* grid-template-rows: repeat(2, 0.29fr); */
-    gap: 1vw;
+    gap: 1.5vw;
     grid-row: 3;
     padding: 0.5vw 0 0.5vh;
     justify-content: center;
