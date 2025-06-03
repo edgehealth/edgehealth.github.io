@@ -160,7 +160,7 @@ h1 {
 
 .image-grid {
     display: grid;
-    grid-template-columns: repeat(2, 0.4fr);
+    grid-template-columns: repeat(2, 0.37fr);
     /* grid-template-rows: repeat(2, 0.29fr); */
     gap: 3vw;
     grid-row: 3;
