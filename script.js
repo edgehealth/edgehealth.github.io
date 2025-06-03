@@ -6,33 +6,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const feedbackMessageElement = document.getElementById('feedback-message');
 
     buttons.forEach(button => {
-    button.addEventListener('click', () => {
-        const topic = button.dataset.topic;
-        
-        // Add pressed animation
-        button.classList.add('pressed');
-        setTimeout(() => {
-            button.classList.remove('pressed');
-        }, 600);
-        
-        logTopicChoice(topic);
-    });
-});
+        button.addEventListener('click', () => {
+            const topic = button.dataset.topic; // This goes to Google Sheets
+            const showName = button.dataset.showName; // This is for display
 
-    function logTopicChoice(topic) {
+            // Add pressed animation
+            button.classList.add('pressed');
+            setTimeout(() => {
+                button.classList.remove('pressed');
+            }, 600);
+
+            // Pass both topic (for logging) and showName (for display)
+            logTopicChoice(topic, showName);
+        });
+    });
+
+    // Modified to accept showName for the confirmation message
+    function logTopicChoice(topic, displayName) {
         feedbackMessageElement.textContent = 'Sending...';
         feedbackMessageElement.className = 'feedback'; // Reset class
 
         // Disable all buttons to prevent multiple submissions
         buttons.forEach(btn => btn.disabled = true);
 
+        // We still send the original 'topic' to the script for logging
         fetch(`${SCRIPT_URL}?topic=${encodeURIComponent(topic)}`, {
-            method: 'GET', 
-            mode: 'cors',  
+            method: 'GET',
+            mode: 'cors',
         })
         .then(response => {
             if (!response.ok) {
-
                 return response.json().then(errData => {
                     throw new Error(errData.message || `Network response was not ok: ${response.statusText}`);
                 });
@@ -42,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             console.log('Success:', data);
             if (data.status === "success") {
-                feedbackMessageElement.textContent = `Thanks for choosing ${data.topic}!\r\nPick up your gift and check out our interactive dashboard to find out more.`;
+                feedbackMessageElement.innerHTML = `Thanks for choosing ${displayName}!<br>Pick up your gift and check out our interactive dashboard to find out more.`; // Use <br>
                 feedbackMessageElement.className = 'feedback success';
             } else {
                 feedbackMessageElement.textContent = `Error: ${data.message}`;
@@ -59,11 +62,11 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 buttons.forEach(btn => btn.disabled = false);
                 // Clear the message after a few more seconds
-            setTimeout(() => {
-                feedbackMessageElement.textContent = '';
-                feedbackMessageElement.className = 'feedback';
-                }, 5000);
-            }, 1500); // Allow time to read the message
+                setTimeout(() => {
+                    feedbackMessageElement.textContent = '';
+                    feedbackMessageElement.className = 'feedback';
+                }, 5000); // Time to read success/error message
+            }, 1500); // Delay before re-enabling buttons
         });
     }
 });
