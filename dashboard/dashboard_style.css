@@ -12,9 +12,9 @@ body {
 
 .fixed-logo {
     position: fixed;
-    bottom: 4vw; /* Aligns with your dashboard container padding */
-    left: 4vw;   /* Aligns with your dashboard container padding */
-    height: clamp(60px, 8vh, 120px); /* Responsive height, good for 50" TV */
+    bottom: 1vw; /* Aligns with your dashboard container padding */
+    right: 2vw;   /* Aligns with your dashboard container padding */
+    height: clamp(60px, 20vh, 120px); /* Responsive height, good for 50" TV */
     width: auto;
     max-width: clamp(200px, 25vw, 400px); /* Responsive width constraint */
     object-fit: contain;
@@ -23,9 +23,6 @@ body {
     transition: transform 0.3s ease; /* Smooth hover effect */
 }
 
-.fixed-logo:hover {
-    transform: scale(1.05); /* Subtle interactive feedback */
-}
 
 /* Main Dashboard Container - Controls everything */
 .dashboard-container {
@@ -33,7 +30,7 @@ body {
     grid-template-rows: auto 1fr 4fr;
     height: 100vh;
     width: 100vw;
-    padding: 6vh 4vw 2vh 4vw; /* Increased top padding from 2vh to 6vh */
+    padding: 3vh 4vw 2vh 4vw; /* Increased top padding from 2vh to 6vh */
     box-sizing: border-box;
     gap: 3vh;
     align-content: center;
@@ -364,7 +361,7 @@ h1.page-title {
     
     .dashboard-container {
         grid-template-rows: auto 0.8fr 3fr;
-        padding: 4vh 2vw 1vh 2vw; /* Adjusted for mobile */
+        padding: 3vh 2vw 1vh 2vw; /* Adjusted for mobile */
         gap: 2vh;
     }
     
