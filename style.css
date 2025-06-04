@@ -3,12 +3,41 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    min-height: 90vh;
     margin: 0;
     background-color: #f0e0fb5c;
     text-align: center;
     padding: 20px;
     box-sizing: border-box;
+}
+
+.title-header {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centers the logo + title block */
+    gap: 15px; /* Space between logo and title text */
+    margin-bottom: 15px; /* Existing h1 margin-bottom, now on the wrapper */
+    flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+}
+
+.company-logo {
+    height: clamp(35px, 5vw, 55px); /* Responsive height for the logo */
+    width: auto; /* Maintain aspect ratio */
+    max-width: 240px; /* Approx. 55px * (601/138) aspect ratio */
+    object-fit: contain;
+    flex-shrink: 0; /* Prevents logo from shrinking too much */
+}
+
+h1 { 
+    color: #1D1B38;
+    margin-top: 0;
+    margin-bottom: 0; 
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(1.8rem, 3.5vw, 3rem); 
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+    /* text-align: left; */ /* Remove if you want the text to be centered if it wraps, inherited from .container or set explicitly */
 }
 
 .container {
@@ -17,7 +46,7 @@ body {
     border-radius: 20px; /* More rounded corners */
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12); /* Enhanced shadow */
     max-width: 60vw; /* Slightly wider */
-    max-height: 85vh;
+    max-height: 80vh;
     width: 100%;
     position: relative;
     overflow: hidden;
@@ -32,16 +61,6 @@ body {
     bottom: 0;
     background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
     pointer-events: none;
-}
-
-h1 {
-    color: #1D1B38;
-    margin-bottom: 15px;
-    font-family: 'Libre Baskerville', serif;
-    font-size: clamp(2rem, 4vw, 3.5rem); /* Responsive font size */
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle text shadow */
-    position: relative;
-    z-index: 1;
 }
 
 p {
