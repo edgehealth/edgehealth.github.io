@@ -196,24 +196,6 @@ p {
     text-shadow: 0 1px 2px rgba(242, 143, 100, 0.3);
 }
 
-/* Enhanced responsive design */
-@media (max-width: 600px) {
-    .container {
-        padding: 30px 25px;
-        max-width: 95%;
-    }
-    .button-grid {
-        gap: 20px;
-    }
-    .topic-button {
-        padding: 25px 15px;
-        min-height: 160px;
-    }
-    .topic-button:hover {
-        transform: translateY(-6px); /* Less dramatic on mobile */
-    }
-}
-
 @media (max-width: 400px) {
     .container {
         padding: 25px 20px;
@@ -238,6 +220,31 @@ p {
     }
     .topic-button {
         padding: 45px 30px;
-        min-height: 220px;
+        min-height: clamp(250px, 25vh, 250px);
+    }
+}
+
+/* Large screen optimizations - minimal changes to prevent spreading */
+@media (min-width: 1600px) {
+    .container {
+        max-width: 1000px; /* Constrain the container width */
+        padding: clamp(4vw, 4vw, 60px); /* Cap the padding */
+    }
+    
+    .button-grid {
+        gap: clamp(30px, 3vw, 40px); /* Cap the gap */
+    }
+    
+    .topic-button {
+        min-height: clamp(250px, 30vh, 250px); /* Cap the height */
+    }
+    
+    h1 {
+        font-size: clamp(1.8rem, 3.5vw, 2.5rem); /* Cap the title size */
+    }
+    
+    p {
+        font-size: clamp(1rem, 2vw, 1.2em); /* Cap the subtitle size */
+        margin-bottom: clamp(3vw, 3vw, 30px); /* Cap the margin */
     }
 }
