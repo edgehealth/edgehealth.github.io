@@ -131,7 +131,7 @@ h1.page-title {
 }
 
 .counter-label {
-    font-size: clamp(0.5rem, 1.5vw, 1rem); /* Much smaller labels */
+    font-size: clamp(0.5rem, 1vw, 1rem); /* Much smaller labels */
     font-weight: 700;
     color: rgba(255, 255, 255, 0.95);
     line-height: 1.1;
