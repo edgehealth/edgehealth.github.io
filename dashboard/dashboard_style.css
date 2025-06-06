@@ -355,8 +355,8 @@ h1.page-title {
     .fixed-logo {
         bottom: 2vw;
         left: 2vw;
-        height: clamp(50px, 6vh, 80px);
-        max-width: clamp(150px, 20vw, 250px);
+        height: clamp(50px, 4vh, 80px);
+        max-width: clamp(150px, 15vw, 250px);
     }
     
     .dashboard-container {
