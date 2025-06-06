@@ -12,11 +12,11 @@ body {
 
 .fixed-logo {
     position: fixed;
-    bottom: 1vw; /* Aligns with your dashboard container padding */
-    right: 2vw;   /* Aligns with your dashboard container padding */
-    height: clamp(60px, 20vh, 120px); /* Responsive height, good for 50" TV */
+    bottom: 0vw;
+    right: 2vw;
+    height: clamp(60px, 20vh, 100px);
     width: auto;
-    max-width: clamp(200px, 25vw, 400px); /* Responsive width constraint */
+    max-width: clamp(150px, 2vw, 400px);
     object-fit: contain;
     z-index: 10; /* Ensures it stays on top */
     filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2)); /* Subtle shadow for visibility */
@@ -56,7 +56,6 @@ h1.page-title {
     gap: 6vw;
     place-items: center;
     grid-row: 2;
-    padding: 0 15vw;
     max-height: 20vh;
     align-content: center;
     justify-items: center;
@@ -64,13 +63,13 @@ h1.page-title {
 }
 
 .counter-card {
-    width: 8.5vw; 
-    height: 8vw;
+    width: 4.5vw; 
+    height: 4vw;
     min-width: 80px; 
     min-height: 80px;
     border: none;
-    border-bottom-left-radius: 40px; /* Smaller radius to match size */
-    border-top-right-radius: 40px;
+    border-bottom-left-radius: 20px; /* Smaller radius to match size */
+    border-top-right-radius: 20px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12); 
     transition: all 0.3s ease;
     display: flex;
@@ -120,7 +119,7 @@ h1.page-title {
 }
 
 .counter-value {
-    font-size: clamp(1.2rem, 2.5vw, 2.5rem); /* Smaller counter values */
+    font-size: clamp(1.2rem, 1.5vw, 1.5rem); /* Smaller counter values */
     font-weight: 900;
     color: white;
     line-height: 1;
@@ -131,7 +130,7 @@ h1.page-title {
 }
 
 .counter-label {
-    font-size: clamp(0.5rem, 1vw, 1rem); /* Much smaller labels */
+    font-size: clamp(0.5rem, 0.5vw, 0.5rem); /* Much smaller labels */
     font-weight: 700;
     color: rgba(255, 255, 255, 0.95);
     line-height: 1.1;
