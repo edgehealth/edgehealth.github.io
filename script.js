@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzH_KYGZafbS-UswAwuki7aMcNghg8_mxxINj-Wpa9fEQzk-zLkOVom9SkSxSDOC8Y/exec';
     
 
-    const buttons = document.querySelectorAll('.topic-button');
+const buttons = document.querySelectorAll('.topic-button');
     const feedbackMessageElement = document.getElementById('feedback-message');
     const emailForm = document.getElementById('email-form');
     const emailInput = document.getElementById('email-input');
@@ -12,9 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const emailFeedback = document.getElementById('email-feedback');
 
     let selectedTopic = null;
-    let emailFormTimeoutId = null; // Variable to store the timeout ID
+    let pageResetTimeoutId = null; // Timer for resetting the whole page state
 
-    const AUTO_HIDE_EMAIL_FORM_DELAY = 30000; // email form disappears after 30 seconds if no interaction
+    const PAGE_RESET_DELAY = 30000; // 30 seconds of inactivity to reset the page
 
     buttons.forEach(button => {
         button.addEventListener('click', () => {
@@ -31,19 +31,44 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    function resetPageToInitialState() {
+        console.log("Resetting page to initial state due to inactivity or completion.");
+        clearTimeout(pageResetTimeoutId); // Clear any pending reset
+
+        // Hide feedback message
+        feedbackMessageElement.textContent = '';
+        feedbackMessageElement.className = 'feedback'; // Reset class
+
+        // Hide and reset email form
+        emailForm.classList.remove('show');
+        setTimeout(() => { // Allow transition out
+            emailForm.style.display = 'none';
+            emailInput.value = '';
+            emailFeedback.textContent = '';
+            emailFeedback.className = 'email-feedback';
+        }, 500); // Match CSS transition duration for .email-form if any
+
+        // Re-enable topic buttons (if they were disabled)
+        buttons.forEach(btn => btn.disabled = false);
+        // Re-enable email form buttons (if they were disabled)
+        submitEmailBtn.disabled = false;
+        skipEmailBtn.disabled = false;
+
+        selectedTopic = null; // Clear selected topic
+    }
+
+    function startPageResetTimer() {
+        clearTimeout(pageResetTimeoutId); // Clear existing timer
+        pageResetTimeoutId = setTimeout(resetPageToInitialState, PAGE_RESET_DELAY);
+        console.log(`Page reset timer started for ${PAGE_RESET_DELAY / 1000}s`);
+    }
+
     function logTopicChoice(topic, displayName) {
+        resetPageToInitialState(); // Clear previous state immediately before new interaction
+
         feedbackMessageElement.textContent = 'Sending...';
         feedbackMessageElement.className = 'feedback';
         buttons.forEach(btn => btn.disabled = true);
-
-        // Clear any existing auto-hide timer for the form (e.g., if a new topic is chosen quickly)
-        clearTimeout(emailFormTimeoutId);
-        // Ensure form is hidden if it was previously shown and auto-hidden
-        // (and now user picks another topic)
-        if (emailForm.classList.contains('show')) {
-             hideEmailForm(false); // Hide immediately without success message delay
-        }
-
 
         fetch(`${SCRIPT_URL}?topic=${encodeURIComponent(topic)}`, {
             method: 'GET',
@@ -58,31 +83,31 @@ document.addEventListener('DOMContentLoaded', () => {
             return response.json();
         })
         .then(data => {
-            console.log('Success:', data);
+            console.log('Topic Log Success:', data);
             if (data.status === "success") {
                 feedbackMessageElement.innerHTML = `Thanks for choosing ${displayName}!<br>Pick up your gift and check out our interactive dashboard to find out more.`;
                 feedbackMessageElement.className = 'feedback success';
-                showEmailForm();
+                showEmailForm(); // This will also start/restart the page reset timer
             } else {
                 feedbackMessageElement.textContent = `Error: ${data.message}`;
                 feedbackMessageElement.className = 'feedback error';
+                buttons.forEach(btn => btn.disabled = false); // Re-enable if topic logging failed
+                startPageResetTimer(); // Start timer even on error to eventually clear message
             }
         })
         .catch(error => {
             console.error('Error logging topic:', error);
             feedbackMessageElement.textContent = 'Oops! Something went wrong. Please try again.';
             feedbackMessageElement.className = 'feedback error';
+            buttons.forEach(btn => btn.disabled = false); // Re-enable on catch
+            startPageResetTimer(); // Start timer even on error to eventually clear message
         })
-        .finally(() => {
-            setTimeout(() => {
-                buttons.forEach(btn => btn.disabled = false);
-            }, 1500);
-        });
+        // .finally() no longer needed here for topic buttons re-enabling, handled by reset or error paths
     }
 
     function showEmailForm() {
         emailForm.style.display = 'block';
-        emailForm.offsetHeight;
+        emailForm.offsetHeight; // Force reflow
         requestAnimationFrame(() => {
             emailForm.classList.add('show');
             if (!navigator.userAgent.includes('iPhone') && !navigator.userAgent.includes('iPad')) {
@@ -91,95 +116,77 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 100);
             }
         });
-
-        // Start the auto-hide timer
-        clearTimeout(emailFormTimeoutId); // Clear any previous timer
-        emailFormTimeoutId = setTimeout(() => {
-            console.log("Auto-hiding email form due to inactivity.");
-            hideEmailForm(false); // Pass false to not delay based on success message
-        }, AUTO_HIDE_EMAIL_FORM_DELAY);
+        startPageResetTimer(); // When email form is shown, ensure the page reset timer is active
     }
 
-    // Modify hideEmailForm to accept an optional parameter
-    // `delayForSuccessMessage` to control the timeout for hiding.
-    // If called by auto-hide, we might want to hide it faster.
-    function hideEmailForm(delayForSuccessMessage = true) {
-        clearTimeout(emailFormTimeoutId); // Always clear the auto-hide timer when hiding
+    function hideEmailFormAndPotentiallyResetPage(isSuccess = false) {
+        clearTimeout(pageResetTimeoutId); // Stop the main page reset timer
 
         emailForm.classList.remove('show');
-        const hideDelay = delayForSuccessMessage ? 500 : 100; // Shorter delay if not success
         setTimeout(() => {
             emailForm.style.display = 'none';
-            resetForm();
-        }, hideDelay);
+            emailInput.value = ''; // Reset input
+            emailFeedback.textContent = ''; // Reset feedback
+            emailFeedback.className = 'email-feedback';
+
+            // If email was successful, we want to show the "Thank you" message
+            // for a bit, then reset the whole page.
+            // If "skip" was pressed, we reset immediately.
+            if (isSuccess) {
+                // Email feedback (e.g., "Thank you!") is already shown.
+                // Wait a bit for user to read it, then reset the page.
+                setTimeout(resetPageToInitialState, 2500); // Wait for success message to be read
+            } else {
+                // If skip or auto-hide, reset the page state sooner
+                resetPageToInitialState();
+            }
+        }, 500); // Email form hide transition
     }
 
-    function resetForm() {
-        emailInput.value = '';
-        emailFeedback.textContent = '';
-        emailFeedback.className = 'email-feedback';
-        // feedbackMessageElement.textContent = ''; // Keep the topic choice feedback
-        // feedbackMessageElement.className = 'feedback';
-    }
 
     function handleEmailSubmit(e) {
         e.preventDefault();
-        clearTimeout(emailFormTimeoutId); // Clear auto-hide timer on interaction
+        clearTimeout(pageResetTimeoutId); // User is active, clear general page reset timer
 
         const email = emailInput.value.trim();
         if (!email) {
             emailFeedback.textContent = 'Please enter an email address.';
             emailFeedback.className = 'email-feedback error';
+            startPageResetTimer(); // Restart timer if validation fails
             return;
         }
         if (!isValidEmail(email)) {
             emailFeedback.textContent = 'Please enter a valid email address.';
             emailFeedback.className = 'email-feedback error';
+            startPageResetTimer(); // Restart timer if validation fails
             return;
         }
         submitEmail(email, selectedTopic);
     }
 
-    // Attach event listeners
     submitEmailBtn.addEventListener('click', handleEmailSubmit);
-    // For touchend, it's better to prevent default and then call the handler
-    // to avoid potential double calls if 'click' also fires.
-    // However, modern browsers are good at handling this. Simpler is:
-    // submitEmailBtn.addEventListener('touchend', handleEmailSubmit);
-    // But to be safe and avoid double logic:
-    let touchendSubmitHandled = false;
-    submitEmailBtn.addEventListener('touchend', (e) => {
-        e.preventDefault();
-        if (touchendSubmitHandled) return;
-        touchendSubmitHandled = true;
-        handleEmailSubmit(e);
-        setTimeout(() => { touchendSubmitHandled = false; }, 300); // Reset flag
-    });
-
+    // Add touchend for submitEmailBtn as before if needed
 
     function handleSkipEmail(e) {
         e.preventDefault();
-        clearTimeout(emailFormTimeoutId); // Clear auto-hide timer on interaction
-        hideEmailForm(false); // Hide form, no need for long delay
+        // User clicked skip, so we hide the form and reset the page.
+        hideEmailFormAndPotentiallyResetPage(false); // false indicates not a success
     }
 
     skipEmailBtn.addEventListener('click', handleSkipEmail);
-    let touchendSkipHandled = false;
-    skipEmailBtn.addEventListener('touchend', (e) => {
-        e.preventDefault();
-        if (touchendSkipHandled) return;
-        touchendSkipHandled = true;
-        handleSkipEmail(e);
-        setTimeout(() => { touchendSkipHandled = false; }, 300); // Reset flag
-    });
-
+    // Add touchend for skipEmailBtn as before if needed
 
     emailInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             e.preventDefault();
-            handleEmailSubmit(e); // This will also clear the timer
+            handleEmailSubmit(e);
+        } else {
+            // Any typing can be considered activity
+            startPageResetTimer();
         }
     });
+    emailInput.addEventListener('focus', startPageResetTimer); // Focus on input resets timer
+
 
     function submitEmail(email, topic) {
         emailFeedback.textContent = 'Submitting...';
@@ -187,7 +194,9 @@ document.addEventListener('DOMContentLoaded', () => {
         submitEmailBtn.disabled = true;
         skipEmailBtn.disabled = true;
 
-        fetch(`${SCRIPT_URL}?email=${encodeURIComponent(email)}&topic=${encodeURIComponent(topic || 'Not specified')}`, { // Ensure topic is sent
+        // No need to call startPageResetTimer() here as success/error will handle it
+
+        fetch(`${SCRIPT_URL}?email=${encodeURIComponent(email)}&topic=${encodeURIComponent(topic || 'Not specified')}`, {
             method: 'GET',
             mode: 'cors',
         })
@@ -200,40 +209,37 @@ document.addEventListener('DOMContentLoaded', () => {
             return response.json();
         })
         .then(data => {
-            console.log('Email Success:', data);
+            console.log('Email Submit Success:', data);
             if (data.status === "success") {
                 emailFeedback.textContent = 'Thank you! We\'ll be in touch.';
                 emailFeedback.className = 'email-feedback success';
-                setTimeout(() => {
-                    hideEmailForm(true); // Hide form after success message, allow delay
-                }, 2500);
+                // After showing success, the form and page will reset
+                hideEmailFormAndPotentiallyResetPage(true); // true indicates success
             } else {
                 emailFeedback.textContent = `Error: ${data.message}`;
                 emailFeedback.className = 'email-feedback error';
-                // Re-enable buttons if server-side error on email submission
                 submitEmailBtn.disabled = false;
                 skipEmailBtn.disabled = false;
+                startPageResetTimer(); // Restart timer if email submission failed
             }
         })
         .catch(error => {
             console.error('Error submitting email:', error);
             emailFeedback.textContent = 'Oops! Something went wrong. Please try again.';
             emailFeedback.className = 'email-feedback error';
-        })
-        .finally(() => {
-            // Only re-enable if not already handled by success/error specific logic
-            // The success path has its own timeout for hiding the form.
-            // If error on submit, we re-enable above.
-            // This finally might be too broad.
-            // Let's ensure buttons are enabled if the success path isn't taken for hiding
-            if (!emailFeedback.classList.contains('success')) {
-                submitEmailBtn.disabled = false;
-                skipEmailBtn.disabled = false;
-            }
+            submitEmailBtn.disabled = false;
+            skipEmailBtn.disabled = false;
+            startPageResetTimer(); // Restart timer on catch
         });
     }
 
     function isValidEmail(email) {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     }
+
+    // Initial call to set the timer if the page loads and nothing happens
+    // Or, you might decide the timer only starts after the first interaction.
+    // For a kiosk, starting it immediately makes sense.
+    // startPageResetTimer();
+    // Let's make it so the timer only starts *after* the first topic choice.
 });
