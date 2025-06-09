@@ -173,15 +173,11 @@ h1.page-title {
 .image-grid {
     display: grid;
     grid-template-columns: repeat(2, 58vh);
-    /* grid-template-rows: repeat(2, 0.29fr); */
     gap: 1.5vw;
     grid-row: 3;
     padding: 0.5vw 0 0.5vh;
     justify-content: center;
-    /* max-height: 80vh; */
-    /* align-items: center; */
     align-content: space-evenly;
-    /* justify-items: center; */
 }
 
 .image-quadrant {
@@ -255,7 +251,6 @@ h1.page-title {
 
 .lightbox-content {
     position: relative;
-    border-radius: 0.5rem; 
     overflow: hidden;
     transform: scale(0.6) translateY(50px); 
     transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
@@ -274,7 +269,6 @@ h1.page-title {
 }
 
 .lightbox-image {
-    /* Image fills the container exactly */
     width: 100%;
     height: 100%;
     object-fit: contain; 
@@ -282,37 +276,9 @@ h1.page-title {
     border-radius: 0;
 }
 
-.lightbox-text-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
-    color: white;
-    padding: 4rem;
-    transform: translateY(20px); 
-    opacity: 0;
-    transition: all 0.6s ease-out 0.3s;
-    border-radius: 0 0 0.5rem 0.5rem; 
-}
-
 .lightbox-overlay.active .lightbox-text-overlay {
     transform: translateY(0);
     opacity: 1;
-}
-
-.lightbox-text-overlay h3 {
-    font-size: clamp(2rem, 4vw, 4rem);
-    font-weight: 700;
-    margin: 0 0 1rem 0;
-    line-height: 1.2;
-}
-
-.lightbox-text-overlay p {
-    font-size: clamp(1.2rem, 2.5vw, 2.5rem);
-    margin: 0;
-    opacity: 0.9;
-    line-height: 1.4;
 }
 
 /* Status messages */
