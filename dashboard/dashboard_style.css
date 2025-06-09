@@ -12,7 +12,7 @@ body {
 
 .fixed-logo {
     position: fixed;
-    bottom: 0vw;
+    bottom: 1.8vw;
     right: 2vw;
     height: clamp(60px, 20vh, 100px);
     width: auto;
@@ -219,7 +219,7 @@ h1.page-title {
     right: 0;
     background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
     color: white;
-    padding: 2vh 1.5vw;
+    padding: 2.5vh 1.5vw;
     transition: all 0.3s ease;
 }
 
@@ -227,14 +227,7 @@ h1.page-title {
     font-size: clamp(1rem, 2.2vh, 2.2rem);
     font-weight: 700;
     margin: 0 0 0.8vh 0;
-    line-height: 1.2;
-}
-
-.overlay-content p {
-    font-size: clamp(0.8rem, 1.6vh, 1.6rem);
-    margin: 0;
-    opacity: 0.9;
-    line-height: 1.4;
+    line-height: 0;
 }
 
 .lightbox-overlay {
