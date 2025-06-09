@@ -75,7 +75,7 @@ p {
 
 .button-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
     gap: min(25px, 2.5vw); /* Reduced from 30px/3vw */
     position: relative;
     z-index: 1;
