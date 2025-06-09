@@ -10,17 +10,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const skipEmailBtn = document.getElementById('skip-email');
     const emailFeedback = document.getElementById('email-feedback');
 
-    let selectedTopic = null; // Store the selected topic for email submission
+    let selectedTopic = null;
 
     buttons.forEach(button => {
         button.addEventListener('click', () => {
             const topic = button.dataset.topic;
             const showName = button.dataset.showName;
 
-            // Store selected topic for potential email submission
             selectedTopic = topic;
 
-            // Add pressed animation
             button.classList.add('pressed');
             setTimeout(() => {
                 button.classList.remove('pressed');
@@ -34,7 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
         feedbackMessageElement.textContent = 'Sending...';
         feedbackMessageElement.className = 'feedback';
 
-        // Disable all buttons to prevent multiple submissions
         buttons.forEach(btn => btn.disabled = true);
 
         fetch(`${SCRIPT_URL}?topic=${encodeURIComponent(topic)}`, {
@@ -55,10 +52,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 feedbackMessageElement.innerHTML = `Thanks for choosing ${displayName}!<br>Pick up your gift and check out our interactive dashboard to find out more.`;
                 feedbackMessageElement.className = 'feedback success';
                 
-                // Show email form after successful topic submission
+                // Show email form with longer delay for better UX
                 setTimeout(() => {
                     showEmailForm();
-                }, 2000);
+                }, 3000); // Increased from 2000ms
                 
             } else {
                 feedbackMessageElement.textContent = `Error: ${data.message}`;
@@ -71,7 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
             feedbackMessageElement.className = 'feedback error';
         })
         .finally(() => {
-            // Re-enable buttons after a short delay
             setTimeout(() => {
                 buttons.forEach(btn => btn.disabled = false);
             }, 1500);
@@ -79,10 +75,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function showEmailForm() {
+        // Force layout recalculation for iOS Safari
         emailForm.style.display = 'block';
-        setTimeout(() => {
+        emailForm.offsetHeight; // Force reflow
+        
+        // Use requestAnimationFrame for better iOS compatibility
+        requestAnimationFrame(() => {
             emailForm.classList.add('show');
-        }, 100);
+            // Focus on input for better mobile UX (but not on iOS where it causes keyboard issues)
+            if (!navigator.userAgent.includes('iPhone') && !navigator.userAgent.includes('iPad')) {
+                setTimeout(() => {
+                    emailInput.focus();
+                }, 100);
+            }
+        });
     }
 
     function hideEmailForm() {
@@ -101,8 +107,12 @@ document.addEventListener('DOMContentLoaded', () => {
         feedbackMessageElement.className = 'feedback';
     }
 
-    // Email submission
-    submitEmailBtn.addEventListener('click', () => {
+    // Email submission with iOS-friendly event handling
+    submitEmailBtn.addEventListener('click', handleEmailSubmit);
+    submitEmailBtn.addEventListener('touchend', handleEmailSubmit); // iOS fallback
+
+    function handleEmailSubmit(e) {
+        e.preventDefault();
         const email = emailInput.value.trim();
         
         if (!email) {
@@ -118,17 +128,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         submitEmail(email, selectedTopic);
-    });
+    }
 
-    // Skip email
-    skipEmailBtn.addEventListener('click', () => {
-        hideEmailForm();
-    });
+    // Skip email with iOS-friendly event handling
+    skipEmailBtn.addEventListener('click', hideEmailForm);
+    skipEmailBtn.addEventListener('touchend', hideEmailForm); // iOS fallback
 
     // Enter key submission
     emailInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
-            submitEmailBtn.click();
+            e.preventDefault();
+            handleEmailSubmit(e);
         }
     });
 
@@ -159,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 setTimeout(() => {
                     hideEmailForm();
-                }, 2000);
+                }, 2500); // Slightly longer to read success message
             } else {
                 emailFeedback.textContent = `Error: ${data.message}`;
                 emailFeedback.className = 'email-feedback error';
