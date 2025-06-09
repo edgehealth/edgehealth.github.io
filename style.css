@@ -50,6 +50,7 @@ h1 {
     width: 100%;
     position: relative;
     min-height: 80vh; /* Set minimum height instead of fixed */
+    overflow:auto;
 }
 
 .container::before {
@@ -74,7 +75,7 @@ p {
 
 .button-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: min(25px, 2.5vw); /* Reduced from 30px/3vw */
     position: relative;
     z-index: 1;
@@ -207,7 +208,6 @@ p {
     opacity: 0;
     transform: translateY(20px);
     transition: all 0.5s ease;
-    /* Ensure it fits in container */
     max-width: 100%;
     box-sizing: border-box;
 }
@@ -359,6 +359,9 @@ p {
     .topic-button {
         min-height: 120px;
         padding: 20px 15px;
+    }
+    .email-input-container button {
+        flex-basis: 100%; /* Make buttons take full width on very small screens if they wrap */
     }
 }
 

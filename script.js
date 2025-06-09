@@ -29,51 +29,50 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    function logTopicChoice(topic, displayName) {
-        feedbackMessageElement.textContent = 'Sending...';
-        feedbackMessageElement.className = 'feedback';
+function logTopicChoice(topic, displayName) {
+    feedbackMessageElement.textContent = 'Sending...';
+    feedbackMessageElement.className = 'feedback';
 
-        buttons.forEach(btn => btn.disabled = true);
+    buttons.forEach(btn => btn.disabled = true);
 
-        fetch(`${SCRIPT_URL}?topic=${encodeURIComponent(topic)}`, {
-            method: 'GET',
-            mode: 'cors',
-        })
-        .then(response => {
-            if (!response.ok) {
-                return response.json().then(errData => {
-                    throw new Error(errData.message || `Network response was not ok: ${response.statusText}`);
-                });
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Success:', data);
-            if (data.status === "success") {
-                feedbackMessageElement.innerHTML = `Thanks for choosing ${displayName}!<br>Pick up your gift and check out our interactive dashboard to find out more.`;
-                feedbackMessageElement.className = 'feedback success';
-                
-                // Show email form with longer delay for better UX
-                setTimeout(() => {
-                    showEmailForm();
-                }, 3000); // Increased from 2000ms
-                
-            } else {
-                feedbackMessageElement.textContent = `Error: ${data.message}`;
-                feedbackMessageElement.className = 'feedback error';
-            }
-        })
-        .catch(error => {
-            console.error('Error logging topic:', error);
-            feedbackMessageElement.textContent = 'Oops! Something went wrong. Please try again.';
+    fetch(`${SCRIPT_URL}?topic=${encodeURIComponent(topic)}`, {
+        method: 'GET',
+        mode: 'cors',
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.json().then(errData => {
+                throw new Error(errData.message || `Network response was not ok: ${response.statusText}`);
+            });
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Success:', data);
+        if (data.status === "success") {
+            feedbackMessageElement.innerHTML = `Thanks for choosing ${displayName}!<br>Pick up your gift and check out our interactive dashboard to find out more.`;
+            feedbackMessageElement.className = 'feedback success';
+
+            // Show email form IMMEDIATELY after the success message is set
+            showEmailForm(); 
+
+        } else {
+            feedbackMessageElement.textContent = `Error: ${data.message}`;
             feedbackMessageElement.className = 'feedback error';
-        })
-        .finally(() => {
-            setTimeout(() => {
-                buttons.forEach(btn => btn.disabled = false);
-            }, 1500);
-        });
-    }
+        }
+    })
+    .catch(error => {
+        console.error('Error logging topic:', error);
+        feedbackMessageElement.textContent = 'Oops! Something went wrong. Please try again.';
+        feedbackMessageElement.className = 'feedback error';
+    })
+    .finally(() => {
+        // Keep this delay for re-enabling buttons, it's separate
+        setTimeout(() => {
+            buttons.forEach(btn => btn.disabled = false);
+        }, 1500);
+    });
+}
 
     function showEmailForm() {
         // Force layout recalculation for iOS Safari
