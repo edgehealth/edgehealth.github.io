@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // !!! IMPORTANT: PASTE THE GOOGLE APPS SCRIPT WEB APP URL HERE !!!
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzH_KYGZafbS-UswAwuki7aMcNghg8_mxxINj-Wpa9fEQzk-zLkOVom9SkSxSDOC8Y/exec';
+    
 
     const buttons = document.querySelectorAll('.topic-button');
     const feedbackMessageElement = document.getElementById('feedback-message');
