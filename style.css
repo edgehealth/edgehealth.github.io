@@ -47,7 +47,6 @@ h1 {
     border-radius: 20px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
     max-width: min(70vw, 900px);
-    max-height: 95vh; /* Increased from 90vh to 95vh */
     width: 100%;
     position: relative;
     min-height: 80vh; /* Set minimum height instead of fixed */
@@ -95,7 +94,7 @@ p {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: min(1900px, 24vh); /* Reduced from 200px/20vh */
+    min-height: min(180px, 18vh); 
     position: relative;
     overflow: hidden;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
