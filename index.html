@@ -12,7 +12,6 @@
 <!-- Add a web app manifest -->
 <link rel="manifest" href="manifest.json">
 
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -42,7 +41,19 @@
                 Health Economics and Evaluations
             </button>
         </div>
+        
         <div id="feedback-message" class="feedback"></div>
+        
+        <!-- Email Form - Initially Hidden -->
+        <div id="email-form" class="email-form" style="display: none;">
+            <h3>Leave your email if you want to stay in touch</h3>
+            <div class="email-input-container">
+                <input type="email" id="email-input" placeholder="your.email@example.com" class="email-input">
+                <button id="submit-email" class="email-submit-btn">Submit</button>
+                <button id="skip-email" class="email-skip-btn">Skip</button>
+            </div>
+            <div id="email-feedback" class="email-feedback"></div>
+        </div>
     </div>
 
     <script src="script.js"></script>
