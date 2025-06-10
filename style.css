@@ -54,11 +54,10 @@ h1 {
     padding: clamp(20px, 3vw, 40px); /* Responsive padding */
     border-radius: 20px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
-    width: 90%; /* Use percentage for reliable width */
-    max-width: 850px; /* Adjusted max-width */
+    width: 80%; /* Use percentage for reliable width */
+    max-width: 850px; 
     position: relative;
-    /* min-height: 80vh; /* Can make container too tall; let content define height */
-    overflow: auto; /* Keep if content might exceed container */
+    overflow: auto; 
 }
 
 .container::before {
@@ -96,10 +95,10 @@ p {
 }
 
 .topic-button {
-    padding: 20px 15px; /* Fallback padding */
-    padding: clamp(15px, 2.5vw, 25px) clamp(10px, 2vw, 20px); /* Responsive padding */
-    font-size: 1.1em; /* Fallback font size */
-    font-size: clamp(1em, 1.8vw, 1.4em); /* More conservative vw for font */
+    padding: 25px 10px; /* Fallback: Taller padding, narrower padding */
+    padding: clamp(20px, 3vh, 30px) clamp(10px, 1.5vw, 15px); /* Use vh for vertical, vw for horizontal */
+    font-size: 1.1em; /* Fallback font size - might need to be slightly smaller if width is very restricted */
+    font-size: clamp(0.9em, 1.6vw, 1.2em); /* Adjusted for potentially narrower buttons */
     font-weight: bold;
     color: white;
     border: none;
@@ -111,9 +110,8 @@ p {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 140px; /* Fallback & primary height determinant */
-    /* min-height: min(180px, 25vh); /* This was risky. Replaced with clamp below or stick to px */
-    min-height: clamp(120px, 16vh, 190px); /* Conservative vh, bounded by px */
+    min-height: 180px; /* Fallback & primary height determinant */
+    min-height: clamp(150px, 23vh, 200px);
     position: relative;
     overflow: hidden;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
