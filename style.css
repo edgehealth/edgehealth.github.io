@@ -9,48 +9,56 @@ body {
     text-align: center;
     padding: 20px;
     box-sizing: border-box;
+    font-size: 16px; /* Base font size for better rem/em consistency */
+}
+
+/* Ensure all elements inherit box-sizing for easier layout */
+*, *::before, *::after {
+    box-sizing: inherit;
 }
 
 .title-header {
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
     align-items: center;
-    justify-content: center; /* Centers the logo + title block */
-    gap: 15px; /* Space between logo and title text */
-    margin-bottom: 15px; /* Existing h1 margin-bottom, now on the wrapper */
-    flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
 }
 
 .company-logo {
-    height: clamp(35px, 5vw, 55px); /* Responsive height for the logo */
-    width: auto; /* Maintain aspect ratio */
-    max-width: 240px; /* Approx. 55px * (601/138) aspect ratio */
+    height: 40px; /* Fallback height */
+    height: clamp(35px, 5vw, 50px); /* Responsive height, slightly reduced max */
+    width: auto;
+    max-width: 220px; /* Slightly reduced max-width */
     object-fit: contain;
-    flex-shrink: 0; /* Prevents logo from shrinking too much */
+    flex-shrink: 0;
 }
 
-h1 { 
+h1 {
     color: #1D1B38;
     margin-top: 0;
-    margin-bottom: 0; 
+    margin-bottom: 0;
     font-family: 'Libre Baskerville', serif;
-    font-size: clamp(1.8rem, 3.5vw, 3rem); 
+    font-size: 1.8rem; /* Fallback (approx 28px if base is 16px) */
+    font-size: clamp(1.6rem, 3vw, 2.5rem); /* More conservative vw, bounded by rem */
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: relative;
     z-index: 1;
-    /* text-align: left; */ /* Remove if you want the text to be centered if it wraps, inherited from .container or set explicitly */
 }
 
 .container {
     background: linear-gradient(145deg, #ffffff, #f8f9fa);
-    padding: 3vw; /* Reduced from 4vw to make more room */
+    padding: 25px; /* Fallback fixed padding */
+    padding: clamp(20px, 3vw, 40px); /* Responsive padding */
     border-radius: 20px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
-    max-width: min(70vw, 900px);
-    width: 100%;
+    width: 90%; /* Use percentage for reliable width */
+    max-width: 850px; /* Adjusted max-width */
     position: relative;
-    min-height: 80vh; /* Set minimum height instead of fixed */
-    overflow:auto;
+    /* min-height: 80vh; /* Can make container too tall; let content define height */
+    overflow: auto; /* Keep if content might exceed container */
 }
 
 .container::before {
@@ -66,8 +74,10 @@ h1 {
 
 p {
     color: #555;
-    margin-bottom: 3vw;
-    font-size: clamp(1rem, 2vw, 1.3em); /* Responsive subtitle */
+    margin-bottom: 20px; /* Fallback */
+    margin-bottom: clamp(20px, 3vw, 30px); /* Responsive margin */
+    font-size: 1rem; /* Fallback (16px) */
+    font-size: clamp(0.9rem, 1.8vw, 1.2rem); /* More conservative vw */
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     position: relative;
     z-index: 1;
@@ -75,15 +85,21 @@ p {
 
 .button-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(200px, 1fr));
-    gap: min(25px, 2.5vw); /* Reduced from 30px/3vw */
+    /* grid-template-columns: repeat(2, minmax(200px, 1fr)); /* Original */
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* More flexible for different screen sizes */
+    /* If strictly two columns are always needed and they might get small: */
+    /* grid-template-columns: 1fr 1fr; */
+    gap: 20px; /* Fallback gap */
+    gap: clamp(15px, 2.5vw, 25px); /* Responsive gap */
     position: relative;
     z-index: 1;
 }
 
 .topic-button {
-    padding: min(30px, 3vw) min(20px, 2vw); /* Reduced padding */
-    font-size: clamp(1.1em, 2.3vw, 1.6em); /* Slightly smaller font */
+    padding: 20px 15px; /* Fallback padding */
+    padding: clamp(15px, 2.5vw, 25px) clamp(10px, 2vw, 20px); /* Responsive padding */
+    font-size: 1.1em; /* Fallback font size */
+    font-size: clamp(1em, 1.8vw, 1.4em); /* More conservative vw for font */
     font-weight: bold;
     color: white;
     border: none;
@@ -95,14 +111,16 @@ p {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: min(180px, 25vh); 
+    min-height: 140px; /* Fallback & primary height determinant */
+    /* min-height: min(180px, 25vh); /* This was risky. Replaced with clamp below or stick to px */
+    min-height: clamp(120px, 15vh, 160px); /* Conservative vh, bounded by px */
+
     position: relative;
     overflow: hidden;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* Subtle overlay effect on buttons */
 .topic-button::before {
     content: '';
     position: absolute;
@@ -115,21 +133,20 @@ p {
     z-index: 1;
 }
 
-/* Ensure text is above the overlay */
 .topic-button > * {
     position: relative;
     z-index: 2;
 }
 
 .topic-button:hover {
-    transform: translateY(-8px); /* More dramatic hover effect */
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25); /* Enhanced hover shadow */
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
 }
 
 .topic-button:active {
     transform: translateY(-4px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    transition: all 0.1s ease; /* Quick active response */
+    transition: all 0.1s ease;
 }
 
 .sweet-info {
@@ -140,44 +157,26 @@ p {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-/* Enhanced button colors with gradients */
-#btn-data-engineering { 
-    background: linear-gradient(135deg, #B58CBD, #B58CBD);
-}
+#btn-data-engineering { background: linear-gradient(135deg, #B58CBD, #B58CBD); }
+#btn-ai { background: linear-gradient(135deg, #241E3E, #241E3E); }
+#btn-analytics { background: linear-gradient(135deg, #80B9BC, #80B9BC); }
+#btn-econ-eval { background: linear-gradient(135deg, #dec2e3, #dec2e3); }
 
-#btn-ai { 
-    background: linear-gradient(135deg, #241E3E, #241E3E);
-}
-
-#btn-analytics { 
-    background: linear-gradient(135deg, #80B9BC, #80B9BC);
-}
-
-#btn-econ-eval { 
-    background: linear-gradient(135deg, #dec2e3, #dec2e3);
-}
-
-/* Add pulse animation for button press feedback */
 .topic-button.pressed {
     animation: buttonPress 0.6s ease-out;
 }
 
 @keyframes buttonPress {
-    0% { 
-        transform: scale(1) translateY(0); 
-    }
-    50% { 
-        transform: scale(1.05) translateY(-10px);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    }
-    100% { 
-        transform: scale(1) translateY(0);
-    }
+    0% { transform: scale(1) translateY(0); }
+    50% { transform: scale(1.05) translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+    100% { transform: scale(1) translateY(0); }
 }
 
 .feedback {
-    margin-top: 40px;
-    font-size: clamp(1rem, 2vw, 1.4em); /* Responsive feedback text */
+    margin-top: 30px; /* Fallback */
+    margin-top: clamp(20px, 3vw, 40px);
+    font-size: 1rem; /* Fallback */
+    font-size: clamp(0.9rem, 1.8vw, 1.2rem);
     min-height: 1.5em;
     font-weight: bold;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
@@ -185,20 +184,12 @@ p {
     z-index: 1;
 }
 
-.feedback.success {
-    color: #c18dbe;
-    text-shadow: 0 1px 2px rgba(193, 141, 190, 0.3);
-}
+.feedback.success { color: #c18dbe; text-shadow: 0 1px 2px rgba(193,141,190,0.3); }
+.feedback.error { color: #F28F64; text-shadow: 0 1px 2px rgba(242,143,100,0.3); }
 
-.feedback.error {
-    color: #F28F64;
-    text-shadow: 0 1px 2px rgba(242, 143, 100, 0.3);
-}
-
-/* Email Form Styles */
 .email-form {
-    margin-top: 20px; /* Reduced from 30px */
-    padding: 20px; /* Reduced from 30px */
+    margin-top: 20px;
+    padding: 20px;
     background: linear-gradient(145deg, #ffffff, #f8f9fa);
     border-radius: 15px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
@@ -209,7 +200,6 @@ p {
     transform: translateY(20px);
     transition: all 0.5s ease;
     max-width: 100%;
-    box-sizing: border-box;
 }
 
 .email-form.show {
@@ -220,25 +210,27 @@ p {
 .email-form h3 {
     color: #1D1B38;
     font-family: 'Libre Baskerville', serif;
-    font-size: clamp(1.1rem, 2.2vw, 1.6rem); /* Slightly smaller */
-    margin: 0 0 15px 0; /* Reduced margin */
+    font-size: 1.2rem; /* Fallback */
+    font-size: clamp(1.1rem, 2vw, 1.5rem); /* Conservative vw */
+    margin: 0 0 15px 0;
     font-weight: 600;
 }
 
 .email-input-container {
     display: flex;
-    gap: 12px; /* Reduced from 15px */
+    gap: 12px;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: 10px; /* Reduced from 15px */
+    margin-bottom: 10px;
 }
 
 .email-input {
     flex: 1;
-    min-width: 200px; /* Reduced from 250px */
-    padding: 12px 18px; /* Reduced padding */
-    font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+    min-width: 200px;
+    padding: 12px 18px;
+    font-size: 0.9rem; /* Fallback */
+    font-size: clamp(0.85rem, 1.6vw, 1rem); /* Conservative vw */
     border: 2px solid #dec2e3;
     border-radius: 25px;
     background: white;
@@ -253,153 +245,147 @@ p {
     box-shadow: 0 0 15px rgba(181, 140, 189, 0.3);
 }
 
-.email-submit-btn {
-    padding: 12px 24px; /* Reduced padding */
-    background: linear-gradient(135deg, #B58CBD, #B58CBD);
-    color: white;
-    border: none;
+.email-submit-btn,
+.email-skip-btn {
+    padding: 12px 24px;
     border-radius: 25px;
-    font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+    font-size: 0.9rem; /* Fallback */
+    font-size: clamp(0.85rem, 1.6vw, 1rem); /* Conservative vw */
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
+}
+
+.email-submit-btn {
+    background: linear-gradient(135deg, #B58CBD, #B58CBD);
+    color: white;
+    border: none;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
     box-shadow: 0 5px 15px rgba(181, 140, 189, 0.3);
 }
-
 .email-submit-btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 20px rgba(181, 140, 189, 0.4);
 }
 
 .email-skip-btn {
-    padding: 12px 20px; /* Reduced padding */
     background: transparent;
     color: #1D1B38;
     border: 2px solid #dec2e3;
-    border-radius: 25px;
-    font-size: clamp(0.9rem, 1.8vw, 1.1rem);
     font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
 }
-
 .email-skip-btn:hover {
     background: #dec2e3;
     transform: translateY(-2px);
 }
 
 .email-feedback {
-    font-size: clamp(0.8rem, 1.6vw, 1rem);
+    font-size: 0.85rem; /* Fallback */
+    font-size: clamp(0.8rem, 1.5vw, 1rem); /* Conservative vw */
     font-weight: 600;
-    min-height: 1em; /* Reduced from 1.2em */
-    margin-top: 8px; /* Reduced from 10px */
+    min-height: 1em;
+    margin-top: 8px;
 }
 
-.email-feedback.success {
-    color: #c18dbe;
-}
-
-.email-feedback.error {
-    color: #F28F64;
-}
-
-/* Responsive adjustments */
-@media (min-width: 1400px) {
-    .container {
-        max-width: 850px; /* Slightly smaller for better proportions */
-        padding: 50px; /* Fixed padding for large screens */
-    }
-    
-    .button-grid {
-        gap: 35px; /* Fixed gap */
-    }
-    
-    .topic-button {
-        padding: 40px 30px; /* Fixed padding */
-        min-height: 200px; /* Fixed height */
-        font-size: 1.5em; /* Fixed font size */
-    }
-}
-
+.email-feedback.success { color: #c18dbe; }
+.email-feedback.error { color: #F28F64; }
 
 @media (max-width: 600px) {
     .container {
-        padding: 25px 20px; /* More compact on mobile */
+        padding: 20px 15px; /* More compact on mobile */
         max-width: 95%;
-        max-height: 98vh; /* More height on mobile */
-    }    
-    
+        /* max-height: 98vh; /* Usually not needed, let content flow */
+    }
+
+    .button-grid {
+        /* On smaller screens, auto-fit might naturally go to 1 column if items are wide enough */
+        /* If you want to force 1 column earlier: */
+        /* grid-template-columns: 1fr; */
+        gap: 15px;
+    }
+    .topic-button {
+        min-height: 100px; /* Fallback */
+        min-height: clamp(100px, 12vh, 140px); /* Adjusted for smaller screens */
+        padding: 15px 10px; /* Fallback */
+        padding: clamp(12px, 2vw, 20px) clamp(8px, 1.5vw, 15px);
+    }
+
     .email-input-container {
         flex-direction: column;
         gap: 8px;
     }
-    .email-input {
-        min-width: 100%;
+    .email-input,
+    .email-submit-btn,
+    .email-skip-btn {
+        width: 100%; /* Make form elements full width */
+        min-width: unset; /* Override any previous min-width */
     }
-    
-    .email-submit-btn, .email-skip-btn {
-        width: 100%;
-    }
-    
-    .email-form {
-        padding: 15px;
-        margin-top: 15px;
-    }
+    .email-form { padding: 15px; margin-top: 15px; }
 }
 
 @media (max-width: 400px) {
-    .container {
-        padding: 25px 20px;
-    }
+    /* .container { padding: 15px 10px; } /* Further reduced padding */
     .button-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
+        grid-template-columns: 1fr; /* Definitely one column */
+        gap: 10px;
     }
     .topic-button {
-        min-height: 120px;
-        padding: 20px 15px;
+        min-height: 90px; /* Fallback */
+        min-height: clamp(90px, 10vh, 120px);
+        /* font-size might need further reduction if text wraps badly */
+        /* font-size: 0.9em; */
+        /* font-size: clamp(0.85em, 1.5vw, 1.1em); */
     }
-    .email-input-container button {
-        flex-basis: 100%; /* Make buttons take full width on very small screens if they wrap */
+    h1 {
+        font-size: 1.5rem; /* Fallback */
+        font-size: clamp(1.4rem, 4vw, 2rem);
+    }
+    p {
+        font-size: 0.9rem; /* Fallback */
+        font-size: clamp(0.8rem, 2vw, 1rem);
     }
 }
 
-/* Large screen optimizations */
+/* Large screen optimizations - focus on capping sizes */
 @media (min-width: 1200px) {
     .container {
-        padding: 5vw;
+        padding: 40px; /* Fallback */
+        padding: clamp(30px, 4vw, 50px);
     }
     .button-grid {
-        gap: 2vw;
+        gap: 25px; /* Fallback */
+        gap: clamp(20px, 2vw, 30px);
     }
     .topic-button {
-        padding: 45px 30px;
-        min-height: clamp(250px, 25vh, 250px);
+        min-height: 180px; /* Fallback */
+        min-height: clamp(160px, 18vh, 220px); /* Capped vh */
+        padding: 30px 20px; /* Fallback */
+        padding: clamp(25px, 3vw, 40px) clamp(20px, 2.5vw, 30px);
     }
 }
 
-/* Large screen optimizations - minimal changes to prevent spreading */
 @media (min-width: 1600px) {
     .container {
-        max-width: 1000px; /* Constrain the container width */
-        padding: clamp(4vw, 4vw, 60px); /* Cap the padding */
+        max-width: 950px; /* Slightly larger cap */
+        padding: 50px; /* Fixed padding */
+        padding: clamp(40px, 3.5vw, 60px); /* Capped vw */
     }
-    
     .button-grid {
-        gap: clamp(30px, 3vw, 40px); /* Cap the gap */
+        gap: 30px; /* Fixed gap */
+        gap: clamp(25px, 2.5vw, 35px); /* Capped vw */
     }
-    
     .topic-button {
-        min-height: clamp(250px, 30vh, 250px); /* Cap the height */
+        min-height: 200px; /* Fixed height */
+        min-height: clamp(180px, 20vh, 240px); /* Capped vh */
     }
-    
     h1 {
-        font-size: clamp(1.8rem, 3.5vw, 2.5rem); /* Cap the title size */
+        font-size: 2.2rem; /* Fixed */
+        font-size: clamp(2rem, 3vw, 2.8rem); /* Capped */
     }
-    
     p {
-        font-size: clamp(1rem, 2vw, 1.2em); /* Cap the subtitle size */
-        margin-bottom: clamp(3vw, 3vw, 30px); /* Cap the margin */
+        font-size: 1.1rem; /* Fixed */
+        font-size: clamp(1rem, 1.5vw, 1.3rem); /* Capped */
+        margin-bottom: 25px; /* Fixed */
+        margin-bottom: clamp(20px, 2.5vw, 30px); /* Capped */
     }
 }
