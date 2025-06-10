@@ -85,10 +85,7 @@ p {
 
 .button-grid {
     display: grid;
-    /* grid-template-columns: repeat(2, minmax(200px, 1fr)); /* Original */
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* More flexible for different screen sizes */
-    /* If strictly two columns are always needed and they might get small: */
-    /* grid-template-columns: 1fr 1fr; */
+    grid-template-columns: repeat(2, minmax(180px, 1fr)); /* More flexible for different screen sizes */
     gap: 20px; /* Fallback gap */
     gap: clamp(15px, 2.5vw, 25px); /* Responsive gap */
     position: relative;
