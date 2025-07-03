@@ -1,43 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UK 10-Year Health Plan: Interactive Timeline</title>
-    
-    <!-- Google Fonts: Libre Baskerville -->
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="eh-container">
-        <header class="eh-header">
-            <img src="../img/EdgeHealthLogo.svg" alt="Edge Health Logo" class="eh-logo">
-            <h1 class="eh-title">UK 10-Year Health Plan</h1>
-            <p class="eh-subtitle">An Interactive Timeline of Government Promises</p>
-        </header>
-        <main class="eh-main">
-            <section class="eh-timeline-section">
-                <div id="timeline" class="eh-timeline" aria-label="Timeline of 10-Year Plan Promises"></div>
-            </section>
-            <section id="details-panel" class="eh-details-panel" aria-live="polite" hidden>
-                <h2 id="details-title" class="eh-details-title"></h2>
-                <p id="details-promise" class="eh-details-promise"></p>
-                <div class="eh-details-meta">
-                    <span id="details-deadline" class="eh-details-deadline"></span>
-                    <a id="details-link" href="#" target="_blank" rel="noopener noreferrer" class="eh-details-link">
-                        View Source (Page <span id="details-page"></span>)
-                    </a>
-                </div>
-            </section>
-            <section id="instructions-panel" class="eh-instructions-panel">
-                <p>Click a marker on the timeline to see details. Scroll horizontally if needed.</p>
-            </section>
-        </main>
-        <footer class="eh-footer">
-            <p>Dashboard created by Edge Health. Data sourced from the "Fit for the Future: 10 Year Health Plan for England" (July 2025).</p>
-        </footer>
-    </div>
-    <script src="script.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React + TS</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
