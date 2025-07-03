@@ -1,27 +1,203 @@
-/* Custom styles to complement Tailwind and vis-timeline */
+/* Edge Health 10-Year Plan Tracker Styles */
+:root {
+  --primary: #c18dbe;
+  --dark: #23203f;
+  --light: #f0e0fb;
+  --grey: #575756;
+  --secondary1: #56BABF;
+  --secondary2: #F28F64;
+  --secondary3: #559370;
+  --title-font: 'Libre Baskerville', serif;
+  --body-font: 'Segoe UI', Arial, sans-serif;
+}
 body {
-    font-family: 'Inter', sans-serif;
-    background-color: #f8fafc; /* slate-50 */
+  font-family: var(--body-font);
+  background: var(--light);
+  color: var(--dark);
+  margin: 0;
+  padding: 0;
 }
-
-/* Styling for the vis-timeline component */
-.vis-item {
-    border-color: #3b82f6; /* blue-500 */
-    background-color: #bfdbfe; /* blue-200 */
-    color: #1e3a8a; /* blue-900 */
-    font-size: 14px;
-    padding: 8px;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+.eh-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
 }
-
-.vis-item.vis-selected {
-    border-color: #1e3a8a; /* blue-900 */
-    background-color: #3b82f6; /* blue-500 */
-    color: white;
+.eh-header {
+  text-align: center;
+  margin-bottom: 2rem;
 }
-
-.vis-timeline {
-    border: 1px solid #e2e8f0; /* slate-200 */
-    border-radius: 12px;
+.eh-logo {
+  width: 70px;
+  height: 70px;
+  margin-bottom: 0.5rem;
+  border-radius: 20px;
+  background: white;
+  box-shadow: 0 2px 12px rgba(35,32,63,0.08);
+}
+.eh-title {
+  font-family: var(--title-font);
+  font-size: 2.2rem;
+  color: var(--dark);
+  margin: 0.5rem 0 0.2rem 0;
+}
+.eh-subtitle {
+  font-size: 1.2rem;
+  color: var(--grey);
+  margin-bottom: 1.5rem;
+}
+.eh-main {
+  background: white;
+  border-radius: 1.5rem;
+  box-shadow: 0 2px 16px rgba(35,32,63,0.07);
+  padding: 2rem 1.5rem 2.5rem 1.5rem;
+}
+.eh-timeline-section {
+  overflow-x: auto;
+  padding-bottom: 2rem;
+}
+.eh-timeline {
+  position: relative;
+  min-width: 900px;
+  height: 180px;
+  margin: 0 auto 2rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.eh-timeline-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--primary);
+  z-index: 1;
+  border-radius: 2px;
+}
+.eh-timeline-marker {
+  position: absolute;
+  z-index: 2;
+  width: 18px;
+  height: 18px;
+  background: var(--secondary1);
+  border: 3px solid var(--primary);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s, border 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(86,186,191,0.13);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.eh-timeline-marker.selected {
+  background: var(--primary);
+  border: 3px solid var(--secondary1);
+  box-shadow: 0 4px 16px rgba(193,141,190,0.18);
+}
+.eh-timeline-label {
+  position: absolute;
+  min-width: 120px;
+  max-width: 200px;
+  font-size: 1rem;
+  color: var(--dark);
+  background: var(--light);
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 1px 4px rgba(35,32,63,0.07);
+  font-family: var(--body-font);
+  text-align: center;
+  pointer-events: none;
+}
+.eh-timeline-label.above {
+  bottom: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.eh-timeline-label.below {
+  top: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.eh-details-panel {
+  background: var(--f0e0fb, #f0e0fb);
+  border: 1px solid var(--primary);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin: 0 auto 1.5rem auto;
+  max-width: 600px;
+  box-shadow: 0 2px 8px rgba(193,141,190,0.08);
+  display: none;
+}
+.eh-details-panel[hidden] {
+  display: none;
+}
+.eh-details-title {
+  font-family: var(--title-font);
+  font-size: 1.3rem;
+  color: var(--dark);
+  margin-bottom: 0.5rem;
+}
+.eh-details-promise {
+  font-size: 1.1rem;
+  color: var(--grey);
+  margin-bottom: 1rem;
+}
+.eh-details-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.eh-details-deadline {
+  font-size: 0.95rem;
+  color: var(--secondary3);
+  background: #e6f7f7;
+  border-radius: 1rem;
+  padding: 0.3rem 1rem;
+  font-weight: 600;
+}
+.eh-details-link {
+  font-size: 0.95rem;
+  color: var(--primary);
+  text-decoration: underline;
+  font-weight: 600;
+}
+.eh-details-link:hover {
+  color: var(--secondary2);
+}
+.eh-instructions-panel {
+  text-align: center;
+  color: var(--grey);
+  background: var(--light);
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 0 auto 1.5rem auto;
+  max-width: 600px;
+  font-size: 1rem;
+}
+.eh-footer {
+  text-align: center;
+  color: var(--grey);
+  font-size: 0.95rem;
+  margin-top: 2.5rem;
+}
+@media (max-width: 900px) {
+  .eh-timeline {
+    min-width: 600px;
+  }
+}
+@media (max-width: 600px) {
+  .eh-container {
+    padding: 0.5rem;
+  }
+  .eh-main {
+    padding: 1rem 0.2rem 1.5rem 0.2rem;
+  }
+  .eh-timeline {
+    min-width: 400px;
+    height: 140px;
+  }
+  .eh-details-panel, .eh-instructions-panel {
+    max-width: 98vw;
+    padding: 1rem;
+  }
 }

@@ -5,70 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UK 10-Year Health Plan: Interactive Timeline</title>
     
-    <!-- Tailwind CSS for styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- vis-timeline library for the interactive timeline -->
-    <link href="https://unpkg.com/vis-timeline@latest/styles/vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="https://unpkg.com/vis-timeline@latest/standalone/umd/vis-timeline-graph2d.min.js"></script>
-
-    <!-- Google Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Your Custom CSS -->
-    <link href="style.css" rel="stylesheet" type="text/css" />
+    <!-- Google Fonts: Libre Baskerville -->
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="text-slate-800">
-
-    <!-- Main Container -->
-    <div class="container mx-auto p-4 md:p-8">
-
-        <!-- Header Section -->
-        <header class="mb-8 text-center">
-            <h1 class="text-3xl md:text-4xl font-bold text-slate-900">UK 10-Year Health Plan</h1>
-            <p class="mt-2 text-lg text-slate-600">An Interactive Timeline of Government Promises</p>
+<body>
+    <div class="eh-container">
+        <header class="eh-header">
+            <img src="../img/EdgeHealthLogo.svg" alt="Edge Health Logo" class="eh-logo">
+            <h1 class="eh-title">UK 10-Year Health Plan</h1>
+            <p class="eh-subtitle">An Interactive Timeline of Government Promises</p>
         </header>
-
-        <!-- Main Content Area -->
-        <main class="bg-white p-6 rounded-2xl shadow-lg">
-            <!-- Timeline Container: Interactive horizontal timeline (fishbone style) -->
-            <div id="timeline-container" class="w-full h-[600px] mb-6" aria-label="Timeline of 10-Year Plan Promises">
-                <!-- Timeline rendered by JS -->
-            </div>
-            <!-- Details Panel: Shows details for selected promise -->
-            <div id="details-panel" class="hidden p-6 border border-slate-200 rounded-xl bg-slate-50 transition-all duration-300" aria-live="polite">
-                <h2 id="details-title" class="text-xl font-bold mb-2 text-slate-800"></h2>
-                <p id="details-promise" class="text-base mb-4 text-slate-700"></p>
-                <div class="flex items-center justify-between">
-                    <span id="details-deadline" class="text-sm font-semibold text-blue-600 bg-blue-100 px-3 py-1 rounded-full"></span>
-                    <a id="details-link" href="#" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline">
+        <main class="eh-main">
+            <section class="eh-timeline-section">
+                <div id="timeline" class="eh-timeline" aria-label="Timeline of 10-Year Plan Promises"></div>
+            </section>
+            <section id="details-panel" class="eh-details-panel" aria-live="polite" hidden>
+                <h2 id="details-title" class="eh-details-title"></h2>
+                <p id="details-promise" class="eh-details-promise"></p>
+                <div class="eh-details-meta">
+                    <span id="details-deadline" class="eh-details-deadline"></span>
+                    <a id="details-link" href="#" target="_blank" rel="noopener noreferrer" class="eh-details-link">
                         View Source (Page <span id="details-page"></span>)
                     </a>
                 </div>
-            </div>
-            <!-- Instructions Panel -->
-            <div id="instructions-panel" class="mt-6 p-4 border border-slate-200 rounded-xl bg-slate-50">
-                <p class="text-center text-slate-600">Click on an item in the timeline to see details. Use your mouse wheel or trackpad to zoom, and click and drag to navigate.</p>
-            </div>
-            <!--
-              To move the data to a JSON file in the future:
-              1. Place the data in a file (e.g., promises.json).
-              2. Fetch it in script.js using fetch('promises.json').then(res => res.json()).then(...)
-              3. Update the timeline logic to use the fetched data.
-            -->
+            </section>
+            <section id="instructions-panel" class="eh-instructions-panel">
+                <p>Click a marker on the timeline to see details. Scroll horizontally if needed.</p>
+            </section>
         </main>
-
-        <!-- Footer -->
-        <footer class="mt-8 text-center text-sm text-slate-500">
+        <footer class="eh-footer">
             <p>Dashboard created by Edge Health. Data sourced from the "Fit for the Future: 10 Year Health Plan for England" (July 2025).</p>
         </footer>
-
     </div>
-
-    <!-- Your Custom JavaScript -->
     <script src="script.js"></script>
-
 </body>
 </html>
