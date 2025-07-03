@@ -13,9 +13,23 @@ const App: React.FC = () => {
       .then((data) => setPromises(data));
   }, []);
 
+  // Apply gradient background to body
+  useEffect(() => {
+    document.body.style.background = 'linear-gradient(135deg, #f0e0fb 60%, #c18dbe 100%)';
+    document.body.style.margin = '0';
+    document.body.style.padding = '0';
+    document.body.style.minHeight = '100vh';
+    
+    return () => {
+      document.body.style.background = '';
+      document.body.style.margin = '';
+      document.body.style.padding = '';
+      document.body.style.minHeight = '';
+    };
+  }, []);
+
   return (
     <Box sx={{
-      background: 'linear-gradient(135deg, #f0e0fb 60%, #c18dbe 100%)',
       minHeight: '100vh',
       width: '100vw',
       display: 'flex',

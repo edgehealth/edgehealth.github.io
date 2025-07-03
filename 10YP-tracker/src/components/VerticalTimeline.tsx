@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Box from '@mui/material/Box';
 import type { PromiseData } from '../types';
 import PromiseCard from './PromiseCard';
@@ -17,8 +17,15 @@ const MIN_CARD_WIDTH = 200;
 const MAX_CARD_WIDTH = 400;
 const MAX_CARDS_PER_GROUP = 5;
 
+// Mobile card sizes
+const MOBILE_CARD_WIDTH = 280;
+const MOBILE_MIN_CARD_WIDTH = 150;
+const MOBILE_MAX_CARD_WIDTH = 320;
+
 const VerticalTimeline: React.FC<VerticalTimelineProps> = ({ promises }) => {
   const [todayY, setTodayY] = useState(0);
+  const [zoom, setZoom] = useState(1);
+  const containerRef = useRef<HTMLDivElement>(null);
   
   // Group by deadline_label, but keep order as in original array
   const groups: { label: string; items: PromiseData[] }[] = [];
@@ -62,18 +69,59 @@ const VerticalTimeline: React.FC<VerticalTimelineProps> = ({ promises }) => {
     return () => clearInterval(interval);
   }, [minDate, maxDate, groupCount, timelineHeight]);
 
+  // Simple pinch-to-zoom handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length === 2) {
+      const touch1 = e.touches[0];
+      const touch2 = e.touches[1];
+      const distance = Math.hypot(touch2.clientX - touch1.clientX, touch2.clientY - touch1.clientY);
+      (e.currentTarget as any).initialDistance = distance;
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (e.touches.length === 2) {
+      e.preventDefault();
+      const touch1 = e.touches[0];
+      const touch2 = e.touches[1];
+      const distance = Math.hypot(touch2.clientX - touch1.clientX, touch2.clientY - touch1.clientY);
+      const initialDistance = (e.currentTarget as any).initialDistance;
+      if (initialDistance) {
+        const scale = distance / initialDistance;
+        setZoom(prev => Math.max(0.3, Math.min(2, prev * scale)));
+        (e.currentTarget as any).initialDistance = distance;
+      }
+    }
+  };
+
+  const handleTouchEnd = () => {
+    delete (containerRef.current as any)?.initialDistance;
+  };
+
   return (
-    <Box sx={{
-      position: 'relative',
-      width: 900,
-      mx: 'auto',
-      py: 6,
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      minHeight: '80vh',
-    }}>
+    <Box 
+      ref={containerRef}
+      sx={{
+        position: 'relative',
+        width: { xs: '100%', md: 900 },
+        mx: 'auto',
+        py: { xs: 3, md: 6 },
+        px: { xs: 2, md: 0 },
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: { xs: '70vh', md: '80vh' },
+        overflow: 'hidden',
+        touchAction: 'none',
+        transform: `scale(${zoom})`,
+        transformOrigin: 'center center',
+        transition: 'transform 0.1s ease-out',
+      }}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
       {/* Vertical line */}
       <Box sx={{
         position: 'absolute',
@@ -91,8 +139,12 @@ const VerticalTimeline: React.FC<VerticalTimelineProps> = ({ promises }) => {
         {groups.map((group, i) => {
           const isLeft = i % 2 === 0;
           const n = group.items.length;
-          // Shrink cards if there are many in a group
-          const cardWidth = n > MAX_CARDS_PER_GROUP ? MIN_CARD_WIDTH : CARD_WIDTH;
+          // Responsive card sizing
+          const cardWidth = n > MAX_CARDS_PER_GROUP 
+            ? { xs: MOBILE_MIN_CARD_WIDTH, md: MIN_CARD_WIDTH }
+            : { xs: MOBILE_CARD_WIDTH, md: CARD_WIDTH };
+          const minCardWidth = { xs: MOBILE_MIN_CARD_WIDTH, md: MIN_CARD_WIDTH };
+          const maxCardWidth = { xs: MOBILE_MAX_CARD_WIDTH, md: MAX_CARD_WIDTH };
           const fontSize = n > MAX_CARDS_PER_GROUP ? '0.4rem' : '0.45rem';
           return (
             <Box key={group.label + i} sx={{
@@ -153,7 +205,12 @@ const VerticalTimeline: React.FC<VerticalTimelineProps> = ({ promises }) => {
                     gap: 1.5,
                   }}>
                     {group.items.map((promise, idx) => (
-                      <Box key={promise.id} sx={{ width: cardWidth, minWidth: MIN_CARD_WIDTH, maxWidth: MAX_CARD_WIDTH, fontSize }}>
+                      <Box key={promise.id} sx={{ 
+                        width: cardWidth, 
+                        minWidth: minCardWidth, 
+                        maxWidth: maxCardWidth, 
+                        fontSize 
+                      }}>
                         <PromiseCard promise={promise} smallText={true} />
                       </Box>
                     ))}
@@ -170,7 +227,12 @@ const VerticalTimeline: React.FC<VerticalTimelineProps> = ({ promises }) => {
                     gap: 1.5,
                   }}>
                     {group.items.map((promise, idx) => (
-                      <Box key={promise.id} sx={{ width: cardWidth, minWidth: MIN_CARD_WIDTH, maxWidth: MAX_CARD_WIDTH, fontSize }}>
+                      <Box key={promise.id} sx={{ 
+                        width: cardWidth, 
+                        minWidth: minCardWidth, 
+                        maxWidth: maxCardWidth, 
+                        fontSize 
+                      }}>
                         <PromiseCard promise={promise} smallText={true} />
                       </Box>
                     ))}
