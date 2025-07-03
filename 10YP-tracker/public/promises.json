@@ -58,7 +58,7 @@
   {
     "id": 8,
     "deadline_date": "2025-12-31",
-    "deadline_label": "From this year (2025)",
+    "deadline_label": "By end of 2025",
     "promise": "Through the Tobacco and Vapes Bill, ensure children turning 16 this year or younger can never legally be sold tobacco.",
     "source_page": 11,
     "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=11"
@@ -74,7 +74,7 @@
   {
     "id": 10,
     "deadline_date": "2026-03-31",
-    "deadline_label": "By March 2026",
+    "deadline_label": "March 2026",
     "promise": "Reduce the setup time for clinical trials to 150 days.",
     "source_page": 15,
     "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=15"
@@ -98,7 +98,7 @@
   {
     "id": 13,
     "deadline_date": "2026-04-30",
-    "deadline_label": "By April 2026",
+    "deadline_label": "April 2026",
     "promise": "Establish new national and regional talent management systems to identify and support future leaders at all levels.",
     "source_page": 107,
     "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=107"
@@ -106,7 +106,7 @@
   {
     "id": 14,
     "deadline_date": "2026-04-30",
-    "deadline_label": "From April 2026",
+    "deadline_label": "April 2026",
     "promise": "Begin expanding NICE’s technology appraisal process to cover some devices, diagnostics and digital products.",
     "source_page": 126,
     "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=126"
@@ -225,7 +225,7 @@
   },
   {
     "id": 29,
-    "deadline_date": "2028-12-31",
+    "deadline_date": "2028-12-01",
     "deadline_label": "From 2028",
     "promise": "Enable patients to securely view their Single Patient Record on the NHS App.",
     "source_page": 48,

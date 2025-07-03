@@ -1,35 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useEffect, useState } from 'react';
+import Header from './components/Header';
+import VerticalTimeline from './components/VerticalTimeline';
+import type { PromiseData } from './types';
+import Box from '@mui/material/Box';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App: React.FC = () => {
+  const [promises, setPromises] = useState<PromiseData[]>([]);
+
+  useEffect(() => {
+    fetch('/10YP-tracker/promises.json')
+      .then((res) => res.json())
+      .then((data) => setPromises(data));
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <Box sx={{
+      background: 'linear-gradient(135deg, #f0e0fb 60%, #c18dbe 100%)',
+      minHeight: '100vh',
+      width: '100vw',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontFamily: "'Segoe UI', 'Arial', sans-serif",
+      color: '#23203f',
+    }}>
+      <Header />
+      <VerticalTimeline promises={promises} />
+    </Box>
+  );
+};
 
-export default App
+export default App;
