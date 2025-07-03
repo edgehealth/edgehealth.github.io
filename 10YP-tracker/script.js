@@ -1,70 +1,120 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UK 10-Year Health Plan: Interactive Timeline</title>
+// Wait for the DOM to be fully loaded before running the script
+document.addEventListener('DOMContentLoaded', function() {
     
-    <!-- Tailwind CSS for styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- vis-timeline library for the interactive timeline -->
-    <link href="https://unpkg.com/vis-timeline@latest/styles/vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="https://unpkg.com/vis-timeline@latest/standalone/umd/vis-timeline-graph2d.min.js"></script>
+    // Data containing all the promises from the 10-Year Health Plan
+    const promisesData = [
+        { "id": 1, "deadline_date": "2025-07-31", "deadline_label": "July 2025", "promise": "Publish the new NHS oversight framework for 2025 to 2026.", "source_page": 87 },
+        { "id": 2, "deadline_date": "2025-08-31", "deadline_label": "Summer 2025", "promise": "Begin publishing easy-to-understand league tables that rank providers on key quality indicators each quarter.", "source_page": 13 },
+        { "id": 3, "deadline_date": "2025-10-01", "deadline_label": "1 October 2025", "promise": "Restrictions on volume price promotions (e.g., buy-one-get-one-free) on unhealthy food will come into force.", "source_page": 64 },
+        { "id": 4, "deadline_date": "2025-10-31", "deadline_label": "Autumn 2025", "promise": "The review of NHS productivity by Andy Haldane will be available to inform NHS planning guidance.", "source_page": 132 },
+        { "id": 5, "deadline_date": "2025-10-31", "deadline_label": "Autumn 2025", "promise": "A final decision on using Public Private Partnerships for Neighbourhood Health Centres will be taken at the Budget.", "source_page": 139 },
+        { "id": 6, "deadline_date": "2025-12-31", "deadline_label": "By end of 2025", "promise": "A national, independent investigation into maternity services will conduct urgent reviews of up to 10 trusts.", "source_page": 88 },
+        { "id": 7, "deadline_date": "2025-12-31", "deadline_label": "By end of 2025", "promise": "Make emergency hormonal contraception freely available from community pharmacists.", "source_page": 37 },
+        { "id": 8, "deadline_date": "2025-12-31", "deadline_label": "From this year (2025)", "promise": "Through the Tobacco and Vapes Bill, ensure children turning 16 this year or younger can never legally be sold tobacco.", "source_page": 11 },
+        { "id": 9, "deadline_date": "2026-01-01", "deadline_label": "Beginning 2026", "promise": "Start the roll-out of two new contracts to encourage GPs to work over larger geographies and lead new neighbourhood providers.", "source_page": 10 },
+        { "id": 10, "deadline_date": "2026-03-31", "deadline_label": "By March 2026", "promise": "Reduce the setup time for clinical trials to 150 days.", "source_page": 15 },
+        { "id": 11, "deadline_date": "2026-04-01", "deadline_label": "April 2026", "promise": "Introduce a new set of staff standards outlining minimum standards for modern employment.", "source_page": 14 },
+        { "id": 12, "deadline_date": "2026-04-01", "deadline_label": "April 2026", "promise": "Completely reform mandatory training for NHS staff.", "source_page": 98 },
+        { "id": 13, "deadline_date": "2026-04-30", "deadline_label": "By April 2026", "promise": "Establish new national and regional talent management systems to identify and support future leaders at all levels.", "source_page": 107 },
+        { "id": 14, "deadline_date": "2026-04-30", "deadline_label": "From April 2026", "promise": "Begin expanding NICE’s technology appraisal process to cover some devices, diagnostics and digital products.", "source_page": 126 },
+        { "id": 15, "deadline_date": "2026-08-31", "deadline_label": "Summer 2026", "promise": "Enable all women and families to provide feedback on their maternity care through a new Patient Reported Experience Measure (PREM).", "source_page": 88 },
+        { "id": 16, "deadline_date": "2026-09-30", "deadline_label": "September 2026", "promise": "Expand free school meals so that all children with a parent in receipt of Universal Credit are eligible.", "source_page": 63 },
+        { "id": 17, "deadline_date": "2027-03-31", "deadline_label": "FY 2026 to 2027", "promise": "Phase out deficit support funding for NHS organisations.", "source_page": 133 },
+        { "id": 18, "deadline_date": "2027-03-31", "deadline_label": "FY 2026 to 2027", "promise": "Restore the value of the Healthy Start scheme for pregnant women and young children.", "source_page": 12 },
+        { "id": 19, "deadline_date": "2027-03-31", "deadline_label": "FY 2026 to 2027", "promise": "Begin testing the development of 'year of care' payments.", "source_page": 16 },
+        { "id": 20, "deadline_date": "2027-07-31", "deadline_label": "By mid-2027", "promise": "Complete the process of abolishing NHS England and combining its headquarters with the DHSC.", "source_page": 12 },
+        { "id": 21, "deadline_date": "2027-07-31", "deadline_label": "By mid-2027", "promise": "Move to a Single National Formulary (SNF) for medicines.", "source_page": 15 },
+        { "id": 22, "deadline_date": "2027-07-31", "deadline_label": "By mid-2027", "promise": "Support providers to roll out technology to cut unnecessary administrative and clerical work for GPs.", "source_page": 29 },
+        { "id": 23, "deadline_date": "2027-12-31", "deadline_label": "By 2027", "promise": "Ensure 95% of people with complex needs have an agreed and co-created care plan.", "source_page": 10 },
+        { "id": 24, "deadline_date": "2027-12-31", "deadline_label": "By 2027", "promise": "Reduce the central headcount of the combined DHSC and NHS England by 50%.", "source_page": 12 },
+        { "id": 25, "deadline_date": "2028-01-01", "deadline_label": "From 2028", "promise": "Expand community water fluoridation in the north east of England.", "source_page": 31 },
+        { "id": 26, "deadline_date": "2028-12-31", "deadline_label": "By 2028", "promise": "Transform the NHS App into a full 'front door' to the entire NHS.", "source_page": 11 },
+        { "id": 27, "deadline_date": "2028-12-31", "deadline_label": "By 2028", "promise": "Support patients to book into the most appropriate urgent care service via 111 or the app before attending.", "source_page": 10 },
+        { "id": 28, "deadline_date": "2028-12-31", "deadline_label": "By 2028", "promise": "Make remote monitoring for cardiovascular disease, using wearables integrated into the NHS App, a standard part of NHS care.", "source_page": 121 },
+        { "id": 29, "deadline_date": "2028-12-31", "deadline_label": "From 2028", "promise": "Enable patients to securely view their Single Patient Record on the NHS App.", "source_page": 48 },
+        { "id": 30, "deadline_date": "2029-03-31", "deadline_label": "By FY 2028-29", "promise": "At least double the number of people offered a Personal Health Budget.", "source_page": 10 },
+        { "id": 31, "deadline_date": "2029-12-31", "deadline_label": "By 2029", "promise": "Ensure PROMs and PREMs are used universally and published publicly.", "source_page": 88 },
+        { "id": 32, "deadline_date": "2029-12-31", "deadline_label": "By end of Parliament", "promise": "Introduce mandatory healthy food sales reporting for all large companies in the food sector.", "source_page": 64 },
+        { "id": 33, "deadline_date": "2029-12-31", "deadline_label": "By end of Parliament", "promise": "Eliminate agency staffing in the NHS.", "source_page": 106 },
+        { "id": 34, "deadline_date": "2029-12-31", "deadline_label": "By end of Parliament", "promise": "Return the NHS to pre-pandemic levels of productivity.", "source_page": 132 },
+        { "id": 35, "deadline_date": "2030-12-31", "deadline_label": "By 2030", "promise": "Offer 1 million people a Personal Health Budget.", "source_page": 10 },
+        { "id": 36, "deadline_date": "2030-12-31", "deadline_label": "By 2030", "promise": "Ensure most NHS providers are generating a financial surplus.", "source_page": 16 },
+        { "id": 37, "deadline_date": "2030-12-31", "deadline_label": "By 2030", "promise": "Create a new genomics population health service accessible to all.", "source_page": 12 },
+        { "id": 38, "deadline_date": "2030-12-31", "deadline_label": "By 2030", "promise": "Reach full national coverage of mental health support teams in schools and colleges.", "source_page": 70 },
+        { "id": 39, "deadline_date": "2030-12-31", "deadline_label": "By 2030", "promise": "End new HIV transmissions in England.", "source_page": 71 },
+        { "id": 40, "deadline_date": "2035-12-31", "deadline_label": "By 2035", "promise": "Make Personal Health Budgets a universal offer for all who would benefit from them.", "source_page": 10 },
+        { "id": 41, "deadline_date": "2035-12-31", "deadline_label": "By 2035", "promise": "End hospital outpatients as we know it, with most care happening outside hospitals.", "source_page": 10 },
+        { "id": 42, "deadline_date": "2035-12-31", "deadline_label": "By 2035", "promise": "Ensure every NHS provider is an NHS Foundation Trust (FT) with enhanced freedoms.", "source_page": 13 },
+        { "id": 43, "deadline_date": "2035-12-31", "deadline_label": "By 2035", "promise": "Make wearables a standard part of preventative, chronic, and post-acute NHS treatment.", "source_page": 15 },
+        { "id": 44, "deadline_date": "2035-12-31", "deadline_label": "By 2035", "promise": "Reduce international recruitment of NHS staff to less than 10%.", "source_page": 15 },
+        { "id": 45, "deadline_date": "2035-12-31", "deadline_label": "Within 10 Years", "promise": "Ensure all hospitals are fully AI-enabled.", "source_page": 10 },
+        { "id": 46, "deadline_date": "2035-12-31", "deadline_label": "Within 10 Years", "promise": "Have every single member of NHS staff on a personalised career coaching and development plan.", "source_page": 14 }
+    ];
 
-    <!-- Google Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    // DOM element where the timeline will be attached
+    const container = document.getElementById('timeline-container');
 
-    <!-- Your Custom CSS -->
-    <link href="style.css" rel="stylesheet" type="text/css" />
-</head>
-<body class="text-slate-800">
+    // Map our promise data to the format required by vis-timeline
+    const items = new vis.DataSet(promisesData.map(item => {
+        return {
+            id: item.id,
+            content: item.promise.substring(0, 40) + '...', // Shorten content for display
+            start: item.deadline_date,
+            // Store full data in the item for retrieval on click
+            fullData: item
+        };
+    }));
 
-    <!-- Main Container -->
-    <div class="container mx-auto p-4 md:p-8">
+    // Configuration for the Timeline
+    const options = {
+        stack: true,
+        maxHeight: '600px',
+        zoomMin: 1000 * 60 * 60 * 24 * 30, // One month
+        zoomMax: 1000 * 60 * 60 * 24 * 365 * 12, // 12 years
+        start: '2025-01-01',
+        end: '2036-01-01',
+        orientation: 'top',
+        showCurrentTime: true,
+        margin: {
+            item: 20,
+            axis: 20
+        }
+    };
 
-        <!-- Header Section -->
-        <header class="mb-8 text-center">
-            <h1 class="text-3xl md:text-4xl font-bold text-slate-900">UK 10-Year Health Plan</h1>
-            <p class="mt-2 text-lg text-slate-600">An Interactive Timeline of Government Promises</p>
-        </header>
+    // Create a Timeline
+    const timeline = new vis.Timeline(container, items, options);
 
-        <!-- Main Content Area -->
-        <main class="bg-white p-6 rounded-2xl shadow-lg">
+    // Get references to the details panel elements
+    const detailsPanel = document.getElementById('details-panel');
+    const detailsTitle = document.getElementById('details-title');
+    const detailsPromise = document.getElementById('details-promise');
+    const detailsDeadline = document.getElementById('details-deadline');
+    const detailsLink = document.getElementById('details-link');
+    const detailsPage = document.getElementById('details-page');
+    const instructionsPanel = document.getElementById('instructions-panel');
+
+    // Add a 'select' event listener
+    timeline.on('select', function (properties) {
+        const selectedIds = properties.items;
+        if (selectedIds.length > 0) {
+            const selectedItem = items.get(selectedIds[0]);
+            const data = selectedItem.fullData;
+
+            // Populate and show the details panel
+            detailsTitle.textContent = `Promise #${data.id}`;
+            detailsPromise.textContent = data.promise;
+            detailsDeadline.textContent = data.deadline_label;
+            detailsPage.textContent = data.source_page;
             
-            <!-- Timeline Container -->
-            <div id="timeline-container" class="w-full h-[600px] mb-6">
-                <!-- The interactive timeline will be rendered here by JavaScript -->
-            </div>
+            // Link to the source PDF, attempting to navigate to the specific page
+            detailsLink.href = `https://assets.publishing.service.gov.uk/media/6683d10f488c02d44b5804f5/fit-for-the-future-10-year-health-plan-for-england.pdf#page=${data.source_page}`;
 
-            <!-- Details Panel: Initially hidden, shown on click -->
-            <div id="details-panel" class="hidden p-6 border border-slate-200 rounded-xl bg-slate-50 transition-all duration-300">
-                <h2 id="details-title" class="text-xl font-bold mb-2 text-slate-800"></h2>
-                <p id="details-promise" class="text-base mb-4 text-slate-700"></p>
-                <div class="flex items-center justify-between">
-                    <span id="details-deadline" class="text-sm font-semibold text-blue-600 bg-blue-100 px-3 py-1 rounded-full"></span>
-                    <a id="details-link" href="#" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline">
-                        View Source (Page <span id="details-page"></span>)
-                    </a>
-                </div>
-            </div>
-             <!-- Instructions Panel -->
-            <div id="instructions-panel" class="mt-6 p-4 border border-slate-200 rounded-xl bg-slate-50">
-                <p class="text-center text-slate-600">Click on an item in the timeline to see details. Use your mouse wheel or trackpad to zoom, and click and drag to navigate.</p>
-            </div>
-        </main>
-
-        <!-- Footer -->
-        <footer class="mt-8 text-center text-sm text-slate-500">
-            <p>Dashboard created by Edge Health. Data sourced from the "Fit for the Future: 10 Year Health Plan for England" (July 2025).</p>
-        </footer>
-
-    </div>
-
-    <!-- Your Custom JavaScript -->
-    <script src="script.js"></script>
-
-</body>
-</html>
+            detailsPanel.classList.remove('hidden');
+            instructionsPanel.classList.add('hidden');
+        } else {
+            // Hide the panel if nothing is selected
+            detailsPanel.classList.add('hidden');
+            instructionsPanel.classList.remove('hidden');
+        }
+    });
+});
