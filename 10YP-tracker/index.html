@@ -33,14 +33,12 @@
 
         <!-- Main Content Area -->
         <main class="bg-white p-6 rounded-2xl shadow-lg">
-            
-            <!-- Timeline Container -->
-            <div id="timeline-container" class="w-full h-[600px] mb-6">
-                <!-- The interactive timeline will be rendered here by JavaScript -->
+            <!-- Timeline Container: Interactive horizontal timeline (fishbone style) -->
+            <div id="timeline-container" class="w-full h-[600px] mb-6" aria-label="Timeline of 10-Year Plan Promises">
+                <!-- Timeline rendered by JS -->
             </div>
-
-            <!-- Details Panel: Initially hidden, shown on click -->
-            <div id="details-panel" class="hidden p-6 border border-slate-200 rounded-xl bg-slate-50 transition-all duration-300">
+            <!-- Details Panel: Shows details for selected promise -->
+            <div id="details-panel" class="hidden p-6 border border-slate-200 rounded-xl bg-slate-50 transition-all duration-300" aria-live="polite">
                 <h2 id="details-title" class="text-xl font-bold mb-2 text-slate-800"></h2>
                 <p id="details-promise" class="text-base mb-4 text-slate-700"></p>
                 <div class="flex items-center justify-between">
@@ -50,10 +48,16 @@
                     </a>
                 </div>
             </div>
-             <!-- Instructions Panel -->
+            <!-- Instructions Panel -->
             <div id="instructions-panel" class="mt-6 p-4 border border-slate-200 rounded-xl bg-slate-50">
                 <p class="text-center text-slate-600">Click on an item in the timeline to see details. Use your mouse wheel or trackpad to zoom, and click and drag to navigate.</p>
             </div>
+            <!--
+              To move the data to a JSON file in the future:
+              1. Place the data in a file (e.g., promises.json).
+              2. Fetch it in script.js using fetch('promises.json').then(res => res.json()).then(...)
+              3. Update the timeline logic to use the fetched data.
+            -->
         </main>
 
         <!-- Footer -->

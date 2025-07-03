@@ -1,7 +1,11 @@
+// UK 10-Year Health Plan Interactive Timeline
+// Uses vis-timeline for a horizontal, interactive, fishbone-style timeline
+// Data is currently in this JS file, but can be moved to JSON (see index.html for instructions)
+
 // Wait for the DOM to be fully loaded before running the script
 document.addEventListener('DOMContentLoaded', function() {
     
-    // Data containing all the promises from the 10-Year Health Plan
+    // --- Data: Promises from the 10-Year Health Plan ---
     const promisesData = [
         { "id": 1, "deadline_date": "2025-07-31", "deadline_label": "July 2025", "promise": "Publish the new NHS oversight framework for 2025 to 2026.", "source_page": 87 },
         { "id": 2, "deadline_date": "2025-08-31", "deadline_label": "Summer 2025", "promise": "Begin publishing easy-to-understand league tables that rank providers on key quality indicators each quarter.", "source_page": 13 },
@@ -16,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { "id": 11, "deadline_date": "2026-04-01", "deadline_label": "April 2026", "promise": "Introduce a new set of staff standards outlining minimum standards for modern employment.", "source_page": 14 },
         { "id": 12, "deadline_date": "2026-04-01", "deadline_label": "April 2026", "promise": "Completely reform mandatory training for NHS staff.", "source_page": 98 },
         { "id": 13, "deadline_date": "2026-04-30", "deadline_label": "By April 2026", "promise": "Establish new national and regional talent management systems to identify and support future leaders at all levels.", "source_page": 107 },
-        { "id": 14, "deadline_date": "2026-04-30", "deadline_label": "From April 2026", "promise": "Begin expanding NICE’s technology appraisal process to cover some devices, diagnostics and digital products.", "source_page": 126 },
+        { "id": 14, "deadline_date": "2026-04-30", "deadline_label": "From April 2026", "promise": "Begin expanding NICE's technology appraisal process to cover some devices, diagnostics and digital products.", "source_page": 126 },
         { "id": 15, "deadline_date": "2026-08-31", "deadline_label": "Summer 2026", "promise": "Enable all women and families to provide feedback on their maternity care through a new Patient Reported Experience Measure (PREM).", "source_page": 88 },
         { "id": 16, "deadline_date": "2026-09-30", "deadline_label": "September 2026", "promise": "Expand free school meals so that all children with a parent in receipt of Universal Credit are eligible.", "source_page": 63 },
         { "id": 17, "deadline_date": "2027-03-31", "deadline_label": "FY 2026 to 2027", "promise": "Phase out deficit support funding for NHS organisations.", "source_page": 133 },
@@ -51,21 +55,14 @@ document.addEventListener('DOMContentLoaded', function() {
         { "id": 46, "deadline_date": "2035-12-31", "deadline_label": "Within 10 Years", "promise": "Have every single member of NHS staff on a personalised career coaching and development plan.", "source_page": 14 }
     ];
 
-    // DOM element where the timeline will be attached
+    // --- Timeline Setup ---
     const container = document.getElementById('timeline-container');
-
-    // Map our promise data to the format required by vis-timeline
-    const items = new vis.DataSet(promisesData.map(item => {
-        return {
-            id: item.id,
-            content: item.promise.substring(0, 40) + '...', // Shorten content for display
-            start: item.deadline_date,
-            // Store full data in the item for retrieval on click
-            fullData: item
-        };
-    }));
-
-    // Configuration for the Timeline
+    const items = new vis.DataSet(promisesData.map(item => ({
+        id: item.id,
+        content: item.promise.substring(0, 40) + '...', // Shorten for display
+        start: item.deadline_date,
+        fullData: item
+    })));
     const options = {
         stack: true,
         maxHeight: '600px',
@@ -73,18 +70,13 @@ document.addEventListener('DOMContentLoaded', function() {
         zoomMax: 1000 * 60 * 60 * 24 * 365 * 12, // 12 years
         start: '2025-01-01',
         end: '2036-01-01',
-        orientation: 'top',
+        orientation: 'top', // Horizontal timeline
         showCurrentTime: true,
-        margin: {
-            item: 20,
-            axis: 20
-        }
+        margin: { item: 20, axis: 20 }
     };
-
-    // Create a Timeline
     const timeline = new vis.Timeline(container, items, options);
 
-    // Get references to the details panel elements
+    // --- Details Panel Logic ---
     const detailsPanel = document.getElementById('details-panel');
     const detailsTitle = document.getElementById('details-title');
     const detailsPromise = document.getElementById('details-promise');
@@ -93,28 +85,32 @@ document.addEventListener('DOMContentLoaded', function() {
     const detailsPage = document.getElementById('details-page');
     const instructionsPanel = document.getElementById('instructions-panel');
 
-    // Add a 'select' event listener
     timeline.on('select', function (properties) {
         const selectedIds = properties.items;
         if (selectedIds.length > 0) {
             const selectedItem = items.get(selectedIds[0]);
             const data = selectedItem.fullData;
-
-            // Populate and show the details panel
+            // Populate details panel
             detailsTitle.textContent = `Promise #${data.id}`;
             detailsPromise.textContent = data.promise;
             detailsDeadline.textContent = data.deadline_label;
             detailsPage.textContent = data.source_page;
-            
-            // Link to the source PDF, attempting to navigate to the specific page
             detailsLink.href = `https://assets.publishing.service.gov.uk/media/6683d10f488c02d44b5804f5/fit-for-the-future-10-year-health-plan-for-england.pdf#page=${data.source_page}`;
-
             detailsPanel.classList.remove('hidden');
             instructionsPanel.classList.add('hidden');
         } else {
-            // Hide the panel if nothing is selected
             detailsPanel.classList.add('hidden');
             instructionsPanel.classList.remove('hidden');
         }
     });
+
+    // Accessibility: Focus details panel when shown
+    timeline.on('select', function (properties) {
+        if (properties.items.length > 0) {
+            detailsPanel.setAttribute('tabindex', '-1');
+            detailsPanel.focus();
+        }
+    });
+
+    // Note: To move data to JSON, see index.html instructions
 });
