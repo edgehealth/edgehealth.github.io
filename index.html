@@ -1,63 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-
-    <title>Edge Health Interactive Interests Board</title>
-    <link rel="stylesheet" href="style.css"> 
-
-    <!-- Cache Control Meta Tags -->
-    <meta http-equiv='cache-control' content='no-cache'>
-    <meta http-equiv='expires' content='0'>
-    <meta http-equiv='pragma' content='no-cache'>
-
-    <!-- PWA/Mobile Web App Meta Tags -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Edge Health Interests Selector">
-    <meta name="msapplication-starturl" content="/">
-
-    <!-- Web App Manifest -->
-    <link rel="manifest" href="manifest.json">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Edge Health</title>
+  <!-- Google Fonts: Libre Baskerville -->
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="landing.css">
 </head>
 <body>
-    <div class="container">
-        <div class="title-header">
-            <img src="https://www.edgehealth.co.uk/wp-content/uploads/2023/05/Edge-in-blue.png" alt="Edge Health Logo" class="company-logo">
-            <h1>What sparks your interest today?</h1>
-        </div>
-        <p>Ready to dive in? Pick a topic and grab a small gift!</p>
-
-        <div class="button-grid">
-            <button id="btn-data-engineering" class="topic-button" data-topic="Data Engineering" data-show-name="Data Products, Cloud and Digital Technology">
-                Data Products, Cloud and Digital Technology
-            </button>
-            <button id="btn-ai" class="topic-button" data-topic="AI" data-show-name="AI for Healthcare">
-                AI for Healthcare
-            </button>
-            <button id="btn-analytics" class="topic-button" data-topic="Analytics" data-show-name="Analytics and Insights">
-                Analytics and Insights
-            </button>
-            <button id="btn-econ-eval" class="topic-button" data-topic="Economic Evaluations" data-show-name="Health Economics and Evaluations">
-                Health Economics and Evaluations
-            </button>
-        </div>
-
-        <div id="feedback-message" class="feedback"></div>
-
-        <!-- Email Form - Initially Hidden -->
-        <div id="email-form" class="email-form" style="display: none;">
-            <h3>Leave your email if you want to stay in touch</h3>
-            <div class="email-input-container">
-                <input type="email" id="email-input" placeholder="your.email@example.com" class="email-input">
-                <button id="submit-email" class="email-submit-btn">Submit</button>
-                <button id="skip-email" class="email-skip-btn">Skip</button>
-            </div>
-            <div id="email-feedback" class="email-feedback"></div>
-        </div>
+  <div class="landing-container">
+    <div class="logo">
+      <img src="img/EdgeHealthLogo.svg" alt="Edge Health Logo">
     </div>
-
-    <script src="script.js"></script>
+    <h1>Welcome to Edge Health</h1>
+    <div class="welcome-text">
+      Edge Health is a leading UK-based healthcare analytics and consulting company. We bring data to life with analytics and insights for health and care, helping organisations achieve superior outcomes through evidence-based decision making and innovative solutions.
+    </div>
+    <div class="links">
+      <a class="link-btn" href="https://www.edgehealth.co.uk" target="_blank" rel="noopener">
+        <span class="icon">🌐</span> Visit our Website
+      </a>
+      <a class="link-btn" href="https://www.linkedin.com/company/edgehealth" target="_blank" rel="noopener">
+        <span class="icon">🔗</span> Connect on LinkedIn
+      </a>
+      <a class="link-btn" href="/10YP-tracker/">
+        <span class="icon">📊</span> Explore the 10YP Tracker
+      </a>
+    </div>
+    <img class="petals" src="img/petals.png" alt="Edge Health Petals">
+  </div>
 </body>
-</html>
+</html> 

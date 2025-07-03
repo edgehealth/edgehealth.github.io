@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UK 10-Year Health Plan: Interactive Timeline</title>
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- vis-timeline library for the interactive timeline -->
+    <link href="https://unpkg.com/vis-timeline@latest/styles/vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="https://unpkg.com/vis-timeline@latest/standalone/umd/vis-timeline-graph2d.min.js"></script>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Your Custom CSS -->
+    <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+<body class="text-slate-800">
+
+    <!-- Main Container -->
+    <div class="container mx-auto p-4 md:p-8">
+
+        <!-- Header Section -->
+        <header class="mb-8 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold text-slate-900">UK 10-Year Health Plan</h1>
+            <p class="mt-2 text-lg text-slate-600">An Interactive Timeline of Government Promises</p>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="bg-white p-6 rounded-2xl shadow-lg">
+            
+            <!-- Timeline Container -->
+            <div id="timeline-container" class="w-full h-[600px] mb-6">
+                <!-- The interactive timeline will be rendered here by JavaScript -->
+            </div>
+
+            <!-- Details Panel: Initially hidden, shown on click -->
+            <div id="details-panel" class="hidden p-6 border border-slate-200 rounded-xl bg-slate-50 transition-all duration-300">
+                <h2 id="details-title" class="text-xl font-bold mb-2 text-slate-800"></h2>
+                <p id="details-promise" class="text-base mb-4 text-slate-700"></p>
+                <div class="flex items-center justify-between">
+                    <span id="details-deadline" class="text-sm font-semibold text-blue-600 bg-blue-100 px-3 py-1 rounded-full"></span>
+                    <a id="details-link" href="#" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline">
+                        View Source (Page <span id="details-page"></span>)
+                    </a>
+                </div>
+            </div>
+             <!-- Instructions Panel -->
+            <div id="instructions-panel" class="mt-6 p-4 border border-slate-200 rounded-xl bg-slate-50">
+                <p class="text-center text-slate-600">Click on an item in the timeline to see details. Use your mouse wheel or trackpad to zoom, and click and drag to navigate.</p>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="mt-8 text-center text-sm text-slate-500">
+            <p>Dashboard created by Edge Health. Data sourced from the "Fit for the Future: 10 Year Health Plan for England" (July 2025).</p>
+        </footer>
+
+    </div>
+
+    <!-- Your Custom JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+</html>
