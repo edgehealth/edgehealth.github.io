@@ -1,0 +1,370 @@
+[
+  {
+    "id": 1,
+    "deadline_date": "2025-07-31",
+    "deadline_label": "July 2025",
+    "promise": "Publish the new NHS oversight framework for 2025 to 2026.",
+    "source_page": 87,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=87"
+  },
+  {
+    "id": 2,
+    "deadline_date": "2025-08-31",
+    "deadline_label": "Summer 2025",
+    "promise": "Begin publishing easy-to-understand league tables that rank providers on key quality indicators each quarter.",
+    "source_page": 13,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=13"
+  },
+  {
+    "id": 3,
+    "deadline_date": "2025-10-01",
+    "deadline_label": "1 October 2025",
+    "promise": "Restrictions on volume price promotions (e.g., buy-one-get-one-free) on unhealthy food will come into force.",
+    "source_page": 64,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=64"
+  },
+  {
+    "id": 4,
+    "deadline_date": "2025-10-31",
+    "deadline_label": "Autumn 2025",
+    "promise": "The review of NHS productivity by Andy Haldane will be available to inform NHS planning guidance.",
+    "source_page": 132,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=132"
+  },
+  {
+    "id": 5,
+    "deadline_date": "2025-10-31",
+    "deadline_label": "Autumn 2025",
+    "promise": "A final decision on using Public Private Partnerships for Neighbourhood Health Centres will be taken at the Budget.",
+    "source_page": 139,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=139"
+  },
+  {
+    "id": 6,
+    "deadline_date": "2025-12-31",
+    "deadline_label": "By end of 2025",
+    "promise": "A national, independent investigation into maternity services will conduct urgent reviews of up to 10 trusts.",
+    "source_page": 88,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=88"
+  },
+  {
+    "id": 7,
+    "deadline_date": "2025-12-31",
+    "deadline_label": "By end of 2025",
+    "promise": "Make emergency hormonal contraception freely available from community pharmacists.",
+    "source_page": 37,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=37"
+  },
+  {
+    "id": 8,
+    "deadline_date": "2025-12-31",
+    "deadline_label": "By end of 2025",
+    "promise": "Through the Tobacco and Vapes Bill, ensure children turning 16 this year or younger can never legally be sold tobacco.",
+    "source_page": 11,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=11"
+  },
+  {
+    "id": 9,
+    "deadline_date": "2026-01-01",
+    "deadline_label": "Beginning 2026",
+    "promise": "Start the roll-out of two new contracts to encourage GPs to work over larger geographies and lead new neighbourhood providers.",
+    "source_page": 10,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=10"
+  },
+  {
+    "id": 10,
+    "deadline_date": "2026-03-31",
+    "deadline_label": "March 2026",
+    "promise": "Reduce the setup time for clinical trials to 150 days.",
+    "source_page": 15,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=15"
+  },
+  {
+    "id": 11,
+    "deadline_date": "2026-04-01",
+    "deadline_label": "April 2026",
+    "promise": "Introduce a new set of staff standards outlining minimum standards for modern employment.",
+    "source_page": 14,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=14"
+  },
+  {
+    "id": 12,
+    "deadline_date": "2026-04-01",
+    "deadline_label": "April 2026",
+    "promise": "Completely reform mandatory training for NHS staff.",
+    "source_page": 98,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=98"
+  },
+  {
+    "id": 13,
+    "deadline_date": "2026-04-30",
+    "deadline_label": "April 2026",
+    "promise": "Establish new national and regional talent management systems to identify and support future leaders at all levels.",
+    "source_page": 107,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=107"
+  },
+  {
+    "id": 14,
+    "deadline_date": "2026-04-30",
+    "deadline_label": "April 2026",
+    "promise": "Begin expanding NICE’s technology appraisal process to cover some devices, diagnostics and digital products.",
+    "source_page": 126,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=126"
+  },
+  {
+    "id": 15,
+    "deadline_date": "2026-08-31",
+    "deadline_label": "Summer 2026",
+    "promise": "Enable all women and families to provide feedback on their maternity care through a new Patient Reported Experience Measure (PREM).",
+    "source_page": 88,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=88"
+  },
+  {
+    "id": 16,
+    "deadline_date": "2026-09-30",
+    "deadline_label": "September 2026",
+    "promise": "Expand free school meals so that all children with a parent in receipt of Universal Credit are eligible.",
+    "source_page": 63,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=63"
+  },
+  {
+    "id": 17,
+    "deadline_date": "2027-03-31",
+    "deadline_label": "FY 2026 to 2027",
+    "promise": "Phase out deficit support funding for NHS organisations.",
+    "source_page": 133,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=133"
+  },
+  {
+    "id": 18,
+    "deadline_date": "2027-03-31",
+    "deadline_label": "FY 2026 to 2027",
+    "promise": "Restore the value of the Healthy Start scheme for pregnant women and young children.",
+    "source_page": 12,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=12"
+  },
+  {
+    "id": 19,
+    "deadline_date": "2027-03-31",
+    "deadline_label": "FY 2026 to 2027",
+    "promise": "Begin testing the development of 'year of care' payments.",
+    "source_page": 16,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=16"
+  },
+  {
+    "id": 20,
+    "deadline_date": "2027-07-31",
+    "deadline_label": "By mid-2027",
+    "promise": "Complete the process of abolishing NHS England and combining its headquarters with the DHSC.",
+    "source_page": 12,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=12"
+  },
+  {
+    "id": 21,
+    "deadline_date": "2027-07-31",
+    "deadline_label": "By mid-2027",
+    "promise": "Move to a Single National Formulary (SNF) for medicines.",
+    "source_page": 15,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=15"
+  },
+  {
+    "id": 22,
+    "deadline_date": "2027-07-31",
+    "deadline_label": "By mid-2027",
+    "promise": "Support providers to roll out technology to cut unnecessary administrative and clerical work for GPs.",
+    "source_page": 29,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=29"
+  },
+  {
+    "id": 23,
+    "deadline_date": "2027-12-31",
+    "deadline_label": "By 2027",
+    "promise": "Ensure 95% of people with complex needs have an agreed and co-created care plan.",
+    "source_page": 10,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=10"
+  },
+  {
+    "id": 24,
+    "deadline_date": "2027-12-31",
+    "deadline_label": "By 2027",
+    "promise": "Reduce the central headcount of the combined DHSC and NHS England by 50%.",
+    "source_page": 12,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=12"
+  },
+  {
+    "id": 25,
+    "deadline_date": "2028-01-01",
+    "deadline_label": "From 2028",
+    "promise": "Expand community water fluoridation in the north east of England.",
+    "source_page": 31,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=31"
+  },
+  {
+    "id": 26,
+    "deadline_date": "2028-12-31",
+    "deadline_label": "By 2028",
+    "promise": "Transform the NHS App into a full 'front door' to the entire NHS.",
+    "source_page": 11,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=11"
+  },
+  {
+    "id": 27,
+    "deadline_date": "2028-12-31",
+    "deadline_label": "By 2028",
+    "promise": "Support patients to book into the most appropriate urgent care service via 111 or the app before attending.",
+    "source_page": 10,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=10"
+  },
+  {
+    "id": 28,
+    "deadline_date": "2028-12-31",
+    "deadline_label": "By 2028",
+    "promise": "Make remote monitoring for cardiovascular disease, using wearables integrated into the NHS App, a standard part of NHS care.",
+    "source_page": 121,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=121"
+  },
+  {
+    "id": 29,
+    "deadline_date": "2028-12-01",
+    "deadline_label": "From 2028",
+    "promise": "Enable patients to securely view their Single Patient Record on the NHS App.",
+    "source_page": 48,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=48"
+  },
+  {
+    "id": 30,
+    "deadline_date": "2029-03-31",
+    "deadline_label": "By FY 2028-29",
+    "promise": "At least double the number of people offered a Personal Health Budget.",
+    "source_page": 10,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=10"
+  },
+  {
+    "id": 31,
+    "deadline_date": "2029-12-31",
+    "deadline_label": "By 2029",
+    "promise": "Ensure PROMs and PREMs are used universally and published publicly.",
+    "source_page": 88,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=88"
+  },
+  {
+    "id": 32,
+    "deadline_date": "2029-12-31",
+    "deadline_label": "By end of Parliament",
+    "promise": "Introduce mandatory healthy food sales reporting for all large companies in the food sector.",
+    "source_page": 64,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=64"
+  },
+  {
+    "id": 33,
+    "deadline_date": "2029-12-31",
+    "deadline_label": "By end of Parliament",
+    "promise": "Eliminate agency staffing in the NHS.",
+    "source_page": 106,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=106"
+  },
+  {
+    "id": 34,
+    "deadline_date": "2029-12-31",
+    "deadline_label": "By end of Parliament",
+    "promise": "Return the NHS to pre-pandemic levels of productivity.",
+    "source_page": 132,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=132"
+  },
+  {
+    "id": 35,
+    "deadline_date": "2030-12-31",
+    "deadline_label": "By 2030",
+    "promise": "Offer 1 million people a Personal Health Budget.",
+    "source_page": 10,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=10"
+  },
+  {
+    "id": 36,
+    "deadline_date": "2030-12-31",
+    "deadline_label": "By 2030",
+    "promise": "Ensure most NHS providers are generating a financial surplus.",
+    "source_page": 16,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=16"
+  },
+  {
+    "id": 37,
+    "deadline_date": "2030-12-31",
+    "deadline_label": "By 2030",
+    "promise": "Create a new genomics population health service accessible to all.",
+    "source_page": 12,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=12"
+  },
+  {
+    "id": 38,
+    "deadline_date": "2030-12-31",
+    "deadline_label": "By 2030",
+    "promise": "Reach full national coverage of mental health support teams in schools and colleges.",
+    "source_page": 70,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=70"
+  },
+  {
+    "id": 39,
+    "deadline_date": "2030-12-31",
+    "deadline_label": "By 2030",
+    "promise": "End new HIV transmissions in England.",
+    "source_page": 71,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=71"
+  },
+  {
+    "id": 40,
+    "deadline_date": "2035-12-31",
+    "deadline_label": "By 2035",
+    "promise": "Make Personal Health Budgets a universal offer for all who would benefit from them.",
+    "source_page": 10,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=10"
+  },
+  {
+    "id": 41,
+    "deadline_date": "2035-12-31",
+    "deadline_label": "By 2035",
+    "promise": "End hospital outpatients as we know it, with most care happening outside hospitals.",
+    "source_page": 10,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=10"
+  },
+  {
+    "id": 42,
+    "deadline_date": "2035-12-31",
+    "deadline_label": "By 2035",
+    "promise": "Ensure every NHS provider is an NHS Foundation Trust (FT) with enhanced freedoms.",
+    "source_page": 13,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=13"
+  },
+  {
+    "id": 43,
+    "deadline_date": "2035-12-31",
+    "deadline_label": "By 2035",
+    "promise": "Make wearables a standard part of preventative, chronic, and post-acute NHS treatment.",
+    "source_page": 15,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=15"
+  },
+  {
+    "id": 44,
+    "deadline_date": "2035-12-31",
+    "deadline_label": "By 2035",
+    "promise": "Reduce international recruitment of NHS staff to less than 10%.",
+    "source_page": 15,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=15"
+  },
+  {
+    "id": 45,
+    "deadline_date": "2035-12-31",
+    "deadline_label": "Within 10 Years",
+    "promise": "Ensure all hospitals are fully AI-enabled.",
+    "source_page": 10,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=10"
+  },
+  {
+    "id": 46,
+    "deadline_date": "2035-12-31",
+    "deadline_label": "Within 10 Years",
+    "promise": "Have every single member of NHS staff on a personalised career coaching and development plan.",
+    "source_page": 14,
+    "source_link": "https://assets.publishing.service.gov.uk/media/6866387fe6557c544c74db7a/fit-for-the-future-10-year-health-plan-for-england.pdf#page=14"
+  }
+]
