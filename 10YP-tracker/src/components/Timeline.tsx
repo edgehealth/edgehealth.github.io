@@ -46,7 +46,7 @@ const Timeline: React.FC<TimelineProps> = ({ promises }) => {
 
   // Robust collision-avoiding placement
   const placed: { x: number; y: number }[] = [];
-  sorted.forEach((promise, i) => {
+  sorted.forEach((promise) => {
     const dateMs = new Date(promise.deadline_date).getTime();
     const x = ((dateMs - minDate) / range) * (TIMELINE_WIDTH - CARD_WIDTH) + CARD_WIDTH / 2;
     // Fan out: alternate above/below, increase distance if needed
@@ -163,7 +163,6 @@ const handleMouseLeave = () => {
         {sorted.map((promise, i) => {
           const { x, y } = placed[i];
           // Connecting bar
-          const barTop = y < centerY ? y + CARD_HEIGHT : centerY;
           const barHeight = Math.abs(centerY - y) - (y < centerY ? 0 : 0);
           return (
             <React.Fragment key={promise.id}>

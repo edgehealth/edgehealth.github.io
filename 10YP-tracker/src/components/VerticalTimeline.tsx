@@ -4,14 +4,12 @@ import type { PromiseData } from '../types';
 import PromiseCard from './PromiseCard';
 import MarkerLabel from './MarkerLabel';
 import TodayLine from './TodayLine';
-import dayjs from 'dayjs';
 
 interface VerticalTimelineProps {
   promises: PromiseData[];
 }
 
 const MARKER_SIZE = 24;
-const CARD_MARGIN = 64;
 const CARD_WIDTH = 380;
 const MIN_CARD_WIDTH = 200;
 const MAX_CARD_WIDTH = 400;
@@ -43,8 +41,6 @@ const VerticalTimeline: React.FC<VerticalTimelineProps> = ({ promises }) => {
   const minDate = Math.min(...allDates);
   const maxDate = Math.max(...allDates);
   const today = Date.now();
-  // Clamp today between min and max
-  const todayClamped = Math.max(minDate, Math.min(today, maxDate));
   // Find vertical range (from first to last group marker)
   const groupCount = groups.length;
   const timelineHeight = groupCount > 1 ? (groupCount - 1) * 120 : 1; // 120 is minHeight per group
@@ -53,9 +49,8 @@ const VerticalTimeline: React.FC<VerticalTimelineProps> = ({ promises }) => {
   useEffect(() => {
     const calculateTodayY = () => {
       const now = Date.now();
-      const nowClamped = Math.max(minDate, Math.min(now, maxDate));
       const newTodayY = groupCount > 1
-        ? ((nowClamped - minDate) / (maxDate - minDate)) * timelineHeight
+        ? ((now - minDate) / (maxDate - minDate)) * timelineHeight
         : 0;
       setTodayY(newTodayY);
     };
@@ -204,7 +199,7 @@ const VerticalTimeline: React.FC<VerticalTimelineProps> = ({ promises }) => {
                     alignItems: 'flex-start',
                     gap: 1.5,
                   }}>
-                    {group.items.map((promise, idx) => (
+                    {group.items.map((promise) => (
                       <Box key={promise.id} sx={{ 
                         width: cardWidth, 
                         minWidth: minCardWidth, 
@@ -226,7 +221,7 @@ const VerticalTimeline: React.FC<VerticalTimelineProps> = ({ promises }) => {
                     alignItems: 'flex-end',
                     gap: 1.5,
                   }}>
-                    {group.items.map((promise, idx) => (
+                    {group.items.map((promise) => (
                       <Box key={promise.id} sx={{ 
                         width: cardWidth, 
                         minWidth: minCardWidth, 

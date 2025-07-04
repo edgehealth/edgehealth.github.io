@@ -3,14 +3,31 @@ import Header from './components/Header';
 import VerticalTimeline from './components/VerticalTimeline';
 import type { PromiseData } from './types';
 import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 
 const App: React.FC = () => {
   const [promises, setPromises] = useState<PromiseData[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    setLoading(true);
     fetch('/10YP-tracker/promises.json')
-      .then((res) => res.json())
-      .then((data) => setPromises(data));
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setPromises(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error loading promises:', error);
+        setError(error.message);
+        setLoading(false);
+      });
   }, []);
 
   // Apply gradient background to body
@@ -40,7 +57,17 @@ const App: React.FC = () => {
       color: '#23203f',
     }}>
       <Header />
-      <VerticalTimeline promises={promises} />
+      {loading && (
+        <Box sx={{ textAlign: 'center', py: 4 }}>
+          <Typography variant="h6">Loading timeline...</Typography>
+        </Box>
+      )}
+      {error && (
+        <Box sx={{ textAlign: 'center', py: 4 }}>
+          <Typography variant="h6" color="error">Error loading data: {error}</Typography>
+        </Box>
+      )}
+      {!loading && !error && <VerticalTimeline promises={promises} />}
     </Box>
   );
 };
